@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Login from "./Components/Pages/Login/Login/Login";
 import SignUp from "./Components/Pages/Login/SignUp/SignUp";
 import ResetPassword from "./Components/Pages/Login/ResetPassword";
+import Team from "./Components/Pages/Team/Team";
+import Dashboard from "./Components/Pages/Dashboard/Dashboard/Dashboard";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -43,6 +45,13 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route
+          path="/dashboard"
+          element={
+            <Dashboard handleThemeChange={handleThemeChange} theme={theme} />
+          }
+        />
+        <Route path="/team" element={<Team />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
