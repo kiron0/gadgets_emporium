@@ -14,6 +14,8 @@ import RequireAuth from "./Components/Pages/Login/RequireAuth/RequireAuth";
 import MyProfile from "./Components/Pages/Dashboard/MyProfile/MyProfile";
 import { Toaster } from "react-hot-toast";
 import ScrollButton from "./Components/Pages/Shared/ScrollButton/ScrollButton";
+import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin/MakeAdmin";
+import AllUsers from "./Components/Pages/Dashboard/AllUsers/AllUsers";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -60,6 +62,8 @@ function App() {
         >
           <Route index element={<WelcomeDashboard />} />
           <Route path="profile" element={<MyProfile />}></Route>
+          <Route path="makeAdmin" element={<MakeAdmin />}></Route>
+          <Route path="allUsers" element={<AllUsers />}></Route>
         </Route>
         <Route path="/team" element={<Team />} />
         <Route path="*" element={<NotFound />} />

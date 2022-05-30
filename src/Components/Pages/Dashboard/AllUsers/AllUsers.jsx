@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-import useTitle from "../../hooks/useTitle";
-import Loading from "../Shared/Loading/Loading";
+import useTitle from "../../../hooks/useTitle";
+import Loading from "../../Shared/Loading/Loading";
 import UserDeleteConfirmModal from "./UserDeleteConfirmModal";
 import UserRow from "./UserRow";
 

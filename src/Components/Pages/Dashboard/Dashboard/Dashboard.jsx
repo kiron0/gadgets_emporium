@@ -154,7 +154,10 @@ const Dashboard = ({ handleThemeChange, theme }) => {
                 <NavLink to="/dashboard/manageReviews">Manage Reviews</NavLink>
               </li>
               <li className="lg:pt-56">
-                <button onClick={handleLogOut}>
+                <button
+                  onClick={handleLogOut}
+                  className="bg-primary rounded-lg text-white"
+                >
                   <FiLogOut /> Logout
                 </button>
               </li>

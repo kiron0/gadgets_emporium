@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
-import useTitle from "../../hooks/useTitle";
+import useTitle from "../../../hooks/useTitle";
 
 const MakeAdmin = () => {
   useTitle("Make Admin");
