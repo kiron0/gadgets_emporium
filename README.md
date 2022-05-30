@@ -26,11 +26,11 @@
 ## Installation
 
 ```bash
-git clone https://github.com/kiron0/gadgets_emporium_server.git
+git clone https://github.com/kiron0/gadgets_emporium.git
 ```
 
 ```bash
-cd gadgets_emporium_server
+cd gadgets_emporium
 ```
 
 ```bash
