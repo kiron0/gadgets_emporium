@@ -26,7 +26,7 @@ const ProductRow = ({
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://innovative-cars-co.herokuapp.com/parts/${_id}`, {
+        fetch(`http://localhost:5000/parts/${_id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

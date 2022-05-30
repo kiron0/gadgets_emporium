@@ -92,7 +92,13 @@ const Navbar = ({ handleThemeChange, theme }) => {
               to="/"
             >
               <BsTools className="hidden md:block" />{" "}
-              <span>Gadgets Emporium</span>
+              {!user ? (
+                <span className="text-sm md:text-xl lg:text-xl">
+                  Gadgets Emporium
+                </span>
+              ) : (
+                <span>Gadgets Emporium</span>
+              )}
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">

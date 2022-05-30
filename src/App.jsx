@@ -9,6 +9,11 @@ import SignUp from "./Components/Pages/Login/SignUp/SignUp";
 import ResetPassword from "./Components/Pages/Login/ResetPassword";
 import Team from "./Components/Pages/Team/Team";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard/Dashboard";
+import WelcomeDashboard from "./Components/Pages/Dashboard/WelcomeDashboard/WelcomeDashboard";
+import RequireAuth from "./Components/Pages/Login/RequireAuth/RequireAuth";
+import MyProfile from "./Components/Pages/Dashboard/MyProfile/MyProfile";
+import { Toaster } from "react-hot-toast";
+import ScrollButton from "./Components/Pages/Shared/ScrollButton/ScrollButton";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -48,12 +53,19 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <Dashboard handleThemeChange={handleThemeChange} theme={theme} />
+            <RequireAuth>
+              <Dashboard handleThemeChange={handleThemeChange} theme={theme} />
+            </RequireAuth>
           }
-        />
+        >
+          <Route index element={<WelcomeDashboard />} />
+          <Route path="profile" element={<MyProfile />}></Route>
+        </Route>
         <Route path="/team" element={<Team />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ScrollButton></ScrollButton>
+      <Toaster />
     </div>
   );
 }

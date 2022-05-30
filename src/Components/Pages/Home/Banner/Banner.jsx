@@ -23,7 +23,7 @@ const Banner = () => {
           <Fade left distance="30px">
             <div className="lg:w-2/4">
               <span className="text-lg">
-                We are <strong>Tools House</strong>.
+                We are <strong>Gadgets Emporium</strong>.
               </span>
               <h1 className="text-3xl md:text-5xl font-bold leading-tight">
                 We are the best Tools Manufacturer Company in the world.

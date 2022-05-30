@@ -9,7 +9,7 @@ const PaymentHistory = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetch(
-      `https://innovative-cars-co.herokuapp.com/payment/history?uid=${auth?.currentUser?.uid}`,
+      `http://localhost:5000/payment/history?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

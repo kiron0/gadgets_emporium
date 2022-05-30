@@ -6,7 +6,7 @@ import { FiLogOut } from "react-icons/fi";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-import Loader from "../../Shared/Loader/Loader";
+// import Loader from "../../Shared/Loader/Loader";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../Shared/Firebase/Firebase.init";
 import useAdmin from "../../../hooks/useAdmin";
@@ -131,7 +131,7 @@ const Dashboard = ({ handleThemeChange, theme }) => {
           <li>
             <NavLink to="/dashboard/profile">Profile</NavLink>
           </li>
-          {admin ? (
+          {admin && (
             <>
               <li className="py-2">
                 <NavLink to="/dashboard/addProduct">Add a Product</NavLink>
@@ -159,8 +159,6 @@ const Dashboard = ({ handleThemeChange, theme }) => {
                 </button>
               </li>
             </>
-          ) : (
-            <Loader />
           )}
         </ul>
       </div>

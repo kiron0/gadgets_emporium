@@ -2,9 +2,9 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { useQuery } from "react-query";
-import useTitle from "../../hooks/useTitle";
-import auth from "../Firebase/firebase.init";
-import Loader from "../Shared/Loader/Loader";
+import useTitle from "../../../hooks/useTitle";
+import auth from "../../Shared/Firebase/Firebase.init";
+import Loader from "../../Shared/Loader/Loader";
 
 const MyProfile = () => {
   useTitle("Profile");
@@ -18,17 +18,14 @@ const MyProfile = () => {
     const linkedin = e.target.linkedin.value;
     const facebook = e.target.facebook.value;
     const data = { education, number, address, linkedin, facebook };
-    await fetch(
-      `https://innovative-cars-co.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
-      {
-        method: "PATCH",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    )
+    await fetch(`http://localhost:5000/users?uid=${auth?.currentUser?.uid}`, {
+      method: "PATCH",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
       .then((res) => res.json())
       .then((result) => {
         if (result?.success) {
@@ -45,14 +42,11 @@ const MyProfile = () => {
     isLoading,
     refetch,
   } = useQuery(["profileData", auth?.currentUser?.uid], () =>
-    fetch(
-      `https://innovative-cars-co.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/users?uid=${auth?.currentUser?.uid}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
   if (isLoading)
     return (
