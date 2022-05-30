@@ -1,0 +1,27 @@
+.scroll-btn {
+  position: fixed;
+  width: 100%;
+  left: 95%;
+  bottom: 70px;
+  height: 20px;
+  font-size: 3rem;
+  z-index: 999;
+  cursor: pointer;
+  color: hsl(var(--second-hue), 8%, 26%);
+}
+
+@media screen and (max-width: 490px) {
+  .scroll-btn {
+    left: 80%;
+  }
+}
+@media screen and (min-width: 776px) {
+  .scroll-btn {
+    left: 90%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .scroll-btn {
+    left: 95%;
+  }
+}
