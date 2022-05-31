@@ -121,7 +121,7 @@ const Dashboard = ({ handleThemeChange, theme }) => {
           {!admin && (
             <>
               <li className="py-2">
-                <NavLink to="/dashboard/my-orders">My Orders</NavLink>
+                <NavLink to="/dashboard/myOrders">My Orders</NavLink>
               </li>
               <li className="py-2">
                 <NavLink to="/dashboard/addReview">Add a review</NavLink>

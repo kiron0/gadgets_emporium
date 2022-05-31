@@ -17,6 +17,9 @@ import ScrollButton from "./Components/Pages/Shared/ScrollButton/ScrollButton";
 import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin/MakeAdmin";
 import AllUsers from "./Components/Pages/Dashboard/AllUsers/AllUsers";
 import AddProduct from "./Components/Pages/Dashboard/AddProduct/AddProduct";
+import AddReview from "./Components/Pages/Dashboard/AddReview/AddReview";
+import ProductDetails from "./Components/Pages/Home/ProductDetails/ProductDetails";
+import MyOrders from "./Components/Pages/Dashboard/MyOrders/MyOrders";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -63,10 +66,20 @@ function App() {
         >
           <Route index element={<WelcomeDashboard />} />
           <Route path="profile" element={<MyProfile />}></Route>
+          <Route path="myOrders" element={<MyOrders />}></Route>
           <Route path="makeAdmin" element={<MakeAdmin />}></Route>
           <Route path="allUsers" element={<AllUsers />}></Route>
           <Route path="addProduct" element={<AddProduct />}></Route>
+          <Route path="addReview" element={<AddReview />}></Route>
         </Route>
+        <Route
+          path="/purchase/:id"
+          element={
+            <RequireAuth>
+              <ProductDetails />
+            </RequireAuth>
+          }
+        />
         <Route path="/team" element={<Team />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

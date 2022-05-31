@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import ReactStars from "react-stars";
-import useTitle from "../../hooks/useTitle";
-import auth from "../Firebase/firebase.init";
+import useTitle from "../../../hooks/useTitle";
+import auth from "../../Shared/Firebase/Firebase.init";
 const AddReview = () => {
   useTitle("Add Review");
   const [rating, setRating] = useState(0);

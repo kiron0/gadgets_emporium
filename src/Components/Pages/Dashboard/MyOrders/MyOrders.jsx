@@ -1,9 +1,9 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import useTitle from "../../hooks/useTitle";
-import auth from "../Firebase/firebase.init";
-import Loader from "../Shared/Loader/Loader";
+import useTitle from "../../../hooks/useTitle";
+import auth from "../../Shared/Firebase/Firebase.init";
+import Loader from "../../Shared/Loader/Loader";
 import OrderRow from "./OrderRow";
 const MyOrders = () => {
   useTitle("My Orders");
@@ -63,7 +63,7 @@ const MyOrders = () => {
               <h2 className="text-2xl py-3 font-semibold text-center">
                 Not Order Placed yet.
               </h2>
-              <Link to="/allParts" className="btn btn-primary text-white">
+              <Link to="/shop" className="btn btn-primary text-white">
                 Make Order
               </Link>
             </div>

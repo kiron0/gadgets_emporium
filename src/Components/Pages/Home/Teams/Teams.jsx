@@ -9,7 +9,6 @@ const Teams = () => {
   useEffect(() => {
     fetch(`http://localhost:5000/teams`, {
       headers: {
-        "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
@@ -19,6 +18,10 @@ const Teams = () => {
         setLoading(true);
       });
   }, []);
+
+  if (!teams || teams?.length === 0 || teams?.length === undefined) {
+    return <Loader />;
+  }
 
   return (
     <section className="teams py-20 px-8 sm:px-0">
@@ -30,7 +33,7 @@ const Teams = () => {
         <Fade bottom distance="30px">
           {loading ? (
             <div className="teams-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-8">
-              {teams.map((team) => (
+              {teams?.map((team) => (
                 <CardTeam key={team._id} {...team} />
               ))}
             </div>

@@ -58,7 +58,7 @@ const AddProduct = () => {
       },
     };
 
-    await fetch(`http://localhost:5000/parts`, {
+    await fetch(`http://localhost:5000/products`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
