@@ -16,6 +16,7 @@ import { Toaster } from "react-hot-toast";
 import ScrollButton from "./Components/Pages/Shared/ScrollButton/ScrollButton";
 import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin/MakeAdmin";
 import AllUsers from "./Components/Pages/Dashboard/AllUsers/AllUsers";
+import AddProduct from "./Components/Pages/Dashboard/AddProduct/AddProduct";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -64,6 +65,7 @@ function App() {
           <Route path="profile" element={<MyProfile />}></Route>
           <Route path="makeAdmin" element={<MakeAdmin />}></Route>
           <Route path="allUsers" element={<AllUsers />}></Route>
+          <Route path="addProduct" element={<AddProduct />}></Route>
         </Route>
         <Route path="/team" element={<Team />} />
         <Route path="*" element={<NotFound />} />

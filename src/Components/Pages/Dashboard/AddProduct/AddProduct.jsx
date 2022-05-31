@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import useTitle from "../../hooks/useTitle";
-import auth from "../Firebase/firebase.init";
+import useTitle from "../../../hooks/useTitle";
+import auth from "../../Shared/Firebase/Firebase.init";
 
 const AddProduct = () => {
   useTitle("Add Product");

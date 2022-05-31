@@ -7,7 +7,7 @@
   font-size: 3rem;
   z-index: 999;
   cursor: pointer;
-  color: hsl(var(--second-hue), 8%, 26%);
+  color: #8b5cf6;
 }
 
 @media screen and (max-width: 490px) {

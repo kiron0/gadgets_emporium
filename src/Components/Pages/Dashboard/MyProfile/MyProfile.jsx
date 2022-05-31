@@ -9,6 +9,8 @@ import Loader from "../../Shared/Loader/Loader";
 const MyProfile = () => {
   useTitle("Profile");
   const [isShow, setIsShow] = useState(false);
+  const upload_api_key = `e1a6a4f77bc884f9b46b0d06d86c05e5`;
+  const [isFile, setIsFile] = useState(false);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
@@ -77,7 +79,9 @@ const MyProfile = () => {
           <small>{auth?.currentUser?.email}</small>
           <small className="ml-2">
             {role === "admin" ? (
-              <span className="badge bg-primary text-white">Admin</span>
+              <span className="badge bg-primary border-primary text-white">
+                Admin
+              </span>
             ) : (
               <span className="badge text-white">User</span>
             )}
@@ -173,6 +177,32 @@ const MyProfile = () => {
               required
               defaultValue={facebook}
             />
+            <label htmlFor="file" className="my-2 block">
+              Image
+              <button
+                type="button"
+                className="btn btn-xs mx-2 text-white"
+                onClick={() => setIsFile((prev) => !prev)}
+              >
+                {isFile ? "Upload" : "URL"}
+              </button>
+            </label>
+            {isFile ? (
+              <input
+                type="url"
+                name="file"
+                className="input input-bordered w-full"
+                placeholder="Put Your Image Link"
+                id="file"
+              />
+            ) : (
+              <input
+                type="file"
+                name="file"
+                className="block border p-2 w-full rounded"
+                id="file"
+              />
+            )}
             <div className="text-center mt-3">
               <button className="btn btn-primary text-white">
                 Update Profile

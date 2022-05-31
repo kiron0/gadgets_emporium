@@ -54,7 +54,7 @@ const Navbar = ({ handleThemeChange, theme }) => {
       </li>
       {user && (
         <li>
-          <Link className="uppercase bg-base-200" to="/dashboard">
+          <Link className="uppercase bg-secondary text-white" to="/dashboard">
             Dashboard
           </Link>
         </li>
