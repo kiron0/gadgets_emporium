@@ -2,6 +2,7 @@ import React from "react";
 import useTitle from "../../../hooks/useTitle";
 import Footer from "../../Shared/Footer/Footer";
 import Banner from "../Banner/Banner";
+import GetInTouch from "../GetInTouch/GetInTouch";
 import Hero from "../Hero/Hero";
 import OrderStep from "../OrderStep/OrderStep";
 import Products from "../Products/Products";
@@ -18,6 +19,7 @@ const Home = () => {
       <Teams></Teams>
       <Reviews></Reviews>
       <OrderStep></OrderStep>
+      <GetInTouch></GetInTouch>
       <Footer></Footer>
     </>
   );

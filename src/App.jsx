@@ -20,6 +20,8 @@ import AddProduct from "./Components/Pages/Dashboard/AddProduct/AddProduct";
 import AddReview from "./Components/Pages/Dashboard/AddReview/AddReview";
 import ProductDetails from "./Components/Pages/Home/ProductDetails/ProductDetails";
 import MyOrders from "./Components/Pages/Dashboard/MyOrders/MyOrders";
+import RequireAdmin from "./Components/Pages/Login/RequireAdmin/RequireAdmin";
+import ManageOrder from "./Components/Pages/Dashboard/ManageOrder/ManageOrder";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -71,6 +73,14 @@ function App() {
           <Route path="allUsers" element={<AllUsers />}></Route>
           <Route path="addProduct" element={<AddProduct />}></Route>
           <Route path="addReview" element={<AddReview />}></Route>
+          <Route
+            path="manageOrder"
+            element={
+              <RequireAdmin>
+                <ManageOrder></ManageOrder>
+              </RequireAdmin>
+            }
+          ></Route>
         </Route>
         <Route
           path="/purchase/:id"

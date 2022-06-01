@@ -7,7 +7,7 @@ const Teams = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:5000/teams`, {
+    fetch(`https://gadgets-emporium.herokuapp.com/teams`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

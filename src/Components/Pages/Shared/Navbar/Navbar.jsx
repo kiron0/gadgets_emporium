@@ -151,7 +151,7 @@ const Navbar = ({ handleThemeChange, theme }) => {
                       {user?.photoURL ? (
                         <img src={user?.photoURL} alt={user?.displayName} />
                       ) : (
-                        user?.displayName.slice(0, 1)
+                        user?.displayName?.slice(0, 1)
                       )}
                     </div>
                   </label>
