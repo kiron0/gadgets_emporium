@@ -7,6 +7,7 @@ import Hero from "../Hero/Hero";
 import OrderStep from "../OrderStep/OrderStep";
 import Products from "../Products/Products";
 import Reviews from "../Reviews/Reviews";
+import Stats from "../Stats/Stats";
 import Teams from "../Teams/Teams";
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
       <Teams></Teams>
       <Reviews></Reviews>
       <OrderStep></OrderStep>
+      <Stats></Stats>
       <GetInTouch></GetInTouch>
       <Footer></Footer>
     </>
