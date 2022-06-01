@@ -14,7 +14,6 @@ const ResetPassword = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     setSending(true);

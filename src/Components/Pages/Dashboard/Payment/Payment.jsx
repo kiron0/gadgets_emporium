@@ -5,7 +5,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import useTitle from "../../../hooks/useTitle";
-import auth from "../../Firebase/firebase.init";
+import auth from "../../Shared/Firebase/Firebase.init";
 import Loader from "../../Shared/Loader/Loader";
 
 import CheckoutForm from "./CheckoutForm";
@@ -18,7 +18,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery("Orders", () =>
     fetch(
-      `https://gadgets-emporium.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
+      `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

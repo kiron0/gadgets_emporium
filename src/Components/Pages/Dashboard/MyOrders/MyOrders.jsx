@@ -9,7 +9,7 @@ const MyOrders = () => {
   useTitle("My Orders");
   const { data, isLoading, refetch } = useQuery("Orders", () =>
     fetch(
-      `https://gadgets-emporium.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
+      `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
