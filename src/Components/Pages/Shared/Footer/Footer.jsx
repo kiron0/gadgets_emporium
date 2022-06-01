@@ -82,7 +82,7 @@ const Footer = () => {
       </footer>
       <div className="text-center py-6">
         <p className="text-md font-semibold lg:text-md">
-          Copyright &copy; 2022 - All rights reserved by Innovative Car Co.
+          Copyright &copy; 2022 - All rights reserved by Gadgets Emporium.
         </p>
       </div>
     </div>
