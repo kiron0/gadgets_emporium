@@ -8,7 +8,7 @@ const useParts = () => {
     refetch,
   } = useQuery("allParts", async () => {
     const res = await fetch(
-      "https://gadgets-emporium.herokuapp.com/parts?sort=1",
+      "http://localhost:5000/parts?sort=1",
       {
         headers: {
           "content-type": "application/json",

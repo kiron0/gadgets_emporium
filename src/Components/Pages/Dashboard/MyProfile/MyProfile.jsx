@@ -9,7 +9,7 @@ import Loader from "../../Shared/Loader/Loader";
 const MyProfile = () => {
   useTitle("Profile");
   const [isShow, setIsShow] = useState(false);
-  const upload_api_key = `e1a6a4f77bc884f9b46b0d06d86c05e5`;
+  // const upload_api_key = `e1a6a4f77bc884f9b46b0d06d86c05e5`;
   const [isFile, setIsFile] = useState(false);
 
   const handleUpdateProfile = async (e) => {
@@ -21,7 +21,7 @@ const MyProfile = () => {
     const facebook = e.target.facebook.value;
     const data = { education, number, address, linkedin, facebook };
     await fetch(
-      `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+      `http://localhost:5000/users?uid=${auth?.currentUser?.uid}`,
       {
         method: "PATCH",
         headers: {
@@ -48,7 +48,7 @@ const MyProfile = () => {
     refetch,
   } = useQuery(["profileData", auth?.currentUser?.uid], () =>
     fetch(
-      `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+      `http://localhost:5000/users?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

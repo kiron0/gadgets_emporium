@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import auth from "../../Firebase/firebase.init";
+import auth from "../../Shared/Firebase/Firebase.init";
 
 const CheckoutForm = ({ singleOrder, refetch }) => {
   const stripe = useStripe();
@@ -16,7 +16,7 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
     Number(singleOrder?.productInfo?.price);
   useEffect(() => {
     fetch(
-      `https://gadgets-emporium.herokuapp.com/payment/create-payment-intent`,
+      `http://localhost:5000/payment/create-payment-intent`,
       {
         method: "POST",
         headers: {
@@ -29,7 +29,7 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
       .then((res) => res.json())
       .then((result) => {
         if (result?.clientSecret) {
-          setClientSecret(result.clientSecret);
+          setClientSecret(result?.clientSecret);
         }
       });
   }, [totalPrice]);
@@ -88,7 +88,7 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
             new Date().toDateString() + " " + new Date().toLocaleTimeString(),
         };
         fetch(
-          `https://gadgets-emporium.herokuapp.com/booking?id=${singleOrder?._id}`,
+          `http://localhost:5000/booking?id=${singleOrder?._id}`,
           {
             method: "POST",
             headers: {
@@ -101,9 +101,9 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
           .then((res) => res.json())
           .then((result) => {
             if (result?.insertedId) {
-              navigate(`/dashboard/my-orders`);
+              navigate(`/dashboard/myOrders`);
               fetch(
-                `https://gadgets-emporium.herokuapp.com/orders/paid/${singleOrder?._id}`,
+                `http://localhost:5000/orders/paid/${singleOrder?._id}`,
                 {
                   method: "PATCH",
                   headers: {

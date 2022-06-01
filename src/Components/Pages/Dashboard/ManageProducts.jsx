@@ -4,7 +4,7 @@ import Loading from "../Shared/Loading/Loading";
 
 const ManageProducts = () => {
   const { data: parts, isLoading } = useQuery("ManageAllParts", async () => {
-    const res = await fetch("https://gadgets-emporium.herokuapp.com/parts", {
+    const res = await fetch("http://localhost:5000/parts", {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
