@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import useTitle from "../../../hooks/useTitle";
 import Loader from "../../Shared/Loader/Loader";
 import OrderManageRow from "./OrderManageRow";
+
 const ManageOrder = () => {
   useTitle("Manage Order");
   const { data, isLoading, refetch } = useQuery("orders", () =>
