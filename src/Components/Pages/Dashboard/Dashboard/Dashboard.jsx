@@ -126,6 +126,12 @@ const Dashboard = ({ handleThemeChange, theme }) => {
               <li className="py-2">
                 <NavLink to="/dashboard/addReview">Add a review</NavLink>
               </li>
+              <li>
+                <NavLink to="/dashboard/paymentHistory">
+                  Payment History{" "}
+                  <small className="badge badge-outline text-sm">New</small>
+                </NavLink>
+              </li>
             </>
           )}
           <li>

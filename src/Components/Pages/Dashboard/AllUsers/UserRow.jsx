@@ -10,7 +10,9 @@ const UserRow = ({ user, setDeletingUser, index }) => {
       <td>{email}</td>
       <td>
         {role === "admin" ? (
-          <span className="badge bg-primary text-white">Admin</span>
+          <span className="badge bg-primary text-white border-primary">
+            Admin
+          </span>
         ) : (
           <span className="badge text-white">User</span>
         )}

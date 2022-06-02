@@ -54,27 +54,29 @@ const Reviews = () => {
   }
 
   return (
-    <section className="reviews py-20 px-6 sm:px-0">
-      <TItle
-        title="Reviews by Customer"
-        subTitle="What Customer say about us?"
-      />
-      <div className="container mx-auto">
-        <Fade bottom distance="30px">
-          {loading ? (
-            <div className="reviews-content">
-              <Slider {...settings}>
-                {reviews?.map((review) => (
-                  <CardReview key={review._id} {...review} />
-                ))}
-              </Slider>
-            </div>
-          ) : (
-            <Loader />
-          )}
-        </Fade>
-      </div>
-    </section>
+    <>
+      <section className="reviews py-20 px-6 sm:px-0">
+        <TItle
+          title="Reviews by Customer"
+          subTitle="What Customer say about us?"
+        />
+        <div className="container mx-auto">
+          <Fade bottom distance="30px">
+            {loading ? (
+              <div className="reviews-content">
+                <Slider {...settings}>
+                  {reviews?.map((review) => (
+                    <CardReview key={review._id} {...review} />
+                  ))}
+                </Slider>
+              </div>
+            ) : (
+              <Loader />
+            )}
+          </Fade>
+        </div>
+      </section>
+    </>
   );
 };
 

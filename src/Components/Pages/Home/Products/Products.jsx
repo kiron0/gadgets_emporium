@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import Loader from "../../Shared/Loader/Loader";
 import TItle from "../../Shared/Title/Title";
 import { useQuery } from "react-query";
@@ -7,15 +8,12 @@ const Products = () => {
   const navigate = useNavigate();
 
   const { data: products, isLoading } = useQuery("allProducts", async () => {
-    const res = await fetch(
-      "http://localhost:5000/products?sort=1",
-      {
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    );
+    const res = await fetch("http://localhost:5000/products?sort=1", {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
     const data = await res.json();
     return data;
   });
@@ -28,6 +26,11 @@ const Products = () => {
   ) {
     return <Loader />;
   }
+
+  // add to cart button
+  const addToCart = () => {
+    console.log("add to cart");
+  };
 
   return (
     <div className="py-28 lg:px-12">
@@ -70,12 +73,18 @@ const Products = () => {
                       {price}$
                     </div>
                   </div>
-                  <div className="card-actions justify-end mt-2">
+                  <div className="card-actions justify-center mt-2">
                     <button
                       onClick={() => navigate(`/purchase/${_id}`)}
                       className="btn btn-primary text-white mt-4"
                     >
                       Order Now
+                    </button>
+                    <button
+                      className="btn btn-primary text-white mt-4"
+                      onClick={addToCart}
+                    >
+                      <MdOutlineShoppingCart className="text-xl" />
                     </button>
                   </div>
                 </div>

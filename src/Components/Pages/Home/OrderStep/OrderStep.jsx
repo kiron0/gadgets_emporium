@@ -3,7 +3,7 @@ import Fade from "react-reveal/Fade";
 import TItle from "../../Shared/Title/Title";
 const OrderStep = () => {
   return (
-    <section className="orderStep py-20 mb-20 px-6 md:px-0">
+    <section className="orderStep py-8 px-6 md:px-0">
       <TItle
         title="Order Step"
         subTitle=" Here is the order step you have to do for get order."

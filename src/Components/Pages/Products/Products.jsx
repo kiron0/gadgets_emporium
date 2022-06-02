@@ -20,7 +20,7 @@ const Products = () => {
     return data;
   });
 
-  if (isLoading) {
+  if (isLoading || products?.length === undefined) {
     return <Loading></Loading>;
   }
 

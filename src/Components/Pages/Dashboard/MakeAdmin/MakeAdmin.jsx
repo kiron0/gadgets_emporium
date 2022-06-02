@@ -30,8 +30,8 @@ const MakeAdmin = () => {
     e.preventDefault();
   };
   return (
-    <div className="lg:px-10 py-10 bg-base-300 h-screen rounded-md">
-      <div className="bg-base-100 pl-4 pb-44 pt-4 rounded-2xl">
+    <div className="lg:px-10 py-10 bg-base-100 max-h-[80vh] rounded-md">
+      <div className="bg-base-300 pl-4 pb-44 pt-4 rounded-2xl">
         <form onSubmit={handleAdminSubmit}>
           <label className="label">
             <span className="label-text">Email</span>

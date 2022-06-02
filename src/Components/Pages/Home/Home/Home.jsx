@@ -1,6 +1,7 @@
 import React from "react";
 import useTitle from "../../../hooks/useTitle";
 import Footer from "../../Shared/Footer/Footer";
+import AddToCart from "../AddToCart/AddToCart";
 import Banner from "../Banner/Banner";
 import GetInTouch from "../GetInTouch/GetInTouch";
 import Hero from "../Hero/Hero";
@@ -15,6 +16,7 @@ const Home = () => {
   return (
     <>
       <Banner></Banner>
+      <AddToCart></AddToCart>
       <Hero></Hero>
       <Products></Products>
       <Teams></Teams>

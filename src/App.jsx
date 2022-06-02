@@ -24,6 +24,7 @@ import RequireAdmin from "./Components/Pages/Login/RequireAdmin/RequireAdmin";
 import ManageOrder from "./Components/Pages/Dashboard/ManageOrder/ManageOrder";
 import Payment from "./Components/Pages/Dashboard/Payment/Payment";
 import Products from "./Components/Pages/Products/Products";
+import PaymentHistory from "./Components/Pages/Dashboard/PaymentHistory/PaymentHistory";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -83,6 +84,14 @@ function App() {
             element={
               <RequireAuth>
                 <MyOrders />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route
+            path="paymentHistory"
+            element={
+              <RequireAuth>
+                <PaymentHistory />
               </RequireAuth>
             }
           ></Route>

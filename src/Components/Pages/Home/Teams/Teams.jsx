@@ -25,11 +25,11 @@ const Teams = () => {
 
   return (
     <section className="teams py-20 px-8 sm:px-0">
+      <TItle
+        title="Our Top Valuable Customers"
+        subTitle="These are our top customers of this company."
+      />
       <div className="container mx-auto">
-        <TItle
-          title="Our Top Valuable Customers"
-          subTitle="These are our top customers of this company."
-        />
         <Fade bottom distance="30px">
           {loading ? (
             <div className="teams-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 lg:gap-8">
