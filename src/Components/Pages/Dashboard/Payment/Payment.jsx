@@ -18,7 +18,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery("Orders", () =>
     fetch(
-      `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`,
+      `https://gadgets-emporium.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

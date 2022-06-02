@@ -8,12 +8,15 @@ const Products = () => {
   const navigate = useNavigate();
 
   const { data: products, isLoading } = useQuery("allProducts", async () => {
-    const res = await fetch("http://localhost:5000/products?sort=1", {
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
+    const res = await fetch(
+      "https://gadgets-emporium.herokuapp.com/products?sort=1",
+      {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    );
     const data = await res.json();
     return data;
   });

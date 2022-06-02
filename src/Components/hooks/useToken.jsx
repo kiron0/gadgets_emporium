@@ -8,7 +8,7 @@ const useToken = (user) => {
     const currentUser = { email: email, uid: uid };
     if (email) {
       fetch(
-        `http://localhost:5000/user?email=${email}&&uid=${uid}`,
+        `https://gadgets-emporium.herokuapp.com/user?email=${email}&&uid=${uid}`,
         {
           method: "PUT",
           headers: {

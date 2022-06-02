@@ -16,7 +16,7 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
     Number(singleOrder?.productInfo?.price);
   useEffect(() => {
     fetch(
-      `http://localhost:5000/payment/create-payment-intent`,
+      `https://gadgets-emporium.herokuapp.com/payment/create-payment-intent`,
       {
         method: "POST",
         headers: {
@@ -88,7 +88,7 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
             new Date().toDateString() + " " + new Date().toLocaleTimeString(),
         };
         fetch(
-          `http://localhost:5000/booking?id=${singleOrder?._id}`,
+          `https://gadgets-emporium.herokuapp.com/booking?id=${singleOrder?._id}`,
           {
             method: "POST",
             headers: {
@@ -103,7 +103,7 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
             if (result?.insertedId) {
               navigate(`/dashboard/myOrders`);
               fetch(
-                `http://localhost:5000/orders/paid/${singleOrder?._id}`,
+                `https://gadgets-emporium.herokuapp.com/orders/paid/${singleOrder?._id}`,
                 {
                   method: "PATCH",
                   headers: {

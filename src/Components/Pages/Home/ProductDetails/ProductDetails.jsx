@@ -15,7 +15,7 @@ const ProductDetails = () => {
   const { id } = useParams();
 
   const { data, isLoading, refetch } = useQuery("products", () =>
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://gadgets-emporium.herokuapp.com/products/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -74,7 +74,7 @@ const ProductDetails = () => {
 
   const sendOrderData = async (data) => {
     await fetch(
-      `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`,
+      `https://gadgets-emporium.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
       {
         method: "POST",
         headers: {
@@ -88,7 +88,7 @@ const ProductDetails = () => {
       .then((result) => {
         if (result?.order) {
           fetch(
-            `http://localhost:5000/products/updateQty/${id}`,
+            `https://gadgets-emporium.herokuapp.com/products/updateQty/${id}`,
             {
               method: "PATCH",
               headers: {
