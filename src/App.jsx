@@ -14,7 +14,6 @@ import RequireAuth from "./Components/Pages/Login/RequireAuth/RequireAuth";
 import MyProfile from "./Components/Pages/Dashboard/MyProfile/MyProfile";
 import { Toaster } from "react-hot-toast";
 import ScrollButton from "./Components/Pages/Shared/ScrollButton/ScrollButton";
-import MakeAdmin from "./Components/Pages/Dashboard/MakeAdmin/MakeAdmin";
 import AllUsers from "./Components/Pages/Dashboard/AllUsers/AllUsers";
 import AddProduct from "./Components/Pages/Dashboard/AddProduct/AddProduct";
 import AddReview from "./Components/Pages/Dashboard/AddReview/AddReview";
@@ -25,6 +24,9 @@ import ManageOrder from "./Components/Pages/Dashboard/ManageOrder/ManageOrder";
 import Payment from "./Components/Pages/Dashboard/Payment/Payment";
 import Products from "./Components/Pages/Products/Products";
 import PaymentHistory from "./Components/Pages/Dashboard/PaymentHistory/PaymentHistory";
+import ManageProducts from "./Components/Pages/Dashboard/ManageProducts/ManageProducts";
+import AddTeamMember from "./Components/Pages/Dashboard/AddTeamMember/AddTeamMember";
+import ManageReviews from "./Components/Pages/Dashboard/ManageReviews/ManageReviews";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -96,10 +98,10 @@ function App() {
             }
           ></Route>
           <Route
-            path="makeAdmin"
+            path="manageReviews"
             element={
               <RequireAdmin>
-                <MakeAdmin />
+                <ManageReviews />
               </RequireAdmin>
             }
           ></Route>
@@ -116,6 +118,22 @@ function App() {
             element={
               <RequireAdmin>
                 <AddProduct />
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="manageProducts"
+            element={
+              <RequireAdmin>
+                <ManageProducts />
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="addTeamMember"
+            element={
+              <RequireAdmin>
+                <AddTeamMember />
               </RequireAdmin>
             }
           ></Route>

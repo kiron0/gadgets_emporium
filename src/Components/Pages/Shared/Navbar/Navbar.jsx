@@ -108,14 +108,14 @@ const Navbar = ({ handleThemeChange, theme }) => {
             <ul className="menu menu-horizontal p-0 gap-3">{NavbarMenus}</ul>
           </div>
           <div className="navbar-end gap-3">
-            <li className="list-none mt-2">
+            {/* <li className="list-none mt-2">
               <label for="AddToCart" className="modal-button indicator">
                 <span class="indicator-item badge badge-secondary">
                   {carts ? <>{carts?.length}</> : 0}
                 </span>
                 <MdOutlineShoppingCart className="text-3xl cursor-pointer" />
               </label>
-            </li>
+            </li> */}
             <li className="list-none">
               <button
                 onClick={handleThemeChange}

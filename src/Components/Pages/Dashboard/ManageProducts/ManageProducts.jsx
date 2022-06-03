@@ -8,7 +8,7 @@ const ManageProducts = () => {
   useTitle("Manage Product");
   const [modalProduct, setModalProduct] = useState({});
   const { data, isLoading, refetch } = useQuery(["products"], () =>
-    fetch(`https://gadgets-emporium.herokuapp.com/parts`, {
+    fetch(`https://gadgets-emporium.herokuapp.com/products`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -16,8 +16,6 @@ const ManageProducts = () => {
   );
 
   const productData = data;
-  // console.log(modalProduct?.productName);
-  // availableQty, orderQty, price
 
   /* Handle Update Stock Product */
   const [productNameField, setProductNameField] = useState("");
@@ -34,7 +32,7 @@ const ManageProducts = () => {
     }
 
     await fetch(
-      `https://gadgets-emporium.herokuapp.com/parts/update-stock/${modalProduct._id}`,
+      `https://gadgets-emporium.herokuapp.com/products/update-stock/${modalProduct._id}`,
       {
         method: "PATCH",
         headers: {

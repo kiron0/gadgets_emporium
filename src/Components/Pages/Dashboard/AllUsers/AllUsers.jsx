@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import useTitle from "../../../hooks/useTitle";
 import Loading from "../../Shared/Loading/Loading";
-import UserDeleteConfirmModal from "./UserDeleteConfirmModal";
 import UserRow from "./UserRow";
 
 const AllUsers = () => {
   useTitle("Manage All Users");
-  const [deletingUser, setDeletingUser] = useState(null);
   const {
     data: users,
     isLoading,
@@ -32,6 +30,7 @@ const AllUsers = () => {
               <th>No</th>
               <th>Uid</th>
               <th>Email</th>
+              <th>Make Admin</th>
               <th>Role</th>
               <th>Action</th>
             </tr>
@@ -43,18 +42,11 @@ const AllUsers = () => {
                 key={user._id}
                 user={user}
                 refetch={refetch}
-                setDeletingUser={setDeletingUser}
               ></UserRow>
             ))}
           </tbody>
         </table>
       </div>
-      {deletingUser && (
-        <UserDeleteConfirmModal
-          deletingUser={deletingUser}
-          setDeletingUser={setDeletingUser}
-        ></UserDeleteConfirmModal>
-      )}
     </div>
   );
 };

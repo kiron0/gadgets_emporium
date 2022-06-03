@@ -55,7 +55,7 @@ const Reviews = () => {
 
   return (
     <>
-      <section className="reviews py-20 px-6 sm:px-0">
+      <section className="reviews py-20 px-8">
         <TItle
           title="Reviews by Customer"
           subTitle="What Customer say about us?"

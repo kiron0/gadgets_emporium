@@ -45,7 +45,13 @@ const AddReview = () => {
   const handleReviewTextLimit = (e) => {
     const reviewText = e.target.value;
     if (reviewText.length === 250) {
-      setReviewError(`Stop! Enough`);
+      setReviewError(
+        `Stop, ${auth?.currentUser?.displayName}! You have reached the limit 😃`
+      );
+    } else if (reviewText.length < 100) {
+      setReviewError(
+        `Hey, ${auth?.currentUser?.displayName}! Minimum 100 characters required 😋`
+      );
     } else {
       setReviewError(null);
     }

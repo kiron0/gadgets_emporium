@@ -143,9 +143,6 @@ const Dashboard = ({ handleThemeChange, theme }) => {
                 <NavLink to="/dashboard/addProduct">Add a Product</NavLink>
               </li>
               <li className="py-2">
-                <NavLink to="/dashboard/makeAdmin">Make A Admin</NavLink>
-              </li>
-              <li className="py-2">
                 <NavLink to="/dashboard/allUsers">Manage Users</NavLink>
               </li>
               <li className="py-2">
@@ -157,9 +154,12 @@ const Dashboard = ({ handleThemeChange, theme }) => {
                 </NavLink>
               </li>
               <li className="py-2">
+                <NavLink to="/dashboard/addTeamMember">Add Team Member</NavLink>
+              </li>
+              <li className="py-2">
                 <NavLink to="/dashboard/manageReviews">Manage Reviews</NavLink>
               </li>
-              <li className="lg:pt-56">
+              <li className="lg:pt-52">
                 <button
                   onClick={handleLogOut}
                   className="bg-primary rounded-lg text-white"
