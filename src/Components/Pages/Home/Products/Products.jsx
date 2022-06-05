@@ -3,9 +3,14 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import Loader from "../../Shared/Loader/Loader";
 import TItle from "../../Shared/Title/Title";
 import { useQuery } from "react-query";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../Shared/Firebase/Firebase.init";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Products = () => {
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
 
   const { data: products, isLoading } = useQuery("allProducts", async () => {
     const res = await fetch(
@@ -77,18 +82,36 @@ const Products = () => {
                     </div>
                   </div>
                   <div className="card-actions justify-center mt-2">
-                    <button
-                      onClick={() => navigate(`/purchase/${_id}`)}
-                      className="btn btn-primary text-white mt-4"
-                    >
-                      Order Now
-                    </button>
-                    <button
-                      className="btn btn-primary text-white mt-4"
-                      onClick={addToCart}
-                    >
-                      <MdOutlineShoppingCart className="text-xl" />
-                    </button>
+                    {admin ? (
+                      <button
+                        disabled
+                        className="btn btn-secondary text-white mt-4"
+                      >
+                        Order Now
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => navigate(`/purchase/${_id}`)}
+                        className="btn btn-primary text-white mt-4"
+                      >
+                        Order Now
+                      </button>
+                    )}
+                    {admin ? (
+                      <button
+                        className="btn btn-secondary text-white mt-4"
+                        disabled
+                      >
+                        <MdOutlineShoppingCart className="text-xl" />
+                      </button>
+                    ) : (
+                      <button
+                        className="btn btn-primary text-white mt-4"
+                        onClick={addToCart}
+                      >
+                        <MdOutlineShoppingCart className="text-xl" />
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

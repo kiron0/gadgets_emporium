@@ -7,12 +7,16 @@ import "./ProductDetails.css";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../Shared/Firebase/Firebase.init";
 import Loader from "../../Shared/Loader/Loader";
+import useAdmin from "../../../hooks/useAdmin";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const ProductDetails = () => {
   const [error, setError] = useState("");
   const formRef = useRef(null);
   const navigate = useNavigate();
   const { id } = useParams();
+  const [user] = useAuthState(auth);
+  const [admin] = useAdmin(user);
 
   const { data, isLoading, refetch } = useQuery("products", () =>
     fetch(`https://gadgets-emporium.herokuapp.com/products/${id}`, {
@@ -216,12 +220,21 @@ const ProductDetails = () => {
                 {error && <small className="text-error">{error}</small>}
               </div>
               <div className="my-3">
-                <button
-                  className="btn btn-primary px-10 text-white"
-                  disabled={error && true}
-                >
-                  Place Order
-                </button>
+                {admin ? (
+                  <button
+                    disabled
+                    className="btn btn-secondary text-white mt-4"
+                  >
+                    Place Order
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-primary text-white"
+                    disabled={error && true}
+                  >
+                    Place Order
+                  </button>
+                )}
               </div>
             </form>
           </div>
