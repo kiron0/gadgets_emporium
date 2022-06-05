@@ -56,14 +56,14 @@ const Products = () => {
             }) => (
               <div className="card bg-base-100 shadow-xl" key={_id}>
                 <figure>
-                  <img src={image} className="h-52" alt="Shoes" />
+                  <img src={image} className="h-52 rounded-xl" alt="Shoes" />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title">
                     {productName}
                     <div className="badge badge-secondary text-white">NEW</div>
                   </h2>
-                  <p>{productDescription?.slice(0, 60)}</p>
+                  <p>{productDescription?.slice(0, 60)}...</p>
                   <div className="card-actions justify-end">
                     <div className="badge badge-ghost bg-base-300">
                       <span title="Minimum Order Quantity">MOQ</span>-{" "}

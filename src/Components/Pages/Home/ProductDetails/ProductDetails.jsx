@@ -24,7 +24,7 @@ const ProductDetails = () => {
 
   const [orderQtyField, setOrderQtyField] = useState(0);
   useTitle(data?.productName);
-  if (isLoading) return <Loader />;
+  if (isLoading || !data.image) return <Loader />;
 
   const {
     _id,
@@ -143,7 +143,7 @@ const ProductDetails = () => {
             <img
               src={image}
               alt={productName}
-              className="w-full h-80 object-contain"
+              className="w-full h-80 object-contain rounded-xl"
             />
             <ul className="flex flex-wrap items-center gap-3">
               <li>
