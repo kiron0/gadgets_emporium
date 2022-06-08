@@ -6,23 +6,32 @@ import { FiLogOut } from "react-icons/fi";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-// import Loader from "../../Shared/Loader/Loader";
+import Loader from "../../Shared/Loader/Loader";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../Shared/Firebase/Firebase.init";
 import useAdmin from "../../../hooks/useAdmin";
+import useProfileImage from "../../../hooks/useProfileImage";
 
 const Dashboard = ({ handleThemeChange, theme }) => {
   useTitle("Dashboard");
   const [user] = useAuthState(auth);
-  const [admin] = useAdmin(user);
+  const [admin, adminLoading] = useAdmin(user);
+  const [image] = useProfileImage();
   const navigate = useNavigate();
+
   const handleLogOut = async () => {
     await signOut(auth).then(() => {
       navigate("/");
-      toast.success(`Sign Out successfully.`);
-      localStorage.removeItem("accessToken");
+      toast.success(`Thank you, ${user.displayName} to stay with us!`, {
+        autoClose: 5000,
+      });
     });
   };
+
+  if (adminLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="drawer drawer-mobile">
       <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
@@ -36,7 +45,7 @@ const Dashboard = ({ handleThemeChange, theme }) => {
           </label>
           <Link
             to="/"
-            className="text-lg lg:text-2xl md:text-2xl font-semibold"
+            className="hidden lg:flex text-lg lg:text-2xl md:text-2xl font-semibold"
           >
             Gadgets Emporium
           </Link>
@@ -81,7 +90,7 @@ const Dashboard = ({ handleThemeChange, theme }) => {
                     alt={auth?.currentUser?.displayName}
                   />
                 ) : (
-                  <span>{auth?.currentUser?.displayName?.slice(0, 1)}</span>
+                  <img src={image} alt={auth?.currentUser?.displayName} />
                 )}
               </div>
             </label>
@@ -159,16 +168,16 @@ const Dashboard = ({ handleThemeChange, theme }) => {
               <li className="py-2">
                 <NavLink to="/dashboard/manageReviews">Manage Reviews</NavLink>
               </li>
-              <li className="lg:pt-52">
-                <button
-                  onClick={handleLogOut}
-                  className="bg-primary rounded-lg text-white"
-                >
-                  <FiLogOut /> Logout
-                </button>
-              </li>
             </>
           )}
+          <li className={admin ? "lg:pt-52" : "lg:pt-96"}>
+            <button
+              onClick={handleLogOut}
+              className="bg-primary rounded-lg text-white"
+            >
+              <FiLogOut /> Logout
+            </button>
+          </li>
         </ul>
       </div>
     </div>

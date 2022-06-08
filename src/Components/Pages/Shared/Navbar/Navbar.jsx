@@ -10,9 +10,12 @@ import { BiLogInCircle } from "react-icons/bi";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import auth from "../Firebase/Firebase.init";
 import useCarts from "../../../hooks/useCarts";
+import useProfileImage from "../../../hooks/useProfileImage";
+import Loading from "../Loading/Loading";
 
 const Navbar = ({ handleThemeChange, theme }) => {
   const [carts] = useCarts();
+  const [image] = useProfileImage();
   const [user] = useAuthState(auth);
   const { pathname } = useLocation();
   const [scrollY, setScrollY] = useState();
@@ -23,10 +26,12 @@ const Navbar = ({ handleThemeChange, theme }) => {
 
   const handleLogOut = () => {
     signOut(auth);
+    localStorage.removeItem("accessToken");
     toast.success(`Thank you, ${user.displayName} to stay with us!`, {
       autoClose: 5000,
     });
   };
+
   const NavbarMenus = (
     <>
       <li>
@@ -45,7 +50,7 @@ const Navbar = ({ handleThemeChange, theme }) => {
         </NavLink>
       </li>
       <li>
-        <NavLink className="uppercase" to="/team">
+        <NavLink className="uppercase" to="/teamMembers">
           Team
         </NavLink>
       </li>
@@ -64,6 +69,10 @@ const Navbar = ({ handleThemeChange, theme }) => {
       )}
     </>
   );
+
+  if (!image || image === undefined) {
+    return <Loading />;
+  }
 
   return (
     <div className="fixed top-0 w-full z-50">
@@ -159,10 +168,13 @@ const Navbar = ({ handleThemeChange, theme }) => {
                       style={{ display: "grid" }}
                       className="w-10 h-10 rounded-full border bg-base-300 grid place-items-center ring ring-primary ring-offset-base-100 ring-offset-2"
                     >
-                      {user?.photoURL ? (
-                        <img src={user?.photoURL} alt={user?.displayName} />
+                      {auth?.currentUser?.photoURL ? (
+                        <img
+                          src={auth?.currentUser?.photoURL}
+                          alt={auth?.currentUser?.displayName}
+                        />
                       ) : (
-                        user?.displayName?.slice(0, 1)
+                        <img src={image} alt={auth?.currentUser?.displayName} />
                       )}
                     </div>
                   </label>

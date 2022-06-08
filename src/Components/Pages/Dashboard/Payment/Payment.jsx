@@ -17,14 +17,11 @@ const Payment = () => {
   const { paymentId } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery("Orders", () =>
-    fetch(
-      `https://gadgets-emporium.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
   useTitle("Payment Option");
   if (isLoading) return <Loader />;

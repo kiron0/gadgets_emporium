@@ -163,7 +163,7 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/team" element={<Team />} />
+        <Route path="/teamMembers" element={<Team />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ScrollButton></ScrollButton>

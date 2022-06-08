@@ -60,7 +60,7 @@ const AddTeamMember = () => {
       },
     };
 
-    await fetch(`https://gadgets-emporium.herokuapp.com/teamMembers`, {
+    await fetch(`http://localhost:5000/teamMembers`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

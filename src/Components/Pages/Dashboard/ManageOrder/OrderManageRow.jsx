@@ -27,7 +27,7 @@ const OrderManageRow = ({
       confirmButtonText: "Yes, Shipped it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://gadgets-emporium.herokuapp.com/orders/shipped/${id}`, {
+        fetch(`http://localhost:5000/orders/shipped/${id}`, {
           method: "PATCH",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -58,7 +58,7 @@ const OrderManageRow = ({
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://gadgets-emporium.herokuapp.com/orders/${id}`, {
+        fetch(`http://localhost:5000/orders/${id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

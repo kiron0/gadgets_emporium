@@ -26,7 +26,7 @@ const ProductRow = ({
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://gadgets-emporium.herokuapp.com/products/${_id}`, {
+        fetch(`http://localhost:5000/products/${_id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

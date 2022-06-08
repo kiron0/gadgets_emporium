@@ -10,7 +10,7 @@ const ManageReviews = () => {
     isLoading,
     refetch,
   } = useQuery(["reviews"], () =>
-    fetch(`https://gadgets-emporium.herokuapp.com/reviews`, {
+    fetch(`http://localhost:5000/reviews`, {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -15,7 +15,7 @@ const ReviewsCard = ({ _id, reviewText, author, rating, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://gadgets-emporium.herokuapp.com/reviews/${_id}`, {
+        fetch(`http://localhost:5000/reviews/${_id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -7,16 +7,13 @@ const useToken = (user) => {
     const uid = user?.user?.uid;
     const currentUser = { email: email, uid: uid };
     if (email) {
-      fetch(
-        `https://gadgets-emporium.herokuapp.com/user?email=${email}&&uid=${uid}`,
-        {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(currentUser),
-        }
-      )
+      fetch(`http://localhost:5000/user?email=${email}&&uid=${uid}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(currentUser),
+      })
         .then((res) => res.json())
         .then((data) => {
           const accessToken = data.token;

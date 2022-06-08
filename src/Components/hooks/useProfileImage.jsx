@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../Pages/Shared/Firebase/Firebase.init";
 
-const useCarts = () => {
-  const [carts, setCarts] = useState([]);
+const useProfileImage = () => {
+  const [image, setImage] = useState({});
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(
-        `http://localhost:5000/carts?uid=${auth?.currentUser?.uid}`,
+        `http://localhost:5000/users?uid=${auth?.currentUser?.uid}`,
         {
           headers: {
             "content-type": "application/json",
@@ -16,12 +18,12 @@ const useCarts = () => {
         }
       );
       const data = await result.json();
-      setCarts(data);
+      setImage(data[0].image);
     };
     fetchData();
-  }, []);
+  }, [user]);
 
-  return [carts];
+  return [image];
 };
 
-export default useCarts;
+export default useProfileImage;

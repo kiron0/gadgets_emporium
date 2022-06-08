@@ -1,17 +1,44 @@
 import React from "react";
+import { useQuery } from "react-query";
+import useTitle from "../../hooks/useTitle";
+import Loader from "../Shared/Loader/Loader";
+import TItle from "../Shared/Title/Title";
 import client1 from "./assets/client-1.png";
 import client2 from "./assets/client-2.png";
 import client3 from "./assets/client-3.png";
 
 const Team = () => {
+  useTitle("Team");
+  const { data: teamMembers, isLoading } = useQuery("teamMembers", async () => {
+    const res = await fetch("http://localhost:5000/teamMembers", {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
+    const data = await res.json();
+    return data;
+  });
+
+  if (
+    isLoading ||
+    teamMembers?.length === undefined ||
+    teamMembers === null ||
+    !teamMembers ||
+    teamMembers.length === 0
+  ) {
+    return <Loader />;
+  }
+
   return (
     <div className="h-screen bg-base-100">
       <section className="body-font bg-base-100">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-col text-center w-full mb-20">
-            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-primary">
-              Our Team
-            </h1>
+            <TItle
+              title="Our Projects Team"
+              subTitle="What Products we can provide?"
+            />
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
               Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
               gentrify, subway tile poke farm-to-table. Franzen you probably

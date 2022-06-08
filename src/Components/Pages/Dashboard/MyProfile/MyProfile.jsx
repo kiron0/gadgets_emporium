@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { useQuery } from "react-query";
@@ -9,33 +10,66 @@ import Loader from "../../Shared/Loader/Loader";
 const MyProfile = () => {
   useTitle("Profile");
   const [isShow, setIsShow] = useState(false);
-  // const upload_api_key = `e1a6a4f77bc884f9b46b0d06d86c05e5`;
+  const upload_api_key = `e1a6a4f77bc884f9b46b0d06d86c05e5`;
   const [isFile, setIsFile] = useState(false);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
 
-  const handleUpdateProfile = async (e) => {
-    e.preventDefault();
-    const education = e.target.education.value;
-    const number = e.target.number.value;
-    const address = e.target.address.value;
-    const linkedin = e.target.linkedin.value;
-    const facebook = e.target.facebook.value;
-    const data = { education, number, address, linkedin, facebook };
-    await fetch(
-      `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
-      {
-        method: "PATCH",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    )
+  const [loading, setLoading] = useState("false");
+  const onSubmit = (data) => {
+    setLoading(false);
+    if (!isFile) {
+      const url = `https://api.imgbb.com/1/upload?key=${upload_api_key}`;
+
+      const formData = new FormData();
+      const image = data.profileImage[0];
+      formData.append("image", image);
+
+      fetch(url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result?.success) {
+            saveProfileDataOnMongodb(result?.data?.url, data);
+            setLoading(true);
+          }
+        });
+    } else {
+      const inputURL = data.imageUrl;
+      saveProfileDataOnMongodb(inputURL, data);
+      setLoading(true);
+    }
+  };
+
+  const saveProfileDataOnMongodb = async (image, data) => {
+    const profileData = {
+      education: data?.education,
+      number: data?.number,
+      address: data?.address,
+      facebook: data?.facebook,
+      linkedin: data?.linkedin,
+      image: image,
+      createdAt: new Date().toDateString(),
+    };
+    await fetch(`http://localhost:5000/users?uid=${auth?.currentUser?.uid}`, {
+      method: "PATCH",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(profileData),
+    })
       .then((res) => res.json())
       .then((result) => {
         if (result?.success) {
           toast.success("Profile Updated Successfully");
-          e.target.reset();
+          reset();
           refetch();
           setIsShow(false);
         }
@@ -47,14 +81,11 @@ const MyProfile = () => {
     isLoading,
     refetch,
   } = useQuery(["profileData", auth?.currentUser?.uid], () =>
-    fetch(
-      `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/users?uid=${auth?.currentUser?.uid}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
   if (isLoading)
     return (
@@ -63,7 +94,8 @@ const MyProfile = () => {
       </div>
     );
 
-  const { role, address, education, number, linkedin, facebook } = result[0];
+  const { image, role, address, education, number, linkedin, facebook } =
+    result[0];
 
   return (
     <div className="grid place-items-center py-20 md:px-5 lg:px-5">
@@ -75,7 +107,7 @@ const MyProfile = () => {
               alt={auth?.currentUser?.displayName}
             />
           ) : (
-            auth?.currentUser?.displayName?.slice(0, 1)
+            <img src={image} alt={auth?.currentUser?.displayName} />
           )}
         </div>
         <div className="info my-2">
@@ -140,49 +172,64 @@ const MyProfile = () => {
         </div>
         {isShow && (
           <form
-            onSubmit={handleUpdateProfile}
+            onSubmit={handleSubmit(onSubmit)}
             className="another-info flex items-center justify-center  flex-col gap-2 my-3"
           >
             <input
               type="text"
               placeholder="Education"
-              name="education"
               className="input input-bordered w-full"
               required
               defaultValue={education}
+              {...register("education", { required: true })}
             />
+            {errors.education?.type === "required" && (
+              <span className="text-error">Education is required</span>
+            )}
             <input
               type="text"
               placeholder="Phone Number"
-              name="number"
               className="input input-bordered w-full"
               required
               defaultValue={number}
+              {...register("number", { required: true })}
             />
+            {errors.number?.type === "required" && (
+              <span className="text-error">Number is required</span>
+            )}
             <input
               type="text"
               placeholder="City/State"
-              name="address"
               className="input input-bordered w-full"
               required
               defaultValue={address}
+              {...register("address", { required: true })}
             />
+            {errors.address?.type === "required" && (
+              <span className="text-error">Address is required</span>
+            )}
             <input
               type="text"
               placeholder="LinkedIn Account Link"
-              name="linkedin"
               className="input input-bordered w-full"
               required
               defaultValue={linkedin}
+              {...register("linkedin", { required: true })}
             />
+            {errors.linkedin?.type === "required" && (
+              <span className="text-error">LinkedIn is required</span>
+            )}
             <input
               type="text"
               placeholder="Facebook Account Link"
-              name="facebook"
               className="input input-bordered w-full"
               required
               defaultValue={facebook}
+              {...register("facebook", { required: true })}
             />
+            {errors.facebook?.type === "required" && (
+              <span className="text-error">Facebook is required</span>
+            )}
             <label htmlFor="file" className="my-2 block">
               Image
               <button
@@ -196,22 +243,31 @@ const MyProfile = () => {
             {isFile ? (
               <input
                 type="url"
-                name="file"
                 className="input input-bordered w-full"
                 placeholder="Put Your Image Link"
                 id="file"
+                {...register("imageUrl", { required: true })}
               />
             ) : (
               <input
                 type="file"
-                name="file"
                 className="block border p-2 w-full rounded"
                 id="file"
+                {...register("profileImage", { required: true })}
               />
             )}
+            {errors.profileImage?.type === "required" ||
+              (errors.imageUrl?.type === "required" && (
+                <span className="text-error">
+                  Product Image Field is required
+                </span>
+              ))}
             <div className="text-center mt-3">
-              <button className="btn btn-primary text-white">
-                Update Profile
+              <button
+                className="btn btn-primary text-white"
+                disabled={!loading && true}
+              >
+                {!loading ? "Updating Profile..." : "Update Profile"}
               </button>
             </div>
           </form>
