@@ -18,7 +18,7 @@ const UserRow = ({ user, index, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((willDelete) => {
       if (willDelete.isConfirmed) {
-        fetch(`http://localhost:5000/user/${email}`, {
+        fetch(`https://gadgets-emporium.herokuapp.com/user/${email}`, {
           method: "DELETE",
           headers: {
             "content-type": "application/json",
@@ -47,7 +47,7 @@ const UserRow = ({ user, index, refetch }) => {
       confirmButtonText: "Yes, make it!",
     }).then((willAdmin) => {
       if (willAdmin.isConfirmed) {
-        fetch(`http://localhost:5000/user/admin`, {
+        fetch(`https://gadgets-emporium.herokuapp.com/user/admin`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -70,6 +70,40 @@ const UserRow = ({ user, index, refetch }) => {
       }
     });
   };
+  const removeAdmin = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    }).then((willAdmin) => {
+      if (willAdmin.isConfirmed) {
+        fetch(`https://gadgets-emporium.herokuapp.com/user/removeAdmin`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => {
+            if (res.status === 403) {
+              toast.error("Failed to Remove an admin");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            if (data.modifiedCount > 0) {
+              refetch();
+              toast.success(`${email} is an user now.`);
+            }
+          });
+      }
+    });
+  };
 
   return (
     <tr>
@@ -83,6 +117,15 @@ const UserRow = ({ user, index, refetch }) => {
           <button onClick={makeAdmin} className="btn btn-xs text-white">
             Make Admin
           </button>
+        )}
+      </td>
+      <td>
+        {role === "admin" ? (
+          <button onClick={removeAdmin} className="btn btn-xs text-white">
+            Remove Admin
+          </button>
+        ) : (
+          ""
         )}
       </td>
       <td>

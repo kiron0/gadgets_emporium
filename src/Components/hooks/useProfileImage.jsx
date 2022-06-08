@@ -1,27 +1,19 @@
 import { useState, useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../Pages/Shared/Firebase/Firebase.init";
 
-const useProfileImage = () => {
+const useProfileImage = (user) => {
   const [image, setImage] = useState({});
-  const [user] = useAuthState(auth);
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(
-        `http://localhost:5000/users?uid=${auth?.currentUser?.uid}`,
-        {
-          headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
+        `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}`
       );
       const data = await result.json();
       setImage(data[0].image);
     };
     fetchData();
-  }, [user]);
+  }, [user, image]);
 
   return [image];
 };

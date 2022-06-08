@@ -15,8 +15,8 @@ import Loading from "../Loading/Loading";
 
 const Navbar = ({ handleThemeChange, theme }) => {
   const [carts] = useCarts();
-  const [image] = useProfileImage();
   const [user] = useAuthState(auth);
+  const [image] = useProfileImage(user);
   const { pathname } = useLocation();
   const [scrollY, setScrollY] = useState();
 
@@ -69,10 +69,6 @@ const Navbar = ({ handleThemeChange, theme }) => {
       )}
     </>
   );
-
-  if (!image || image === undefined) {
-    return <Loading />;
-  }
 
   return (
     <div className="fixed top-0 w-full z-50">
@@ -171,10 +167,13 @@ const Navbar = ({ handleThemeChange, theme }) => {
                       {auth?.currentUser?.photoURL ? (
                         <img
                           src={auth?.currentUser?.photoURL}
-                          alt={auth?.currentUser?.displayName}
+                          alt={auth?.currentUser?.displayName.slice(0, 1)}
                         />
                       ) : (
-                        <img src={image} alt={auth?.currentUser?.displayName} />
+                        <img
+                          src={image}
+                          alt={auth?.currentUser?.displayName.slice(0, 1)}
+                        />
                       )}
                     </div>
                   </label>

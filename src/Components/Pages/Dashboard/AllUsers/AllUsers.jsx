@@ -11,7 +11,7 @@ const AllUsers = () => {
     isLoading,
     refetch,
   } = useQuery("users", () =>
-    fetch("http://localhost:5000/users/all", {
+    fetch("https://gadgets-emporium.herokuapp.com/users/all", {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -31,6 +31,7 @@ const AllUsers = () => {
               <th>Uid</th>
               <th>Email</th>
               <th>Make Admin</th>
+              <th>Remove Admin</th>
               <th>Role</th>
               <th>Action</th>
             </tr>

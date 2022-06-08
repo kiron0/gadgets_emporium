@@ -21,7 +21,7 @@ const AddReview = () => {
       },
     };
     if (rating && reviewText) {
-      await fetch(`http://localhost:5000/reviews`, {
+      await fetch(`https://gadgets-emporium.herokuapp.com/reviews`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

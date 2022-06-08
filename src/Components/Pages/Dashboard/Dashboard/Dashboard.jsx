@@ -45,7 +45,7 @@ const Dashboard = ({ handleThemeChange, theme }) => {
           </label>
           <Link
             to="/"
-            className="hidden lg:flex text-lg lg:text-2xl md:text-2xl font-semibold"
+            className="text-lg lg:text-2xl md:text-2xl font-semibold"
           >
             Gadgets Emporium
           </Link>
@@ -86,6 +86,7 @@ const Dashboard = ({ handleThemeChange, theme }) => {
               >
                 {auth?.currentUser?.photoURL ? (
                   <img
+                    style={{ marginTop: "0.5rem" }}
                     src={auth?.currentUser?.photoURL}
                     alt={auth?.currentUser?.displayName}
                   />
