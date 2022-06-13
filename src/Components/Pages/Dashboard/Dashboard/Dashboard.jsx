@@ -144,7 +144,7 @@ const Dashboard = ({ handleThemeChange, theme }) => {
               </li>
             </>
           )}
-          <li>
+          <li className="py-2">
             <NavLink to="/dashboard/profile">Profile</NavLink>
           </li>
           {admin && (
