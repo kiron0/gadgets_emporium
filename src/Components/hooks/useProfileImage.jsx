@@ -10,7 +10,7 @@ const useProfileImage = (user) => {
         `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}`
       );
       const data = await result.json();
-      setImage(data[0].image);
+      setImage(data[0]?.image);
     };
     fetchData();
   }, [user, image]);
