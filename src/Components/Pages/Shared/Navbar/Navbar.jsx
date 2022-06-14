@@ -7,16 +7,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { toast } from "react-hot-toast";
 import { BiLogInCircle } from "react-icons/bi";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import auth from "../Firebase/Firebase.init";
-import useCarts from "../../../hooks/useCarts";
 import useProfileImage from "../../../hooks/useProfileImage";
 import Loading from "../Loading/Loading";
 
 const Navbar = ({ handleThemeChange, theme }) => {
-  const [carts] = useCarts();
   const [user] = useAuthState(auth);
-  const [image] = useProfileImage(user);
+  const [image, imageLoading] = useProfileImage(user);
   const { pathname } = useLocation();
   const [scrollY, setScrollY] = useState();
 
@@ -28,6 +25,7 @@ const Navbar = ({ handleThemeChange, theme }) => {
     signOut(auth);
     localStorage.removeItem("accessToken");
     toast.success(`Thank you, ${user.displayName} to stay with us!`, {
+      position: "bottom-left",
       autoClose: 5000,
     });
   };
@@ -69,6 +67,10 @@ const Navbar = ({ handleThemeChange, theme }) => {
       )}
     </>
   );
+
+  if (imageLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="fixed top-0 w-full z-50">
@@ -113,14 +115,6 @@ const Navbar = ({ handleThemeChange, theme }) => {
             <ul className="menu menu-horizontal p-0 gap-3">{NavbarMenus}</ul>
           </div>
           <div className="navbar-end gap-3">
-            {/* <li className="list-none mt-2">
-              <label for="AddToCart" className="modal-button indicator">
-                <span class="indicator-item badge badge-secondary">
-                  {carts ? <>{carts?.length}</> : 0}
-                </span>
-                <MdOutlineShoppingCart className="text-3xl cursor-pointer" />
-              </label>
-            </li> */}
             <li className="list-none">
               <button
                 onClick={handleThemeChange}
@@ -167,12 +161,12 @@ const Navbar = ({ handleThemeChange, theme }) => {
                       {auth?.currentUser?.photoURL ? (
                         <img
                           src={auth?.currentUser?.photoURL}
-                          alt={auth?.currentUser?.displayName.slice(0, 1)}
+                          alt={auth?.currentUser?.displayName?.slice(0, 1)}
                         />
                       ) : (
                         <img
                           src={image}
-                          alt={auth?.currentUser?.displayName.slice(0, 1)}
+                          alt={auth?.currentUser?.displayName?.slice(0, 1)}
                         />
                       )}
                     </div>

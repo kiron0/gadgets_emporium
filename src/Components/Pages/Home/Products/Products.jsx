@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import Loader from "../../Shared/Loader/Loader";
 import TItle from "../../Shared/Title/Title";
 import { useQuery } from "react-query";
@@ -29,11 +28,6 @@ const Products = () => {
   if (isLoading || products?.length === undefined) {
     return <Loader />;
   }
-
-  // add to cart button
-  const addToCart = () => {
-    console.log("add to cart");
-  };
 
   return (
     <div className="py-28 lg:px-12">
@@ -76,7 +70,7 @@ const Products = () => {
                       {price}$
                     </div>
                   </div>
-                  <div className="card-actions justify-center mt-2">
+                  <div className="card-actions justify-end mt-2">
                     {admin ? (
                       <></>
                     ) : (
@@ -87,21 +81,19 @@ const Products = () => {
                         Order Now
                       </button>
                     )}
-                    {admin ? (
-                      <></>
-                    ) : (
-                      <button
-                        className="btn btn-primary text-white mt-4"
-                        onClick={addToCart}
-                      >
-                        <MdOutlineShoppingCart className="text-xl" />
-                      </button>
-                    )}
                   </div>
                 </div>
               </div>
             )
           )}
+      </div>
+      <div className="flex justify-center items-center mt-10">
+        <button
+          onClick={() => navigate(`/shop`)}
+          className="btn btn-primary text-white"
+        >
+          See More
+        </button>
       </div>
     </div>
   );

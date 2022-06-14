@@ -23,7 +23,8 @@ const Dashboard = ({ handleThemeChange, theme }) => {
     await signOut(auth).then(() => {
       navigate("/");
       toast.success(`Thank you, ${user.displayName} to stay with us!`, {
-        autoClose: 5000,
+        autoClose: 3000,
+        position: "bottom-left",
       });
     });
   };

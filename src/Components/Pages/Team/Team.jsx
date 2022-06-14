@@ -1,7 +1,5 @@
 import React from "react";
-import { useQuery } from "react-query";
 import useTitle from "../../hooks/useTitle";
-import Loader from "../Shared/Loader/Loader";
 import TItle from "../Shared/Title/Title";
 import client1 from "./assets/client-1.png";
 import client2 from "./assets/client-2.png";
@@ -9,29 +7,6 @@ import client3 from "./assets/client-3.png";
 
 const Team = () => {
   useTitle("Team");
-  const { data: teamMembers, isLoading } = useQuery("teamMembers", async () => {
-    const res = await fetch(
-      "https://gadgets-emporium.herokuapp.com/teamMembers",
-      {
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    );
-    const data = await res.json();
-    return data;
-  });
-
-  if (
-    isLoading ||
-    teamMembers?.length === undefined ||
-    teamMembers === null ||
-    !teamMembers ||
-    teamMembers.length === 0
-  ) {
-    return <Loader />;
-  }
 
   return (
     <div className="h-screen bg-base-100">
@@ -57,8 +32,8 @@ const Team = () => {
                   src={client1}
                 />
                 <div className="flex-grow">
-                  <h2 className="title-font font-medium">Holden Caulfield</h2>
-                  <p className="text-gray-500">UI Designer</p>
+                  <h2 className="title-font font-medium">Martin Eden</h2>
+                  <p className="text-gray-500">Software Engineer</p>
                 </div>
               </div>
             </div>

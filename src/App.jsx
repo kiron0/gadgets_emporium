@@ -27,6 +27,9 @@ import PaymentHistory from "./Components/Pages/Dashboard/PaymentHistory/PaymentH
 import ManageProducts from "./Components/Pages/Dashboard/ManageProducts/ManageProducts";
 import AddTeamMember from "./Components/Pages/Dashboard/AddTeamMember/AddTeamMember";
 import ManageReviews from "./Components/Pages/Dashboard/ManageReviews/ManageReviews";
+import Blogs from "./Components/Pages/Blogs/Blogs";
+import BlogDetails from "./Components/Pages/Blogs/BlogDetails";
+import Contact from "./Components/Pages/Contact/Contact";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -64,6 +67,9 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/shop" element={<Products />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogDetails/:id" element={<BlogDetails />} />
         <Route
           path="/dashboard"
           element={

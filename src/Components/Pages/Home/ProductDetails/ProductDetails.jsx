@@ -108,8 +108,9 @@ const ProductDetails = () => {
             .then((result) => {
               if (result?.modifiedCount) {
                 refetch();
-                toast.success("Order placed successfully");
+                navigate("/dashboard/myOrders");
                 formRef.current.reset();
+                toast.success("Order placed successfully");
               } else {
                 toast.error("Something went wrong");
               }

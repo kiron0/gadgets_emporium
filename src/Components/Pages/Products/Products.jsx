@@ -25,7 +25,7 @@ const Products = () => {
   }
 
   return (
-    <div className="pb-24 px-3">
+    <div className="pb-24 px-3 py-16">
       <div className="breadcrumb text-center py-20 bg-base-300">
         <h2 className="text-3xl">Shop Page</h2>
         <div className="text-md breadcrumbs ">
