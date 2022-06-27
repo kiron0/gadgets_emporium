@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { BsTools } from "react-icons/bs";
+import { AiFillAppstore } from "react-icons/ai";
 import { CgMenuGridO } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -9,11 +9,12 @@ import { toast } from "react-hot-toast";
 import { BiLogInCircle } from "react-icons/bi";
 import auth from "../Firebase/Firebase.init";
 import useProfileImage from "../../../hooks/useProfileImage";
-import Loading from "../Loading/Loading";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Navbar = ({ handleThemeChange, theme }) => {
   const [user] = useAuthState(auth);
-  const [image, imageLoading] = useProfileImage(user);
+  const [image] = useProfileImage(user);
+  const [admin] = useAdmin(user);
   const { pathname } = useLocation();
   const [scrollY, setScrollY] = useState();
 
@@ -68,10 +69,6 @@ const Navbar = ({ handleThemeChange, theme }) => {
     </>
   );
 
-  if (imageLoading) {
-    return <Loading></Loading>;
-  }
-
   return (
     <div className="fixed top-0 w-full z-50">
       <div
@@ -101,7 +98,7 @@ const Navbar = ({ handleThemeChange, theme }) => {
               className="btn btn-ghost normal-case text-xl flex gap-2 items-center"
               to="/"
             >
-              <BsTools className="hidden md:block" />{" "}
+              <AiFillAppstore className="hidden md:block" />{" "}
               {!user ? (
                 <span className="text-sm md:text-xl lg:text-xl">
                   Gadgets Emporium
@@ -181,6 +178,13 @@ const Navbar = ({ handleThemeChange, theme }) => {
                         <span className="badge">New</span>
                       </Link>
                     </li>
+                    {!admin ? (
+                      <li>
+                        <Link to="/dashboard/myOrders">My Orders</Link>
+                      </li>
+                    ) : (
+                      <></>
+                    )}
                     <li>
                       <Link to="/dashboard">Dashboard</Link>
                     </li>

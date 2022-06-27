@@ -7,7 +7,7 @@ const useCarts = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(
-        `https://gadgets-emporium.herokuapp.com/carts?uid=${auth?.currentUser?.uid}`,
+        `http://localhost:5000/carts?uid=${auth?.currentUser?.uid}`,
         {
           headers: {
             "content-type": "application/json",

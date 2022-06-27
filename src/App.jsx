@@ -30,6 +30,11 @@ import ManageReviews from "./Components/Pages/Dashboard/ManageReviews/ManageRevi
 import Blogs from "./Components/Pages/Blogs/Blogs";
 import BlogDetails from "./Components/Pages/Blogs/BlogDetails";
 import Contact from "./Components/Pages/Contact/Contact";
+import BlogManagement from "./Components/Pages/Dashboard/BlogManagement/BlogManagement";
+import ManageBlog from "./Components/Pages/Dashboard/BlogManagement/ManageBlog";
+import EditBlog from "./Components/Pages/Dashboard/BlogManagement/EditBlog";
+import AddBlog from "./Components/Pages/Dashboard/BlogManagement/AddBlog";
+import DeleteTeamMember from "./Components/Pages/Dashboard/DeleteTeamMember/DeleteTeamMember";
 
 function App() {
   const [theme, setTheme] = useState(false);
@@ -143,6 +148,14 @@ function App() {
               </RequireAdmin>
             }
           ></Route>
+          <Route
+            path="deleteTeamMember"
+            element={
+              <RequireAdmin>
+                <DeleteTeamMember />
+              </RequireAdmin>
+            }
+          ></Route>
           <Route path="addReview" element={<AddReview />}></Route>
           <Route
             path="manageOrder"
@@ -160,6 +173,12 @@ function App() {
               </RequireAuth>
             }
           ></Route>
+          <Route path="management-blog" element={<BlogManagement />}>
+            <Route index element={<AddBlog />} />
+            <Route path="add-blog" element={<AddBlog />} />
+            <Route path="manageBlogs" element={<ManageBlog />} />
+            <Route path="edit/:editId" element={<EditBlog />} />
+          </Route>
         </Route>
         <Route
           path="/purchase/:id"

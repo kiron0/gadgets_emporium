@@ -1,7 +1,7 @@
 import React from "react";
 import { toast } from "react-hot-toast";
 import { BsGrid } from "react-icons/bs";
-import { AiFillCar } from "react-icons/ai";
+import { AiFillAppstore } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -122,7 +122,7 @@ const Dashboard = ({ handleThemeChange, theme }) => {
               to="/"
               className="logo font-semibold text-center flex items-center flex-col gap-2"
             >
-              <AiFillCar className="text-3xl" />
+              <AiFillAppstore className="text-3xl" />
               Gadgets Emporium
             </Link>
           </div>
@@ -145,34 +145,45 @@ const Dashboard = ({ handleThemeChange, theme }) => {
               </li>
             </>
           )}
-          <li className="py-2">
+          <li className="py-1">
             <NavLink to="/dashboard/profile">Profile</NavLink>
+          </li>
+          <li className="py-1">
+            <NavLink to="/dashboard/management-blog">
+              Blog Management{" "}
+              <small className="badge badge-outline text-sm">New</small>
+            </NavLink>
           </li>
           {admin && (
             <>
-              <li className="py-2">
+              <li className="py-1">
                 <NavLink to="/dashboard/addProduct">Add a Product</NavLink>
               </li>
-              <li className="py-2">
+              <li className="py-1">
                 <NavLink to="/dashboard/allUsers">Manage Users</NavLink>
               </li>
-              <li className="py-2">
+              <li className="py-1">
                 <NavLink to="/dashboard/manageOrder">Manage Orders</NavLink>
               </li>
-              <li className="py-2">
+              <li className="py-1">
                 <NavLink to="/dashboard/manageProducts">
                   Manage Products
                 </NavLink>
               </li>
-              <li className="py-2">
+              <li className="py-1">
                 <NavLink to="/dashboard/addTeamMember">Add Team Member</NavLink>
               </li>
-              <li className="py-2">
+              <li className="py-1">
+                <NavLink to="/dashboard/deleteTeamMember">
+                  Delete Team Member
+                </NavLink>
+              </li>
+              <li className="py-1">
                 <NavLink to="/dashboard/manageReviews">Manage Reviews</NavLink>
               </li>
             </>
           )}
-          <li className={admin ? "lg:pt-52" : "lg:pt-96"}>
+          <li className={admin ? "lg:pt-40" : "lg:pt-80"}>
             <button
               onClick={handleLogOut}
               className="bg-primary rounded-lg text-white"

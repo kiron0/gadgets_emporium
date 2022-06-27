@@ -159,7 +159,7 @@ const OrderStep = () => {
             </div>
             <img
               className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12"
-              src="https://images.unsplash.com/photo-1519752594763-2633d8d4ea29?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170"
+              src="https://img.freepik.com/free-vector/shop-cart-product-screen-application-search-payment-app_126523-2945.jpg?w=900&t=st=1655329216~exp=1655329816~hmac=7170f742c105b41d5b2dabfdc2e23e092b3e9cfa5d125c998c5868bca57f88b3"
               alt="step"
             />
           </div>

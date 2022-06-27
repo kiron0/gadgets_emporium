@@ -1,6 +1,7 @@
 import React from "react";
 import { BsTwitter } from "react-icons/bs";
 import { FaLinkedinIn, FaFacebookF } from "react-icons/fa";
+
 const CardTeam = ({ image, name, designation }) => {
   return (
     <div className="card bg-base-100 shadow-lg">
