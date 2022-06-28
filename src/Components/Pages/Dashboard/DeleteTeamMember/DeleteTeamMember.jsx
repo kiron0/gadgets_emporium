@@ -10,7 +10,7 @@ const DeleteTeamMember = () => {
     isLoading,
     refetch,
   } = useQuery(["teamMembers"], () =>
-    fetch(`http://localhost:5000/teamMembers`, {
+    fetch(`https://gadgets-emporium.herokuapp.com/teamMembers`, {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

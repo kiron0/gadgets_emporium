@@ -18,7 +18,7 @@ const UserRow = ({ user, index, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((willDelete) => {
       if (willDelete.isConfirmed) {
-        fetch(`http://localhost:5000/user/${email}`, {
+        fetch(`https://gadgets-emporium.herokuapp.com/user/${email}`, {
           method: "DELETE",
           headers: {
             "content-type": "application/json",
@@ -47,7 +47,7 @@ const UserRow = ({ user, index, refetch }) => {
       confirmButtonText: "Yes, make it!",
     }).then((willAdmin) => {
       if (willAdmin.isConfirmed) {
-        fetch(`http://localhost:5000/user/admin`, {
+        fetch(`https://gadgets-emporium.herokuapp.com/user/admin`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const UserRow = ({ user, index, refetch }) => {
       confirmButtonText: "Yes, remove it!",
     }).then((willAdmin) => {
       if (willAdmin.isConfirmed) {
-        fetch(`http://localhost:5000/user/removeAdmin`, {
+        fetch(`https://gadgets-emporium.herokuapp.com/user/removeAdmin`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

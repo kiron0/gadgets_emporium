@@ -12,7 +12,7 @@ const ManageBlog = () => {
   /* call to get all the added blogs for particular users */
   const { data, isLoading, refetch } = useQuery("blogs", () =>
     fetch(
-      `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}`,
+      `https://gadgets-emporium.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -22,7 +22,7 @@ const ManageBlog = () => {
   );
   if (isLoading || data?.length === undefined) return <Loader />;
 
-  const blogsData = data?.result;
+  const blogsData = data;
 
   /*  Handle Blog Delete */
   const handleDeleteBlog = async (id) => {
@@ -37,7 +37,7 @@ const ManageBlog = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&deletedId=${id}`,
+          `https://gadgets-emporium.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&deletedId=${id}`,
           {
             method: "DELETE",
             headers: {
@@ -49,7 +49,7 @@ const ManageBlog = () => {
           .then((result) => {
             if (result.success) {
               refetch();
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              Swal.fire("Deleted!", "Your blogs has been deleted.", "success");
             }
           });
       }

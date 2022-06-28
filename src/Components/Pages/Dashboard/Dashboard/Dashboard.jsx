@@ -145,15 +145,6 @@ const Dashboard = ({ handleThemeChange, theme }) => {
               </li>
             </>
           )}
-          <li className="py-1">
-            <NavLink to="/dashboard/profile">Profile</NavLink>
-          </li>
-          <li className="py-1">
-            <NavLink to="/dashboard/management-blog">
-              Blog Management{" "}
-              <small className="badge badge-outline text-sm">New</small>
-            </NavLink>
-          </li>
           {admin && (
             <>
               <li className="py-1">
@@ -183,7 +174,10 @@ const Dashboard = ({ handleThemeChange, theme }) => {
               </li>
             </>
           )}
-          <li className={admin ? "lg:pt-40" : "lg:pt-80"}>
+          <li className="py-1">
+            <NavLink to="/dashboard/management-blog">Blog Management </NavLink>
+          </li>
+          <li className={admin ? "lg:pt-52" : "lg:pt-96"}>
             <button
               onClick={handleLogOut}
               className="bg-primary rounded-lg text-white"

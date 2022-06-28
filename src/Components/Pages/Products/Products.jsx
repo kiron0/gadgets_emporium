@@ -11,16 +11,17 @@ import useProduct from "../../hooks/useProducts";
 const Products = () => {
   useTitle("Shop");
   const [products, loading, setProducts] = useProduct();
-
   const [searchLoading, setSearchLoading] = useState(false);
   const HandleSearchProduct = async (event) => {
     event.preventDefault();
     const searchText = event.target.search.value;
     if (!searchText) return toast.error(`Search field is required.`);
-    await fetch(`http://localhost:5000/products/search?q=${searchText}`)
+    await fetch(
+      `https://gadgets-emporium.herokuapp.com/products/search?q=${searchText}`
+    )
       .then((res) => res.json())
       .then((result) => {
-        setProducts(result?.searchedResult);
+        setProducts(result);
         setSearchLoading(true);
       });
   };
@@ -28,7 +29,7 @@ const Products = () => {
   return (
     <section id="shops" className="h-screen bg-base-100">
       <div className="breadcrumb text-center py-32 bg-base-300">
-        <div className="container mx-auto px-3">
+        <div className="container mx-auto px-3 lg:px-0">
           <h2 className="text-3xl">Shop Page</h2>
           <div className="text-md breadcrumbs ">
             <ul className="justify-center">
@@ -60,8 +61,8 @@ const Products = () => {
           {loading || searchLoading ? (
             products?.length > 0 ? (
               <div className="shop-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {products.map((product) => (
-                  <Product key={product._id} {...product} />
+                {products?.map((product) => (
+                  <Product key={product._id} product={product} />
                 ))}
               </div>
             ) : (

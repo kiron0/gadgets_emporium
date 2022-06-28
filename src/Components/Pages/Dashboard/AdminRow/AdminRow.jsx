@@ -7,7 +7,7 @@ const AdminRow = ({ uid, serialize, email, role, refetch, _id }) => {
   /* Handle Make Admin  */
   const handleMakeAdmin = async (id) => {
     await fetch(
-      `http://localhost:5000/users/admin?uid=${id}&&currentUserId=${auth?.currentUser?.uid}`,
+      `https://gadgets-emporium.herokuapp.com/users/admin?uid=${id}&&currentUserId=${auth?.currentUser?.uid}`,
       {
         method: "PATCH",
         headers: {
@@ -39,7 +39,7 @@ const AdminRow = ({ uid, serialize, email, role, refetch, _id }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `http://localhost:5000/users?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
           {
             method: "DELETE",
             headers: {

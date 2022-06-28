@@ -8,7 +8,7 @@ const useProfileImage = (user) => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(
-        `http://localhost:5000/users?uid=${auth?.currentUser?.uid}`
+        `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}`
       );
       const data = await result.json();
       setImage(data[0]?.image);

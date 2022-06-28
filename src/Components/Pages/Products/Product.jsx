@@ -6,7 +6,7 @@ import auth from "../Shared/Firebase/Firebase.init";
 
 const Product = ({ product }) => {
   const [user] = useAuthState(auth);
-  const [admin, adminLoading] = useAdmin(user);
+  const [admin] = useAdmin(user);
   const {
     _id,
     productName,
@@ -19,14 +19,8 @@ const Product = ({ product }) => {
 
   const navigate = useNavigate();
 
-  if (adminLoading) {
-    return (
-      <div className="flex justify-center items-center">Fetching Data...</div>
-    );
-  }
-
   return (
-    <div className="card bg-base-100 shadow-xl" key={_id}>
+    <div className="card bg-base-100 shadow-xl">
       <figure>
         <img src={image} className="h-52 rounded-xl" alt="Shoes" />
       </figure>
@@ -59,7 +53,7 @@ const Product = ({ product }) => {
                     d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span>Hey, Admin! You can't order🙂</span>
+                <span>Hey, Admin! You can't order</span>
               </div>
             </div>
           ) : (

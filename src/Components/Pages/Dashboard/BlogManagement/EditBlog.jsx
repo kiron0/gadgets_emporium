@@ -10,7 +10,7 @@ const EditBlog = () => {
   const { editId } = useParams();
   const [blogs, loading] = useBlog();
   if (!loading) return <Loader />;
-  const findBlog = blogs.find((blog) => blog._id === editId);
+  const findBlog = blogs?.find((blog) => blog._id === editId);
   const handleUpdateBLog = async (event) => {
     event.preventDefault();
     const title = event.target.title.value.trim();
@@ -23,7 +23,7 @@ const EditBlog = () => {
       createAt: new Date().toDateString(),
     };
     await fetch(
-      `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&editId=${editId}`,
+      `https://gadgets-emporium.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&editId=${editId}`,
       {
         method: "PUT",
         headers: {
@@ -43,12 +43,12 @@ const EditBlog = () => {
       });
   };
   return (
-    <div className="p-4 m-4">
-      <h3 className="text-2xl font-semibold my-2">Update Blogs</h3>
+    <div className="py-4 my-4">
+      <h3 className="text-2xl font-semibold my-2 ml-4">Update Blogs</h3>
       <form
         onSubmit={handleUpdateBLog}
         action=""
-        className="shadow p-10 rounded flex flex-col gap-4"
+        className="shadow px-5 py-10 rounded flex flex-col gap-4"
       >
         <div>
           <label htmlFor="title">Title</label>

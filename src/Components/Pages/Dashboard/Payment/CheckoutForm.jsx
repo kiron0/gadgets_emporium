@@ -15,14 +15,17 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
     Number(singleOrder?.productInfo?.orderQty) *
     Number(singleOrder?.productInfo?.price);
   useEffect(() => {
-    fetch(`http://localhost:5000/payment/create-payment-intent`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ price: totalPrice }),
-    })
+    fetch(
+      `https://gadgets-emporium.herokuapp.com/payment/create-payment-intent`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ price: totalPrice }),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result?.clientSecret) {
@@ -84,28 +87,34 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
           createdAt:
             new Date().toDateString() + " " + new Date().toLocaleTimeString(),
         };
-        fetch(`http://localhost:5000/booking?id=${singleOrder?._id}`, {
-          method: "POST",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
+        fetch(
+          `https://gadgets-emporium.herokuapp.com/booking?id=${singleOrder?._id}`,
+          {
+            method: "POST",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        )
           .then((res) => res.json())
           .then((result) => {
             if (result?.insertedId) {
               navigate(`/dashboard/myOrders`);
-              fetch(`http://localhost:5000/orders/paid/${singleOrder?._id}`, {
-                method: "PATCH",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify({
-                  ...data,
-                  paid: "true",
-                }),
-              })
+              fetch(
+                `https://gadgets-emporium.herokuapp.com/orders/paid/${singleOrder?._id}`,
+                {
+                  method: "PATCH",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    ...data,
+                    paid: "true",
+                  }),
+                }
+              )
                 .then((res) => res.json())
                 .then((modify) => {
                   if (modify?.modifiedCount) {

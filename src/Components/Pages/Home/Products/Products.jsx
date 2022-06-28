@@ -12,12 +12,15 @@ const Products = () => {
   const [admin] = useAdmin(user);
 
   const { data: products, isLoading } = useQuery("allProducts", async () => {
-    const res = await fetch("http://localhost:5000/products?sort=1", {
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
+    const res = await fetch(
+      "https://gadgets-emporium.herokuapp.com/products?sort=1",
+      {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    );
     const data = await res.json();
     return data;
   });
@@ -67,9 +70,26 @@ const Products = () => {
                       {price}$
                     </div>
                   </div>
-                  <div className="card-actions justify-end mt-2">
+                  <div className="card-actions justify-end mt-4">
                     {admin ? (
-                      <></>
+                      <div className="alert alert-error shadow-lg text-sm lg:text-base">
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="stroke-current flex-shrink-0 h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          <span>Hey, Admin! You can't order</span>
+                        </div>
+                      </div>
                     ) : (
                       <button
                         onClick={() => navigate(`/purchase/${_id}`)}

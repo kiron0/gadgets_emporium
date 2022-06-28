@@ -19,7 +19,7 @@ const AddBlog = () => {
       },
     };
 
-    await fetch(`http://localhost:5000/blogs`, {
+    await fetch(`https://gadgets-emporium.herokuapp.com/blogs`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -29,7 +29,6 @@ const AddBlog = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         if (result.insertedId) {
           toast.success("Blog Created Successfully");
           event.target.reset();

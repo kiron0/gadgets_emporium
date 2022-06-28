@@ -8,7 +8,7 @@ const ManageProducts = () => {
   useTitle("Manage Product");
   const [modalProduct, setModalProduct] = useState({});
   const { data, isLoading, refetch } = useQuery(["products"], () =>
-    fetch(`http://localhost:5000/products`, {
+    fetch(`https://gadgets-emporium.herokuapp.com/products`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -32,7 +32,7 @@ const ManageProducts = () => {
     }
 
     await fetch(
-      `http://localhost:5000/products/update-stock/${modalProduct._id}`,
+      `https://gadgets-emporium.herokuapp.com/products/update-stock/${modalProduct._id}`,
       {
         method: "PATCH",
         headers: {
