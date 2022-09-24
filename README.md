@@ -6,6 +6,13 @@
 
 ---
 
+User Credential:
+
+#### User : test@user.com   Password : 123456
+#### Admin : admin@gadgetsemporium.com   Password : 123456
+
+---
+
 ## The following things in this project:
 
 - Home
@@ -22,6 +29,8 @@
 ---
 
 ### You can see me here.. [Click Me](https://gadgets-emporium.web.app)
+
+### Gadgets Emporium Server Side Code.. [Click Here](https://github.com/kiron0/gadgets_emporium_server)
 
 ## Installation
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { BASE_API } from "../../config";
 import auth from "../Pages/Shared/Firebase/Firebase.init";
 
 const useCarts = () => {
@@ -7,7 +8,7 @@ const useCarts = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(
-        `https://gadgets-emporium.herokuapp.com/carts?uid=${auth?.currentUser?.uid}`,
+        `${BASE_API}/carts?uid=${auth?.currentUser?.uid}`,
         {
           headers: {
             "content-type": "application/json",

@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import Loader from "../../Shared/Loader/Loader";
 import Fade from "react-reveal/Fade";
 import ReviewsCard from "./ReviewsCard";
+import { BASE_API } from "../../../../config";
 
 const ManageReviews = () => {
   const {
@@ -10,7 +11,7 @@ const ManageReviews = () => {
     isLoading,
     refetch,
   } = useQuery(["reviews"], () =>
-    fetch(`https://gadgets-emporium.herokuapp.com/reviews`, {
+    fetch(`${BASE_API}/reviews`, {
       headers: {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

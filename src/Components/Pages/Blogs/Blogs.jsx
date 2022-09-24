@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 import CardBlog from "./CardBlog";
 import useBlog from "../../hooks/useBlog";
+import { BASE_API } from "../../../config";
 
 const Blogs = () => {
   useTitle("BLogs");
@@ -19,7 +20,7 @@ const Blogs = () => {
     const searchText = event.target.searchText.value;
     if (!searchText) return toast.error(`Search field is required`);
     await fetch(
-      `https://gadgets-emporium.herokuapp.com/blogs/search?q=${searchText}`
+      `${BASE_API}/blogs/search?q=${searchText}`
     )
       .then((res) => res.json())
       .then((data) => {

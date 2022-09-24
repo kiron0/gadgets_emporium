@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { AiFillAppstore } from "react-icons/ai";
 import { CgMenuGridO } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -8,12 +7,12 @@ import { signOut } from "firebase/auth";
 import { toast } from "react-hot-toast";
 import { BiLogInCircle } from "react-icons/bi";
 import auth from "../Firebase/Firebase.init";
-import useProfileImage from "../../../hooks/useProfileImage";
 import useAdmin from "../../../hooks/useAdmin";
+import { InitializeContext } from "../../../../App";
 
-const Navbar = ({ handleThemeChange, theme }) => {
+const Navbar = () => {
+  const { handleThemeChange, theme, image } = useContext(InitializeContext);
   const [user] = useAuthState(auth);
-  const [image] = useProfileImage(user);
   const [admin] = useAdmin(user);
   const { pathname } = useLocation();
   const [scrollY, setScrollY] = useState();
@@ -98,7 +97,6 @@ const Navbar = ({ handleThemeChange, theme }) => {
               className="btn btn-ghost normal-case text-xl flex gap-2 items-center"
               to="/"
             >
-              <AiFillAppstore className="hidden md:block" />{" "}
               {!user ? (
                 <span className="text-sm md:text-xl lg:text-xl">
                   Gadgets Emporium

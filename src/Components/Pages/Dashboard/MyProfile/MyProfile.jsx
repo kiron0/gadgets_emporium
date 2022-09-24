@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { useQuery } from "react-query";
+import { BASE_API } from "../../../../config";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../Shared/Firebase/Firebase.init";
 import Loader from "../../Shared/Loader/Loader";
@@ -58,7 +59,7 @@ const MyProfile = () => {
       createdAt: new Date().toDateString(),
     };
     await fetch(
-      `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+      `${BASE_API}/users?uid=${auth?.currentUser?.uid}`,
       {
         method: "PATCH",
         headers: {
@@ -85,7 +86,7 @@ const MyProfile = () => {
     refetch,
   } = useQuery(["profileData", auth?.currentUser?.uid], () =>
     fetch(
-      `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+      `${BASE_API}/users?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

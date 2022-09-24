@@ -2,12 +2,13 @@ import React from "react";
 import { toast } from "react-hot-toast";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import Swal from "sweetalert2";
+import { BASE_API } from "../../../../config";
 import auth from "../Firebase/firebase.init";
 const AdminRow = ({ uid, serialize, email, role, refetch, _id }) => {
   /* Handle Make Admin  */
   const handleMakeAdmin = async (id) => {
     await fetch(
-      `https://gadgets-emporium.herokuapp.com/users/admin?uid=${id}&&currentUserId=${auth?.currentUser?.uid}`,
+      `${BASE_API}/users/admin?uid=${id}&&currentUserId=${auth?.currentUser?.uid}`,
       {
         method: "PATCH",
         headers: {
@@ -39,7 +40,7 @@ const AdminRow = ({ uid, serialize, email, role, refetch, _id }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://gadgets-emporium.herokuapp.com/users?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          `${BASE_API}/users?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
           {
             method: "DELETE",
             headers: {

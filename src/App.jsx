@@ -35,10 +35,17 @@ import ManageBlog from "./Components/Pages/Dashboard/BlogManagement/ManageBlog";
 import EditBlog from "./Components/Pages/Dashboard/BlogManagement/EditBlog";
 import AddBlog from "./Components/Pages/Dashboard/BlogManagement/AddBlog";
 import DeleteTeamMember from "./Components/Pages/Dashboard/DeleteTeamMember/DeleteTeamMember";
+import { createContext } from "react";
+import useProfileImage from "./Components/hooks/useProfileImage";
+import auth from "./Components/Pages/Shared/Firebase/Firebase.init";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+export const InitializeContext = createContext(null);
 
 function App() {
   const [theme, setTheme] = useState(false);
-
+  const [user] = useAuthState(auth);
+  const [image] = useProfileImage(user);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -58,142 +65,144 @@ function App() {
   };
 
   return (
-    <div data-theme={theme && "night"} className="App">
-      {loading ? (
-        <div id="preloader">
-          <div id="loader"></div>
-        </div>
-      ) : (
-        <Navbar handleThemeChange={handleThemeChange} theme={theme} />
-      )}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/resetPassword" element={<ResetPassword />} />
-        <Route path="/shop" element={<Products />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/blogDetails/:id" element={<BlogDetails />} />
-        <Route
-          path="/dashboard"
-          element={
-            <RequireAuth>
-              <Dashboard handleThemeChange={handleThemeChange} theme={theme} />
-            </RequireAuth>
-          }
-        >
-          <Route index element={<WelcomeDashboard />} />
+    <InitializeContext.Provider value={{ handleThemeChange, theme, image }}>
+      <div data-theme={theme && "night"} className="App">
+        {loading ? (
+          <div id="preloader">
+            <div id="loader"></div>
+          </div>
+        ) : (
+          <Navbar />
+        )}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="/shop" element={<Products />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogDetails/:id" element={<BlogDetails />} />
           <Route
-            path="profile"
+            path="/dashboard"
             element={
               <RequireAuth>
-                <MyProfile />
+                <Dashboard />
               </RequireAuth>
             }
-          ></Route>
-          <Route
-            path="myOrders"
-            element={
-              <RequireAuth>
-                <MyOrders />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="paymentHistory"
-            element={
-              <RequireAuth>
-                <PaymentHistory />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route
-            path="manageReviews"
-            element={
-              <RequireAdmin>
-                <ManageReviews />
-              </RequireAdmin>
-            }
-          ></Route>
-          <Route
-            path="allUsers"
-            element={
-              <RequireAdmin>
-                <AllUsers />
-              </RequireAdmin>
-            }
-          ></Route>
-          <Route
-            path="addProduct"
-            element={
-              <RequireAdmin>
-                <AddProduct />
-              </RequireAdmin>
-            }
-          ></Route>
-          <Route
-            path="manageProducts"
-            element={
-              <RequireAdmin>
-                <ManageProducts />
-              </RequireAdmin>
-            }
-          ></Route>
-          <Route
-            path="addTeamMember"
-            element={
-              <RequireAdmin>
-                <AddTeamMember />
-              </RequireAdmin>
-            }
-          ></Route>
-          <Route
-            path="deleteTeamMember"
-            element={
-              <RequireAdmin>
-                <DeleteTeamMember />
-              </RequireAdmin>
-            }
-          ></Route>
-          <Route path="addReview" element={<AddReview />}></Route>
-          <Route
-            path="manageOrder"
-            element={
-              <RequireAdmin>
-                <ManageOrder />
-              </RequireAdmin>
-            }
-          ></Route>
-          <Route
-            path="payment/:paymentId"
-            element={
-              <RequireAuth>
-                <Payment></Payment>
-              </RequireAuth>
-            }
-          ></Route>
-          <Route path="management-blog" element={<BlogManagement />}>
-            <Route index element={<AddBlog />} />
-            <Route path="add-blog" element={<AddBlog />} />
-            <Route path="manageBlogs" element={<ManageBlog />} />
-            <Route path="edit/:editId" element={<EditBlog />} />
+          >
+            <Route index element={<WelcomeDashboard />} />
+            <Route
+              path="profile"
+              element={
+                <RequireAuth>
+                  <MyProfile />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="myOrders"
+              element={
+                <RequireAuth>
+                  <MyOrders />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="paymentHistory"
+              element={
+                <RequireAuth>
+                  <PaymentHistory />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="manageReviews"
+              element={
+                <RequireAdmin>
+                  <ManageReviews />
+                </RequireAdmin>
+              }
+            ></Route>
+            <Route
+              path="allUsers"
+              element={
+                <RequireAdmin>
+                  <AllUsers />
+                </RequireAdmin>
+              }
+            ></Route>
+            <Route
+              path="addProduct"
+              element={
+                <RequireAdmin>
+                  <AddProduct />
+                </RequireAdmin>
+              }
+            ></Route>
+            <Route
+              path="manageProducts"
+              element={
+                <RequireAdmin>
+                  <ManageProducts />
+                </RequireAdmin>
+              }
+            ></Route>
+            <Route
+              path="addTeamMember"
+              element={
+                <RequireAdmin>
+                  <AddTeamMember />
+                </RequireAdmin>
+              }
+            ></Route>
+            <Route
+              path="deleteTeamMember"
+              element={
+                <RequireAdmin>
+                  <DeleteTeamMember />
+                </RequireAdmin>
+              }
+            ></Route>
+            <Route path="addReview" element={<AddReview />}></Route>
+            <Route
+              path="manageOrder"
+              element={
+                <RequireAdmin>
+                  <ManageOrder />
+                </RequireAdmin>
+              }
+            ></Route>
+            <Route
+              path="payment/:paymentId"
+              element={
+                <RequireAuth>
+                  <Payment></Payment>
+                </RequireAuth>
+              }
+            ></Route>
+            <Route path="management-blog" element={<BlogManagement />}>
+              <Route index element={<AddBlog />} />
+              <Route path="add-blog" element={<AddBlog />} />
+              <Route path="manageBlogs" element={<ManageBlog />} />
+              <Route path="edit/:editId" element={<EditBlog />} />
+            </Route>
           </Route>
-        </Route>
-        <Route
-          path="/purchase/:id"
-          element={
-            <RequireAuth>
-              <ProductDetails />
-            </RequireAuth>
-          }
-        />
-        <Route path="/teamMembers" element={<Team />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <ScrollButton></ScrollButton>
-      <Toaster />
-    </div>
+          <Route
+            path="/purchase/:id"
+            element={
+              <RequireAuth>
+                <ProductDetails />
+              </RequireAuth>
+            }
+          />
+          <Route path="/teamMembers" element={<Team />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <ScrollButton></ScrollButton>
+        <Toaster />
+      </div>
+    </InitializeContext.Provider>
   );
 }
 

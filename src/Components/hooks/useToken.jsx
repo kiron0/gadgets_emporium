@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BASE_API } from "../../config";
 
 const useToken = (user) => {
   const [token, setToken] = useState("");
@@ -8,7 +9,7 @@ const useToken = (user) => {
     const currentUser = { email: email, uid: uid };
     if (email) {
       fetch(
-        `https://gadgets-emporium.herokuapp.com/user?email=${email}&&uid=${uid}`,
+        `${BASE_API}/user?email=${email}&&uid=${uid}`,
         {
           method: "PUT",
           headers: {

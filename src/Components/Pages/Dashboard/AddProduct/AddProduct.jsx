@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { BASE_API } from "../../../../config";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../Shared/Firebase/Firebase.init";
 
@@ -58,7 +59,7 @@ const AddProduct = () => {
       },
     };
 
-    await fetch(`https://gadgets-emporium.herokuapp.com/products`, {
+    await fetch(`${BASE_API}/products`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

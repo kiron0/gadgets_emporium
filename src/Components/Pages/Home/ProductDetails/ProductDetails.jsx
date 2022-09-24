@@ -9,6 +9,7 @@ import auth from "../../Shared/Firebase/Firebase.init";
 import Loader from "../../Shared/Loader/Loader";
 import useAdmin from "../../../hooks/useAdmin";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { BASE_API } from "../../../../config";
 
 const ProductDetails = () => {
   const [error, setError] = useState("");
@@ -19,7 +20,7 @@ const ProductDetails = () => {
   const [admin] = useAdmin(user);
 
   const { data, isLoading, refetch } = useQuery("products", () =>
-    fetch(`https://gadgets-emporium.herokuapp.com/products/${id}`, {
+    fetch(`${BASE_API}/products/${id}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -78,7 +79,7 @@ const ProductDetails = () => {
 
   const sendOrderData = async (data) => {
     await fetch(
-      `https://gadgets-emporium.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
+      `${BASE_API}/orders?uid=${auth?.currentUser?.uid}`,
       {
         method: "POST",
         headers: {
@@ -92,7 +93,7 @@ const ProductDetails = () => {
       .then((result) => {
         if (result?.order) {
           fetch(
-            `https://gadgets-emporium.herokuapp.com/products/updateQty/${id}`,
+            `${BASE_API}/products/updateQty/${id}`,
             {
               method: "PATCH",
               headers: {

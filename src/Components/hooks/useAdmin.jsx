@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BASE_API } from "../../config";
 
 const useAdmin = (user) => {
   const [admin, setAdmin] = useState(false);
@@ -6,7 +7,7 @@ const useAdmin = (user) => {
   useEffect(() => {
     const email = user?.email;
     if (email) {
-      fetch(`https://gadgets-emporium.herokuapp.com/admin/${email}`, {
+      fetch(`${BASE_API}/admin/${email}`, {
         method: "GET",
         headers: {
           "content-type": "application/json",

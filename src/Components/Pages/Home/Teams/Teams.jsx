@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Fade from "react-reveal/Fade";
+import { BASE_API } from "../../../../config";
 import Loader from "../../Shared/Loader/Loader";
 import TItle from "../../Shared/Title/Title";
 import CardTeam from "./CardTeam";
@@ -7,7 +8,7 @@ const Teams = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch(`https://gadgets-emporium.herokuapp.com/teams`, {
+    fetch(`${BASE_API}/teams`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useQuery } from "react-query";
+import { BASE_API } from "../../../../config";
 import useTitle from "../../../hooks/useTitle";
 import Loader from "../../Shared/Loader/Loader";
 import ProductsRow from "./ProductsRow";
@@ -8,7 +9,7 @@ const ManageProducts = () => {
   useTitle("Manage Product");
   const [modalProduct, setModalProduct] = useState({});
   const { data, isLoading, refetch } = useQuery(["products"], () =>
-    fetch(`https://gadgets-emporium.herokuapp.com/products`, {
+    fetch(`${BASE_API}/products`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -32,7 +33,7 @@ const ManageProducts = () => {
     }
 
     await fetch(
-      `https://gadgets-emporium.herokuapp.com/products/update-stock/${modalProduct._id}`,
+      `${BASE_API}/products/update-stock/${modalProduct._id}`,
       {
         method: "PATCH",
         headers: {

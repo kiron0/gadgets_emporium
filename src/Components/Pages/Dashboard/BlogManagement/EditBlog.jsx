@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../Shared/Loader/Loader";
 import useBlog from "../../../hooks/useBlog";
 import auth from "../../Shared/Firebase/Firebase.init";
+import { BASE_API } from "../../../../config";
 
 const EditBlog = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const EditBlog = () => {
       createAt: new Date().toDateString(),
     };
     await fetch(
-      `https://gadgets-emporium.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&editId=${editId}`,
+      `${BASE_API}/blogs?uid=${auth?.currentUser?.uid}&&editId=${editId}`,
       {
         method: "PUT",
         headers: {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import ReactStars from "react-stars";
+import { BASE_API } from "../../../../config";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../Shared/Firebase/Firebase.init";
 const AddReview = () => {
@@ -21,7 +22,7 @@ const AddReview = () => {
       },
     };
     if (rating && reviewText) {
-      await fetch(`https://gadgets-emporium.herokuapp.com/reviews`, {
+      await fetch(`${BASE_API}/reviews`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

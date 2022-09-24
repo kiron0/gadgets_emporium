@@ -6,13 +6,14 @@ import Swal from "sweetalert2";
 import Loader from "../../Shared/Loader/Loader";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../Shared/Firebase/Firebase.init";
+import { BASE_API } from "../../../../config";
 const ManageBlog = () => {
   useTitle("Manage Blogs");
   const navigate = useNavigate();
   /* call to get all the added blogs for particular users */
   const { data, isLoading, refetch } = useQuery("blogs", () =>
     fetch(
-      `https://gadgets-emporium.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}`,
+      `${BASE_API}/blogs?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -37,7 +38,7 @@ const ManageBlog = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://gadgets-emporium.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&deletedId=${id}`,
+          `${BASE_API}/blogs?uid=${auth?.currentUser?.uid}&&deletedId=${id}`,
           {
             method: "DELETE",
             headers: {

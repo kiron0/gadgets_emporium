@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { BASE_API } from "../../config";
 
 const useBlog = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch(`https://gadgets-emporium.herokuapp.com/blogs/all`)
+    fetch(`${BASE_API}/blogs/all`)
       .then((res) => res.json())
       .then((result) => {
         setLoading(true);

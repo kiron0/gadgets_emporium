@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { BASE_API } from "../../../../config";
 import useTitle from "../../../hooks/useTitle";
 import Loader from "../../Shared/Loader/Loader";
 import OrderManageRow from "./OrderManageRow";
@@ -8,7 +9,7 @@ const ManageOrder = () => {
   useTitle("Manage Order");
 
   const { data, isLoading, refetch } = useQuery("orders", () =>
-    fetch(`https://gadgets-emporium.herokuapp.com/orders/all`, {
+    fetch(`${BASE_API}/orders/all`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { BASE_API } from "../../../../config";
 import auth from "../../Shared/Firebase/Firebase.init";
 
 const CheckoutForm = ({ singleOrder, refetch }) => {
@@ -16,7 +17,7 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
     Number(singleOrder?.productInfo?.price);
   useEffect(() => {
     fetch(
-      `https://gadgets-emporium.herokuapp.com/payment/create-payment-intent`,
+      `${BASE_API}/payment/create-payment-intent`,
       {
         method: "POST",
         headers: {
@@ -88,7 +89,7 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
             new Date().toDateString() + " " + new Date().toLocaleTimeString(),
         };
         fetch(
-          `https://gadgets-emporium.herokuapp.com/booking?id=${singleOrder?._id}`,
+          `${BASE_API}/booking?id=${singleOrder?._id}`,
           {
             method: "POST",
             headers: {
@@ -103,7 +104,7 @@ const CheckoutForm = ({ singleOrder, refetch }) => {
             if (result?.insertedId) {
               navigate(`/dashboard/myOrders`);
               fetch(
-                `https://gadgets-emporium.herokuapp.com/orders/paid/${singleOrder?._id}`,
+                `${BASE_API}/orders/paid/${singleOrder?._id}`,
                 {
                   method: "PATCH",
                   headers: {

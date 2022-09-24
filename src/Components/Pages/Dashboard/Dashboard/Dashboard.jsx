@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { BsGrid } from "react-icons/bs";
 import { AiFillAppstore } from "react-icons/ai";
@@ -10,13 +10,13 @@ import Loader from "../../Shared/Loader/Loader";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../Shared/Firebase/Firebase.init";
 import useAdmin from "../../../hooks/useAdmin";
-import useProfileImage from "../../../hooks/useProfileImage";
+import { InitializeContext } from "../../../../App";
 
-const Dashboard = ({ handleThemeChange, theme }) => {
+const Dashboard = () => {
   useTitle("Dashboard");
+  const { handleThemeChange, theme, image } = useContext(InitializeContext);
   const [user] = useAuthState(auth);
   const [admin, adminLoading] = useAdmin(user);
-  const [image] = useProfileImage();
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
@@ -98,7 +98,7 @@ const Dashboard = ({ handleThemeChange, theme }) => {
             </label>
             <ul
               tabIndex="0"
-              className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-300 rounded-box w-52"
+              className="mt-3 p-2 shadow-lg menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
                 <Link to="/dashboard/profile" className="justify-between">

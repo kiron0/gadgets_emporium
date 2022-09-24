@@ -2,6 +2,7 @@ import React from "react";
 import Rating from "react-rating";
 import { ImStarEmpty, ImStarFull } from "react-icons/im";
 import Swal from "sweetalert2";
+import { BASE_API } from "../../../../config";
 
 const ReviewsCard = ({ _id, reviewText, author, rating, refetch }) => {
   const handleReviewsDelete = async (_id) => {
@@ -15,7 +16,7 @@ const ReviewsCard = ({ _id, reviewText, author, rating, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://gadgets-emporium.herokuapp.com/reviews/${_id}`, {
+        fetch(`${BASE_API}/reviews/${_id}`, {
           method: "DELETE",
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

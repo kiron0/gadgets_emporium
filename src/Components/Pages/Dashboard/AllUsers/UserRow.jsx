@@ -2,6 +2,7 @@ import React from "react";
 import { FiDelete } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
+import { BASE_API } from "../../../../config";
 
 const UserRow = ({ user, index, refetch }) => {
   const { _id, email, role, uid } = user;
@@ -18,7 +19,7 @@ const UserRow = ({ user, index, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((willDelete) => {
       if (willDelete.isConfirmed) {
-        fetch(`https://gadgets-emporium.herokuapp.com/user/${email}`, {
+        fetch(`${BASE_API}/user/${email}`, {
           method: "DELETE",
           headers: {
             "content-type": "application/json",
@@ -47,7 +48,7 @@ const UserRow = ({ user, index, refetch }) => {
       confirmButtonText: "Yes, make it!",
     }).then((willAdmin) => {
       if (willAdmin.isConfirmed) {
-        fetch(`https://gadgets-emporium.herokuapp.com/user/admin`, {
+        fetch(`${BASE_API}/user/admin`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -81,7 +82,7 @@ const UserRow = ({ user, index, refetch }) => {
       confirmButtonText: "Yes, remove it!",
     }).then((willAdmin) => {
       if (willAdmin.isConfirmed) {
-        fetch(`https://gadgets-emporium.herokuapp.com/user/removeAdmin`, {
+        fetch(`${BASE_API}/user/removeAdmin`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { BASE_API } from "../../../../config";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../Shared/Firebase/Firebase.init";
 import Loader from "../../Shared/Loader/Loader";
@@ -9,7 +10,7 @@ const MyOrders = () => {
   useTitle("My Orders");
   const { data, isLoading, refetch } = useQuery("Orders", () =>
     fetch(
-      `https://gadgets-emporium.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
+      `${BASE_API}/orders?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

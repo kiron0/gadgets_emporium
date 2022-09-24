@@ -3,6 +3,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
 import Loader from "../Shared/Loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
+import { BASE_API } from "../../../config";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -10,7 +11,7 @@ const BlogDetails = () => {
 
   const { data: blog, isLoading } = useQuery("blog", async () => {
     const res = await fetch(
-      `https://gadgets-emporium.herokuapp.com/blogs/${id}`
+      `${BASE_API}/blogs/${id}`
     );
     const data = await res.json();
     return data;

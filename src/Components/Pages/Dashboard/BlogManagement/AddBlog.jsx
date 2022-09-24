@@ -1,5 +1,6 @@
 import React from "react";
 import { toast } from "react-hot-toast";
+import { BASE_API } from "../../../../config";
 import auth from "../../Shared/Firebase/Firebase.init";
 const AddBlog = () => {
   /*   Handle Create Brand New Post For Users */
@@ -19,7 +20,7 @@ const AddBlog = () => {
       },
     };
 
-    await fetch(`https://gadgets-emporium.herokuapp.com/blogs`, {
+    await fetch(`${BASE_API}/blogs`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

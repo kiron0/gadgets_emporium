@@ -1,4 +1,5 @@
 import { useQuery } from "react-query";
+import { BASE_API } from "../../config";
 import Loading from "../Pages/Shared/Loading/Loading";
 
 const useParts = () => {
@@ -8,7 +9,7 @@ const useParts = () => {
     refetch,
   } = useQuery("allParts", async () => {
     const res = await fetch(
-      "https://gadgets-emporium.herokuapp.com/parts?sort=1",
+      `${BASE_API}/parts?sort=1`,
       {
         headers: {
           "content-type": "application/json",
