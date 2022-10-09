@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { CgMenuGridO } from "react-icons/cg";
+import { CgMenuLeft } from "react-icons/cg";
+import { AiOutlineFire } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
@@ -17,8 +18,17 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const [scrollY, setScrollY] = useState();
 
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollY(position);
+  };
+
   useEffect(() => {
-    setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [scrollY]);
 
   const handleLogOut = () => {
@@ -71,8 +81,8 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 w-full z-50">
       <div
-        className={`drawer-content flex flex-col backdrop-blur-[18px] bg-base-100  ${
-          scrollY < 300 && "lg:bg-transparent"
+        className={`drawer-content flex flex-col bg-base-300 ${
+          scrollY > 100 && "duration-500 shadow-md"
         }`}
         style={
           pathname.includes("dashboard")
@@ -80,15 +90,15 @@ const Navbar = () => {
             : { display: "flex" }
         }
       >
-        <div className="navbar py-3 container mx-auto">
+        <div className="navbar py-1 container mx-auto">
           <div className="navbar-start">
             <div className="dropdown">
               <label tabIndex="0" className="btn btn-ghost lg:hidden">
-                <CgMenuGridO className="text-3xl" />
+                <CgMenuLeft className="text-3xl" />
               </label>
               <ul
                 tabIndex="0"
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow-xl bg-base-100 rounded-box w-52"
               >
                 {NavbarMenus}
               </ul>
@@ -97,12 +107,15 @@ const Navbar = () => {
               className="btn btn-ghost normal-case text-xl flex gap-2 items-center"
               to="/"
             >
+              <AiOutlineFire className="hidden lg:block text-2xl" />{" "}
               {!user ? (
-                <span className="text-sm md:text-xl lg:text-xl">
+                <span className="ml-[-17px] md:ml-0 lg:ml-0 text-[16px] md:text-xl lg:text-xl">
                   Gadgets Emporium
                 </span>
               ) : (
-                <span>Gadgets Emporium</span>
+                <span className="ml-[-17px] md:ml-0 lg:ml-0">
+                  Gadgets Emporium
+                </span>
               )}
             </Link>
           </div>
@@ -143,7 +156,7 @@ const Navbar = () => {
               </NavLink>
             )}
             {user && (
-              <div className="flex-none gap-2">
+              <div className="flex-none gap-2 mt-3">
                 <div className="dropdown dropdown-end">
                   <label
                     tabIndex="0"
@@ -154,21 +167,15 @@ const Navbar = () => {
                       className="w-10 h-10 rounded-full border bg-base-300 grid place-items-center ring ring-primary ring-offset-base-100 ring-offset-2"
                     >
                       {auth?.currentUser?.photoURL ? (
-                        <img
-                          src={auth?.currentUser?.photoURL}
-                          alt={auth?.currentUser?.displayName?.slice(0, 1)}
-                        />
+                        <img src={auth?.currentUser?.photoURL} alt="avatar" />
                       ) : (
-                        <img
-                          src={image}
-                          alt={auth?.currentUser?.displayName?.slice(0, 1)}
-                        />
+                        <img src={image} alt="profile" />
                       )}
                     </div>
                   </label>
                   <ul
                     tabIndex="0"
-                    className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                    className="mt-3 p-2 shadow-xl menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                   >
                     <li>
                       <Link className="justify-between" to="/dashboard/profile">

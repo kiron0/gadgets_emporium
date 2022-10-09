@@ -60,20 +60,20 @@ const SignUp = () => {
             <div className="w-full lg:w-1/2">
               <div className="flex flex-col justify-center items-center lg:px-12 md:my-24 lg:my-0">
                 <div className="flex h-screen justify-center items-center w-full">
-                  <div className="card w-full bg-base-100 shadow-md">
+                  <div className="card w-full bg-base-100 shadow-md max-w-lg">
                     <div className="card-body w-full px-16">
                       <h2 className="text-center text-2xl font-semibold">
                         Create an account
                       </h2>
                       <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="form-control w-full">
+                        <div className="form-control w-full max-w-sm">
                           <label className="label">
                             <span className="label-text">Name</span>
                           </label>
                           <input
                             type="text"
                             placeholder="Your Name"
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full max-w-sm"
                             {...register("name", {
                               required: {
                                 value: true,

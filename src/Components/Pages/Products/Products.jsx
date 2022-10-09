@@ -28,7 +28,7 @@ const Products = () => {
   };
 
   return (
-    <section id="shops" className="h-screen bg-base-100">
+    <section id="shops" className="bg-base-100">
       <div className="breadcrumb text-center py-32 bg-base-300">
         <div className="container mx-auto px-3 lg:px-0">
           <h2 className="text-3xl">Shop Page</h2>
@@ -48,7 +48,7 @@ const Products = () => {
             <input
               type="search"
               placeholder="Search Product..."
-              className="p-4 outline-none w-full"
+              className="p-4 outline-none w-full bg-base-100"
               name="search"
             />
             <button className="px-6 bg-primary text-white rounded-md">

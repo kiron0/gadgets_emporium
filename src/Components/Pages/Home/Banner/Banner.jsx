@@ -12,7 +12,7 @@ const Banner = () => {
       <div className="hero pb-80 md:pb-40 bg-base-300">
         <div className="hero-content flex-col justify-between lg:flex-row-reverse">
           <Fade right distance="20px">
-            <div className="w-full lg:w-1/2 rounded shadow-2xl overflow-hidden cursor-grab lg:ml-6">
+            <div className="w-full lg:w-1/2 rounded shadow-2xl overflow-hidden lg:ml-6">
               <div className="outline-none h-full">
                 <img
                   src={bannerImg}

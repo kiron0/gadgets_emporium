@@ -1,15 +1,34 @@
 # Gadgets Emporium Web App
 
-### It's a Full-Stack React base Web App.
-
-### Here you can see E-Commerce type website.
+### It's a Full-Stack React base E-Commerce type Web App.
 
 ---
 
 User Credential:
 
-#### User : test@user.com   Password : 123456
-#### Admin : admin@gadgetsemporium.com   Password : 123456
+> #### Username
+
+```bash
+test@user.com
+```
+
+> ### Password
+
+```bash
+123456
+```
+
+> #### Admin
+
+```bash
+admin@gadgetsemporium.com
+```
+
+> ### Password
+
+```bash
+123456
+```
 
 ---
 

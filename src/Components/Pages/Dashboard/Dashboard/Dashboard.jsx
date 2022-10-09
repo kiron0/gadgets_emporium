@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
+import { AiOutlineFire } from "react-icons/ai";
 import { BsGrid } from "react-icons/bs";
-import { AiFillAppstore } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -37,7 +37,7 @@ const Dashboard = () => {
     <div className="drawer drawer-mobile">
       <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content p-3 md:p-3">
-        <div className="header z-50 sticky top-0 flex justify-between items-center bg-base-300 p-4 rounded">
+        <div className="header z-50 sticky top-0 flex justify-between items-center bg-base-300 p-4 py-1 rounded">
           <label
             htmlFor="dashboard-sidebar"
             className="btn bg-base-300 text-black hover:text-white drawer-button lg:hidden "
@@ -76,7 +76,7 @@ const Dashboard = () => {
               </button>
             </li>
           </div>
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end mt-3">
             <label
               tabIndex="0"
               className="btn btn-ghost btn-circle avatar online"
@@ -122,7 +122,7 @@ const Dashboard = () => {
               to="/"
               className="logo font-semibold text-center flex items-center flex-col gap-2"
             >
-              <AiFillAppstore className="text-3xl" />
+              <AiOutlineFire className="text-3xl" />
               Gadgets Emporium
             </Link>
           </div>
