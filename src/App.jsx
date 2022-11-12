@@ -1,79 +1,82 @@
-import "./App.css";
+import React, { createContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./Components/Pages/Shared/Navbar/Navbar";
-import Home from "./Components/Pages/Home/Home/Home";
-import NotFound from "./Components/Pages/Shared/NotFound/NotFound";
-import { useEffect, useState } from "react";
-import Login from "./Components/Pages/Login/Login/Login";
-import SignUp from "./Components/Pages/Login/SignUp/SignUp";
-import ResetPassword from "./Components/Pages/Login/ResetPassword";
-import Team from "./Components/Pages/Team/Team";
-import Dashboard from "./Components/Pages/Dashboard/Dashboard/Dashboard";
-import WelcomeDashboard from "./Components/Pages/Dashboard/WelcomeDashboard/WelcomeDashboard";
-import RequireAuth from "./Components/Pages/Login/RequireAuth/RequireAuth";
-import MyProfile from "./Components/Pages/Dashboard/MyProfile/MyProfile";
-import { Toaster } from "react-hot-toast";
-import ScrollButton from "./Components/Pages/Shared/ScrollButton/ScrollButton";
-import AllUsers from "./Components/Pages/Dashboard/AllUsers/AllUsers";
-import AddProduct from "./Components/Pages/Dashboard/AddProduct/AddProduct";
-import AddReview from "./Components/Pages/Dashboard/AddReview/AddReview";
-import ProductDetails from "./Components/Pages/Home/ProductDetails/ProductDetails";
-import MyOrders from "./Components/Pages/Dashboard/MyOrders/MyOrders";
-import RequireAdmin from "./Components/Pages/Login/RequireAdmin/RequireAdmin";
-import ManageOrder from "./Components/Pages/Dashboard/ManageOrder/ManageOrder";
-import Payment from "./Components/Pages/Dashboard/Payment/Payment";
-import Products from "./Components/Pages/Products/Products";
-import PaymentHistory from "./Components/Pages/Dashboard/PaymentHistory/PaymentHistory";
-import ManageProducts from "./Components/Pages/Dashboard/ManageProducts/ManageProducts";
-import AddTeamMember from "./Components/Pages/Dashboard/AddTeamMember/AddTeamMember";
-import ManageReviews from "./Components/Pages/Dashboard/ManageReviews/ManageReviews";
-import Blogs from "./Components/Pages/Blogs/Blogs";
-import BlogDetails from "./Components/Pages/Blogs/BlogDetails";
-import Contact from "./Components/Pages/Contact/Contact";
-import BlogManagement from "./Components/Pages/Dashboard/BlogManagement/BlogManagement";
-import ManageBlog from "./Components/Pages/Dashboard/BlogManagement/ManageBlog";
-import EditBlog from "./Components/Pages/Dashboard/BlogManagement/EditBlog";
-import AddBlog from "./Components/Pages/Dashboard/BlogManagement/AddBlog";
-import DeleteTeamMember from "./Components/Pages/Dashboard/DeleteTeamMember/DeleteTeamMember";
-import { createContext } from "react";
-import useProfileImage from "./Components/hooks/useProfileImage";
-import auth from "./Components/Pages/Shared/Firebase/Firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Toaster } from "react-hot-toast";
+import Navbar from "./shared/Navbar/Navbar";
+import Home from "./pages/Home/Home/Home";
+import NotFound from "./shared/NotFound/NotFound";
+import Login from "./pages/Authentication/Login/Login";
+import SignUp from "./pages/Authentication/SignUp/SignUp";
+import ResetPassword from "./pages/Authentication/ResetPassword";
+import Team from "./pages/Team/Team";
+import Dashboard from "./pages/Dashboard/Dashboard/Dashboard";
+import WelcomeDashboard from "./pages/Dashboard/WelcomeDashboard/WelcomeDashboard";
+import RequireAuth from "./auth/RequireAuth/RequireAuth";
+import MyProfile from "./pages/Dashboard/MyProfile/MyProfile";
+import ScrollButton from "./shared/ScrollButton/ScrollButton";
+import AllUsers from "./pages/Dashboard/AllUsers/AllUsers";
+import AddProduct from "./pages/Dashboard/AddProduct/AddProduct";
+import AddReview from "./pages/Dashboard/AddReview/AddReview";
+import ProductDetails from "./pages/Home/ProductDetails/ProductDetails";
+import MyOrders from "./pages/Dashboard/MyOrders/MyOrders";
+import RequireAdmin from "./auth/RequireAdmin/RequireAdmin";
+import ManageOrder from "./pages/Dashboard/ManageOrder/ManageOrder";
+import Payment from "./pages/Dashboard/Payment/Payment";
+import Products from "./pages/Products/Products";
+import PaymentHistory from "./pages/Dashboard/PaymentHistory/PaymentHistory";
+import ManageProducts from "./pages/Dashboard/ManageProducts/ManageProducts";
+import ManageReviews from "./pages/Dashboard/ManageReviews/ManageReviews";
+import Blogs from "./pages/Blogs/Blogs";
+import BlogDetails from "./pages/Blogs/BlogDetails";
+import Contact from "./pages/Contact/Contact";
+import BlogManagement from "./pages/Dashboard/BlogManagement/BlogManagement";
+import ManageBlog from "./pages/Dashboard/BlogManagement/ManageBlog";
+import EditBlog from "./pages/Dashboard/BlogManagement/EditBlog";
+import AddBlog from "./pages/Dashboard/BlogManagement/AddBlog";
+import useProfileImage from "./hooks/useProfileImage";
+import auth from "./auth/Firebase/Firebase.init";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
+import ThemeChanger from "./shared/ThemeChanger/ThemeChanger";
+import Setting from "./pages/Dashboard/Setting/Setting";
+import axios from "axios";
+import { useQuery } from "react-query";
+import { BASE_API } from "./config";
 
 export const InitializeContext = createContext(null);
 
 function App() {
-  const [theme, setTheme] = useState(false);
+  const [theme, setTheme] = useState("light");
   const [user] = useAuthState(auth);
   const [image] = useProfileImage(user);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+      setIsLoading(false);
+    }, 4000);
   }, []);
 
   useEffect(() => {
-    setTheme(JSON.parse(window.localStorage.getItem("theme")));
+    setTheme(window.localStorage.getItem("theme"));
   }, []);
 
-  const handleThemeChange = () => {
-    setTheme(!theme);
-    window.localStorage.setItem("theme", !theme);
-  };
+  const { data, refetch } = useQuery("appName", async () => {
+    const res = await axios.get(`${BASE_API}/app/appName`, {
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
+    return res?.data;
+  });
+
+  const appName = data?.appName;
 
   return (
-    <InitializeContext.Provider value={{ handleThemeChange, theme, image }}>
-      <div data-theme={theme && "night"} className="App">
-        {loading ? (
-          <div id="preloader">
-            <div id="loader"></div>
-          </div>
-        ) : (
-          <Navbar />
-        )}
+    <InitializeContext.Provider value={{ theme, setTheme, image, appName }}>
+      <div data-theme={theme ? theme : "light"} className="bg-base-100">
+        {isLoading ? <LoadingScreen /> : <Navbar />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -133,6 +136,14 @@ function App() {
               }
             ></Route>
             <Route
+              path="setting"
+              element={
+                <RequireAdmin>
+                  <Setting appChangeRefetch={refetch} />
+                </RequireAdmin>
+              }
+            ></Route>
+            <Route
               path="addProduct"
               element={
                 <RequireAdmin>
@@ -145,22 +156,6 @@ function App() {
               element={
                 <RequireAdmin>
                   <ManageProducts />
-                </RequireAdmin>
-              }
-            ></Route>
-            <Route
-              path="addTeamMember"
-              element={
-                <RequireAdmin>
-                  <AddTeamMember />
-                </RequireAdmin>
-              }
-            ></Route>
-            <Route
-              path="deleteTeamMember"
-              element={
-                <RequireAdmin>
-                  <DeleteTeamMember />
                 </RequireAdmin>
               }
             ></Route>
@@ -177,7 +172,7 @@ function App() {
               path="payment/:paymentId"
               element={
                 <RequireAuth>
-                  <Payment></Payment>
+                  <Payment />
                 </RequireAuth>
               }
             ></Route>
@@ -199,7 +194,8 @@ function App() {
           <Route path="/teamMembers" element={<Team />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <ScrollButton></ScrollButton>
+        {isLoading ? null : <ThemeChanger />}
+        <ScrollButton />
         <Toaster />
       </div>
     </InitializeContext.Provider>
