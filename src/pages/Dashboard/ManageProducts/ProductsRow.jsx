@@ -1,5 +1,4 @@
 import React from "react";
-import { BsTrash } from "react-icons/bs";
 import Swal from "sweetalert2";
 import { BASE_API } from "../../../config";
 
@@ -63,7 +62,7 @@ const ProductRow = ({
       <td>
         <label
           type="button"
-          htmlFor="my-modal-3"
+          htmlFor="productModal"
           className="btn btn-sm btn-success text-white modal-button"
           onClick={() =>
             setModalProduct({ _id, productName, availableQty, orderQty, price })
@@ -75,9 +74,9 @@ const ProductRow = ({
       <td>
         <button
           onClick={() => handleProductDelete(_id)}
-          className="btn bg-red-600 border-red-600 text-white btn-sm"
+          className="btn btn-sm btn-error text-white"
         >
-          <BsTrash className="text-xl" />
+          <i className='bx bxs-trash'></i>
         </button>
       </td>
     </tr>

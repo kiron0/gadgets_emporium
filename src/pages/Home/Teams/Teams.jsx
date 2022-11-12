@@ -4,7 +4,9 @@ import { BASE_API } from "../../../config";
 import Loader from "../../../components/Loader/Loader";
 import TItle from "../../../components/Title/Title";
 import CardTeam from "./CardTeam";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 const Teams = () => {
+  useScrollToTop();
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {

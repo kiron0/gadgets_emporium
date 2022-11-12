@@ -34,22 +34,19 @@ const ManageProducts = () => {
       return;
     }
 
-    await fetch(
-      `${BASE_API}/products/update-stock/${modalProduct._id}`,
-      {
-        method: "PATCH",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          productName: productNameField || modalProduct?.productName,
-          availableQty: Number(availableQtyField || modalProduct?.availableQty),
-          orderQty: Number(orderQtyField || modalProduct?.orderQty),
-          price: Number(priceField || modalProduct?.price),
-        }),
-      }
-    )
+    await fetch(`${BASE_API}/products/update-stock/${modalProduct._id}`, {
+      method: "PATCH",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        productName: productNameField || modalProduct?.productName,
+        availableQty: Number(availableQtyField || modalProduct?.availableQty),
+        orderQty: Number(orderQtyField || modalProduct?.orderQty),
+        price: Number(priceField || modalProduct?.price),
+      }),
+    })
       .then((res) => res.json())
       .then((result) => {
         if (result.modifiedCount) {
@@ -106,67 +103,104 @@ const ManageProducts = () => {
       </div>
       {modalProduct && (
         <>
-          <input type="checkbox" id="my-modal-3" className="modal-toggle" />
-          <div className="modal">
+          <input type="checkbox" id="productModal" className="modal-toggle" />
+          <div className="modal modal-bottom sm:modal-middle">
             <div className="modal-box relative">
-              <label
-                htmlFor="my-modal-3"
-                className="btn btn-sm btn-circle absolute right-2 top-2"
-              >
-                ✕
-              </label>
               <h3 className="text-lg font-bold">{modalProduct?.productName}</h3>
               <p>Update Your Product Details From Here</p>
               <form onSubmit={handleUpdateStock} action="" className="my-2">
-                <div className="my-4">
-                  <label htmlFor="stock">Update Product Name</label>
-                  <input
-                    type="text"
-                    placeholder="Put Your Product Name"
-                    className="input input-bordered w-full my-3"
-                    id="stock"
-                    value={productNameField || modalProduct?.productName}
-                    onChange={(event) =>
-                      setProductNameField(event.target.value)
-                    }
-                  />
+                <div className="name border rounded p-3 relative mt-6">
+                  <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+                    <h3 className="text-xs font-poppins">
+                      Put Your Product Name
+                    </h3>
+                  </div>
+                  <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 max-w-md overflow-hidden">
+                    <div className="icon">
+                      <i className="bx bxs-hot"></i>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Put Your Product Name"
+                      className="input focus:outline-none w-full my-3"
+                      id="stock"
+                      value={productNameField || modalProduct?.productName}
+                      onChange={(event) =>
+                        setProductNameField(event.target.value)
+                      }
+                    />
+                  </div>
                 </div>
-                <div className="my-4">
-                  <label htmlFor="stock">Update Available Quantity</label>
-                  <input
-                    type="number"
-                    placeholder="Put Your Quantity"
-                    className="input input-bordered w-full my-3"
-                    id="stock"
-                    value={availableQtyField || modalProduct?.availableQty}
-                    onChange={(event) =>
-                      setAvailableQtyField(event.target.value)
-                    }
-                  />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  <div className="name border rounded p-3 relative mt-8">
+                    <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+                      <h3 className="text-xs font-poppins">
+                        Available Quantity
+                      </h3>
+                    </div>
+                    <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 max-w-md overflow-hidden">
+                      <div className="icon">
+                        <i className="bx bxs-hot"></i>
+                      </div>
+                      <input
+                        type="number"
+                        placeholder="Put Your Quantity"
+                        className="input focus:outline-none w-full my-3"
+                        id="stock"
+                        value={availableQtyField || modalProduct?.availableQty}
+                        onChange={(event) =>
+                          setAvailableQtyField(event.target.value)
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="name border rounded p-3 relative mt-8">
+                    <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+                      <h3 className="text-xs font-poppins">
+                        Minimum Quantity
+                      </h3>
+                    </div>
+                    <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 max-w-md overflow-hidden">
+                      <div className="icon">
+                        <i className="bx bxs-hot"></i>
+                      </div>
+                      <input
+                        type="number"
+                        placeholder="Put Your Quantity"
+                        className="input focus:outline-none w-full my-3"
+                        id="stock"
+                        value={orderQtyField || modalProduct?.orderQty}
+                        onChange={(event) =>
+                          setOrderQtyField(event.target.value)
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="name border rounded p-3 relative mt-8">
+                    <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+                      <h3 className="text-xs font-poppins">Put Your Price</h3>
+                    </div>
+                    <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 max-w-md overflow-hidden">
+                      <div className="icon">
+                        <i className="bx bxs-hot"></i>
+                      </div>
+                      <input
+                        type="number"
+                        placeholder="Put Your Price"
+                        className="input focus:outline-none w-full my-3"
+                        id="stock"
+                        value={priceField || modalProduct.price}
+                        onChange={(event) => setPriceField(event.target.value)}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="my-4">
-                  <label htmlFor="stock">Update Maximum Quantity</label>
-                  <input
-                    type="number"
-                    placeholder="Put Your Quantity"
-                    className="input input-bordered w-full my-3"
-                    id="stock"
-                    value={orderQtyField || modalProduct?.orderQty}
-                    onChange={(event) => setOrderQtyField(event.target.value)}
-                  />
-                </div>
-                <div className="my-4">
-                  <label htmlFor="stock">Update Price</label>
-                  <input
-                    type="number"
-                    placeholder="Put Your Price"
-                    className="input input-bordered w-full my-3"
-                    id="stock"
-                    value={priceField || modalProduct.price}
-                    onChange={(event) => setPriceField(event.target.value)}
-                  />
-                </div>
-                <div className="text-right">
+
+                <div className="modal-action">
+                  <label htmlFor="productModal" className="btn btn-warning">
+                    <i className="bx bx-x text-xl"></i> Close
+                  </label>
                   <button className="btn text-white">Update Product</button>
                 </div>
               </form>

@@ -9,10 +9,12 @@ import { toast } from "react-hot-toast";
 import { BiLogInCircle } from "react-icons/bi";
 import auth from "../../auth/Firebase/Firebase.init";
 import { InitializeContext } from "../../App";
+import useUserInfo from "../../hooks/useUserInfo";
 
 const Navbar = () => {
   const { image, appName } = useContext(InitializeContext);
   const [user] = useAuthState(auth);
+  const [userInfo] = useUserInfo(user);
   const { pathname } = useLocation();
   const [scrollY, setScrollY] = useState();
 
@@ -41,28 +43,53 @@ const Navbar = () => {
   const NavbarMenus = (
     <>
       <li>
-        <NavLink className="uppercase" to="/">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white uppercase bg-primary" : ""
+          }
+          to="/"
+        >
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink className="uppercase" to="/shop">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white uppercase bg-primary" : ""
+          }
+          to="/shop"
+        >
           Shop
         </NavLink>
       </li>
       <li>
-        <NavLink className="uppercase" to="/blogs">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white uppercase bg-primary" : ""
+          }
+          to="/blogs"
+        >
           Blogs
         </NavLink>
       </li>
       <li>
-        <NavLink className="uppercase" to="/teamMembers">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white uppercase bg-primary" : ""
+          }
+          to="/teamMembers"
+        >
           Team
         </NavLink>
       </li>
 
       <li>
-        <NavLink className="uppercase" to="/contact">
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white uppercase rounded-md bg-primary" : ""
+          }
+          to="/contact"
+        >
           Contact
         </NavLink>
       </li>
@@ -72,8 +99,8 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 w-full z-50">
       <div
-        className={`drawer-content flex flex-col bg-base-200 ${
-          scrollY > 100 && "duration-500 shadow-md"
+        className={`drawer-content flex flex-col bg-base-100 shadow-md ${
+          scrollY > 100 && "duration-500"
         }`}
         style={
           pathname.includes("dashboard")
@@ -159,7 +186,9 @@ const Navbar = () => {
                   </div>
                   <div className="text-center mb-4">
                     <h2 className="font-semibold text-lg">
-                      {auth?.currentUser?.displayName}
+                      {userInfo?.displayName
+                        ? userInfo?.displayName
+                        : auth?.currentUser?.displayName}
                     </h2>
 
                     <Link to="/dashboard/profile">

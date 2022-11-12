@@ -1,7 +1,9 @@
 import React from "react";
 import Fade from "react-reveal/Fade";
 import TItle from "../../../components/Title/Title";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 const OrderStep = () => {
+  useScrollToTop();
   return (
     <section className="orderStep py-8 px-6 md:px-0">
       <TItle

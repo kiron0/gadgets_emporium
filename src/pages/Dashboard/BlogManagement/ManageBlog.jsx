@@ -65,7 +65,7 @@ const ManageBlog = () => {
           <table className="table w-full">
             <thead>
               <tr>
-                <th></th>
+                <th>No</th>
                 <th>Title</th>
                 <th>Category</th>
                 <th>Views</th>

@@ -8,9 +8,11 @@ import useTitle from "../../hooks/useTitle";
 import CardBlog from "./CardBlog";
 import useBlog from "../../hooks/useBlog";
 import { BASE_API } from "../../config";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 const Blogs = () => {
   useTitle("BLogs");
+  useScrollToTop();
   const [blogs, loading, setBlogs] = useBlog();
 
   if (!loading) return <Loader />;

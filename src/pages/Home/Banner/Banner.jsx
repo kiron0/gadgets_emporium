@@ -3,18 +3,20 @@ import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import { InitializeContext } from "../../../App";
 import bannerImg from "../../../assets/banner.jpg";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 
 const Banner = () => {
+  useScrollToTop();
   const { appName } = useContext(InitializeContext);
   return (
     <section
-      className="bg-base-200 body-font py-40"
+      className="bg-base-100 body-font py-40"
       style={{ clipPath: `ellipse(300% 100% at 210.5% 0%)` }}
     >
-      <div className="hero pb-80 md:pb-40 bg-base-200">
+      <div className="hero pb-80 md:pb-40 bg-base-100">
         <div className="hero-content flex-col justify-between lg:flex-row-reverse">
           <Fade right distance="20px">
-            <div className="w-full lg:w-1/2 rounded shadow-2xl overflow-hidden lg:ml-6">
+            <div className="w-full lg:w-1/2 rounded overflow-hidden lg:ml-6">
               <div className="outline-none h-full">
                 <img
                   src={bannerImg}

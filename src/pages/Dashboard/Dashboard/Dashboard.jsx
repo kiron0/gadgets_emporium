@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineFire } from "react-icons/ai";
-import { HiOutlineViewGrid } from "react-icons/hi";
+import { BsGrid } from "react-icons/bs";
 import { MdOutlineWavingHand } from "react-icons/md";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -11,12 +11,14 @@ import useTitle from "../../../hooks/useTitle";
 import auth from "../../../auth/Firebase/Firebase.init";
 import useAdmin from "../../../hooks/useAdmin";
 import { InitializeContext } from "../../../App";
+import useUserInfo from "../../../hooks/useUserInfo";
 
 const Dashboard = () => {
   useTitle("Dashboard");
-  const { image, appName, theme } = useContext(InitializeContext);
+  const { image, appName } = useContext(InitializeContext);
   const [user, isLoading] = useAuthState(auth);
   const [admin, adminLoading] = useAdmin(user);
+  const [userInfo] = useUserInfo(user);
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
@@ -40,15 +42,9 @@ const Dashboard = () => {
         <div className="header z-50 sticky top-0 flex justify-between items-center bg-base-100 p-4 py-3 rounded shadow-md">
           <label
             htmlFor="dashboard-sidebar"
-            className="btn bg-base-100 duration-300 hover:text-white drawer-button lg:hidden "
+            className="btn bg-base-100 duration-500 drawer-button lg:hidden text-black hover:text-white"
           >
-            <HiOutlineViewGrid
-              className={
-                theme === "night" || theme === "dark" || theme === "black"
-                  ? "text-2xl text-white"
-                  : "text-2xl text-black"
-              }
-            />
+            <BsGrid className="text-2xl" />
           </label>
           <div className="flex items-center gap-1">
             <h1 className="text-lg lg:text-2xl md:text-2xl font-semibold hidden md:flex">
@@ -106,7 +102,9 @@ const Dashboard = () => {
                 <span className="font-semibold">Hello,</span>
                 <span className="flex justify-center items-center gap-1 font-semibold">
                   <h2 className="text-success">
-                    {auth?.currentUser?.displayName}
+                    {userInfo?.displayName
+                      ? userInfo?.displayName
+                      : auth?.currentUser?.displayName}
                   </h2>
                   <MdOutlineWavingHand />
                 </span>
@@ -184,8 +182,24 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li className="py-2">
-                <NavLink to="/dashboard/addReview">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-white bg-primary" : ""
+                  }
+                  to="/dashboard/addReview"
+                >
                   <i className="bx bxs-star-half text-xl"></i> Add a review
+                </NavLink>
+              </li>
+              <li className="py-2">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-white bg-primary" : ""
+                  }
+                  to="/dashboard/featureRequest"
+                >
+                  <i className="bx bx-recycle text-xl"></i> Feature Request &
+                  Bugs
                 </NavLink>
               </li>
               <li className="py-2">

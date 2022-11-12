@@ -59,7 +59,7 @@ export default function Setting({ appChangeRefetch }) {
   return (
     <>
       <div>
-        <div className="p-5 my-4 bg-white font-poppins">
+        <div className="p-5 my-4 bg-base-100 font-poppins">
           <h3 className="text-2xl font-bold mb-3">Settings</h3>
 
           <div className="settings-content">

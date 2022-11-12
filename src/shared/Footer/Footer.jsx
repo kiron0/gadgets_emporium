@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import ssl from "../../assets/ssl.png";
 import app from "../../assets/app.png";
 import { InitializeContext } from "../../App";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 const Footer = () => {
+  useScrollToTop();
   const { appName } = useContext(InitializeContext);
   return (
     <div

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 const GetInTouch = () => {
+  useScrollToTop();
   const [error, setError] = useState("");
   const handleGetInTouchSubmit = (event) => {
     event.preventDefault();

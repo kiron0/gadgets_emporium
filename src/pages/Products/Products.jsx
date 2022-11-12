@@ -8,8 +8,10 @@ import Loader from "../../components/Loader/Loader";
 import Product from "./Product";
 import useProduct from "../../hooks/useProducts";
 import { BASE_API } from "../../config";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 const Products = () => {
+  useScrollToTop();
   useTitle("Shop");
   const [products, loading, setProducts] = useProduct();
   const [searchLoading, setSearchLoading] = useState(false);

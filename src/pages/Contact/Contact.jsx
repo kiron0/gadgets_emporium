@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useScrollToTop from "../../hooks/useScrollToTop";
 import useTitle from "../../hooks/useTitle";
 
 const Contact = () => {
   useTitle("Contact");
+  useScrollToTop();
 
   const handleContactForm = (event) => {
     event.preventDefault();

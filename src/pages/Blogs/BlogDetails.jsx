@@ -4,21 +4,24 @@ import { useQuery } from "react-query";
 import Loader from "../../components/Loader/Loader";
 import { useNavigate, useParams } from "react-router-dom";
 import { BASE_API } from "../../config";
+import useScrollToTop from "../../hooks/useScrollToTop";
+import useTitle from "../../hooks/useTitle";
 
 const BlogDetails = () => {
+  useScrollToTop();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const { data: blog, isLoading } = useQuery("blog", async () => {
-    const res = await fetch(
-      `${BASE_API}/blogs/${id}`
-    );
+    const res = await fetch(`${BASE_API}/blogs/${id}`);
     const data = await res.json();
     return data;
   });
 
+  useTitle(blog?.title);
+
   if (isLoading) {
-    return <Loader></Loader>;
+    return <Loader />;
   }
   return (
     <div className="blog-details py-28 h-screen">

@@ -6,8 +6,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../auth/Firebase/Firebase.init";
 import useAdmin from "../../../hooks/useAdmin";
 import { BASE_API } from "../../../config";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 
 const Products = () => {
+  useScrollToTop();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const [admin] = useAdmin(user);
@@ -31,7 +33,7 @@ const Products = () => {
   }
 
   return (
-    <div className="py-28 lg:px-12">
+    <div className="md:py-28 lg:px-12">
       <TItle
         title="Our Awesome Products"
         subTitle="What Products we can provide?"

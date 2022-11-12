@@ -41,6 +41,7 @@ import Setting from "./pages/Dashboard/Setting/Setting";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { BASE_API } from "./config";
+import FeatureRequest from "./pages/Dashboard/FeatureRequest/FeatureRequest";
 
 export const InitializeContext = createContext(null);
 
@@ -62,12 +63,7 @@ function App() {
   }, []);
 
   const { data, refetch } = useQuery("appName", async () => {
-    const res = await axios.get(`${BASE_API}/app/appName`, {
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
+    const res = await axios.get(`${BASE_API}/app/appName`);
     return res?.data;
   });
 
@@ -116,6 +112,14 @@ function App() {
               element={
                 <RequireAuth>
                   <PaymentHistory />
+                </RequireAuth>
+              }
+            ></Route>
+            <Route
+              path="featureRequest"
+              element={
+                <RequireAuth>
+                  <FeatureRequest />
                 </RequireAuth>
               }
             ></Route>

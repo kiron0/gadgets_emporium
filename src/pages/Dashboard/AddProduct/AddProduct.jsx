@@ -86,88 +86,121 @@ const AddProduct = () => {
         action=""
         className="shadow rounded bg-base-100 p-5 md:p-10"
       >
-        <div className="my-2">
-          <label htmlFor="name" className="my-2">
-            Product Name
-          </label>
-          <input
-            type="text"
-            placeholder="Product Name"
-            className="input input-bordered w-full"
-            {...register("productName", { required: true })}
-          />
-          {errors.productName?.type === "required" && (
-            <span className="text-error">Product name is required</span>
-          )}
-        </div>
-        <div className="flex flex-col md:flex-row items-center gap-3 w-full">
-          <div className="my-2 w-full">
-            <label htmlFor="availableProduct" className="my-2">
-              Available Product Quantity
-            </label>
-            <input
-              type="number"
-              placeholder="Available Product Quantity"
-              className="input input-bordered w-full"
-              id="availableProduct"
-              {...register("availableProductQty", { required: true })}
-            />
-            {errors.availableProductQty?.type === "required" && (
-              <span className="text-error">
-                Available Product Quantity is required
-              </span>
-            )}
+        <div className="name border rounded p-3 relative">
+          <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+            <h3 className="text-xs font-poppins select-none">Product Name</h3>
           </div>
-          <div className="my-2 w-full">
-            <label htmlFor="maximum" className="my-2">
-              Maximum Product Quantity
-            </label>
+          <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+            <div className="icon">
+              <i className="bx bxs-hot"></i>
+            </div>
             <input
-              type="number"
-              placeholder="Maximum Product Quantity"
-              className="input input-bordered w-full"
-              {...register("maximumOrderQty", { required: true })}
+              type="text"
+              placeholder="Product Name"
+              className="input focus:outline-none w-full max-w-md"
+              {...register("productName", { required: true })}
             />
-            {errors.maximumOrderQty?.type === "required" && (
-              <span className="text-error">
-                Maximum Order Quantity is required
-              </span>
-            )}
-          </div>
-          <div className="my-2 w-full">
-            <label htmlFor="name" className="my-2">
-              Product Per Price
-            </label>
-            <input
-              type="number"
-              placeholder="Product Per Price"
-              className="input input-bordered w-full"
-              {...register("price", { required: true })}
-            />
-            {errors.price?.type === "required" && (
-              <span className="text-error">Price Field is required</span>
+            {errors.productName?.type === "required" && (
+              <span className="text-error">Product name is required</span>
             )}
           </div>
         </div>
-        <div className="my-2">
-          <label htmlFor="name" className="my-2">
-            Product Description
-          </label>
-          <textarea
-            name=""
-            id="desc"
-            className="textarea textarea-bordered w-full my-1"
-            cols="30"
-            placeholder="Product Description"
-            rows="2"
-            {...register("productDescription", { required: true })}
-            style={{ resize: "none", height: "6rem" }}
-          ></textarea>
-          {errors.productDescription?.type === "required" && (
-            <span className="text-error">
-              Product Description Field is required
-            </span>
-          )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 w-full">
+          <div className="name border rounded p-3 relative mt-6">
+            <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+              <h3 className="text-xs font-poppins select-none">
+                Available Product Quantity
+              </h3>
+            </div>
+            <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+              <div className="icon">
+                <i className="bx bxs-hot"></i>
+              </div>
+              <input
+                type="number"
+                placeholder="Available Product Quantity"
+                className="input focus:outline-none w-full"
+                id="availableProduct"
+                {...register("availableProductQty", { required: true })}
+              />
+              {errors.availableProductQty?.type === "required" && (
+                <span className="text-error">
+                  Available Product Quantity is required
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="name border rounded p-3 relative mt-6">
+            <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+              <h3 className="text-xs font-poppins select-none">
+                Maximum Product Quantity
+              </h3>
+            </div>
+            <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+              <div className="icon">
+                <i className="bx bxs-hot"></i>
+              </div>
+              <input
+                type="number"
+                placeholder="Maximum Product Quantity"
+                className="input focus:outline-none w-full"
+                {...register("maximumOrderQty", { required: true })}
+              />
+              {errors.maximumOrderQty?.type === "required" && (
+                <span className="text-error">
+                  Maximum Order Quantity is required
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="name border rounded p-3 relative mt-6">
+            <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+              <h3 className="text-xs font-poppins select-none">
+                Product Per Price
+              </h3>
+            </div>
+            <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+              <div className="icon">
+                <i className="bx bxs-hot"></i>
+              </div>
+              <input
+                type="number"
+                placeholder="Product Per Price"
+                className="input focus:outline-none w-full"
+                {...register("price", { required: true })}
+              />
+              {errors.price?.type === "required" && (
+                <span className="text-error">Price Field is required</span>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="name border rounded p-3 relative mt-6">
+          <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+            <h3 className="text-xs font-poppins select-none">
+              Product Description
+            </h3>
+          </div>
+          <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+            <div className="icon">
+              <i className="bx bxs-hot"></i>
+            </div>
+            <textarea
+              name=""
+              id="desc"
+              className="textarea focus:outline-none w-full my-1"
+              cols="30"
+              placeholder="Product Description"
+              rows="2"
+              {...register("productDescription", { required: true })}
+              style={{ resize: "none", height: "6rem" }}
+            ></textarea>
+            {errors.productDescription?.type === "required" && (
+              <span className="text-error">
+                Product Description Field is required
+              </span>
+            )}
+          </div>
         </div>
         <div>
           <label htmlFor="file" className="my-2 block">
@@ -181,22 +214,46 @@ const AddProduct = () => {
             </button>
           </label>
           {isFile ? (
-            <input
-              type="url"
-              name="file"
-              className="input input-bordered w-full"
-              placeholder="Put Your Image Link"
-              id="file"
-              {...register("imageUrl", { required: true })}
-            />
+            <div className="name border rounded p-3 relative mt-6">
+              <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+                <h3 className="text-xs font-poppins select-none">
+                  Put Your Image Link
+                </h3>
+              </div>
+              <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+                <div className="icon">
+                  <i className="bx bxs-hot"></i>
+                </div>
+                <input
+                  type="url"
+                  name="file"
+                  className="input focus:outline-none w-full"
+                  placeholder="Put Your Image Link"
+                  id="file"
+                  {...register("imageUrl", { required: true })}
+                />
+              </div>
+            </div>
           ) : (
-            <input
-              type="file"
-              name="file"
-              className="block border p-2 w-full rounded"
-              id="file"
-              {...register("productImage", { required: true })}
-            />
+            <div className="name border rounded p-3 relative mt-6">
+              <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+                <h3 className="text-xs font-poppins select-none">
+                  Choose Your Image
+                </h3>
+              </div>
+              <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+                <div className="icon">
+                  <i className="bx bxs-hot"></i>
+                </div>
+                <input
+                  type="file"
+                  name="file"
+                  className="file-input file-input-ghost focus:outline-none w-full rounded-lg"
+                  id="file"
+                  {...register("productImage", { required: true })}
+                />
+              </div>
+            </div>
           )}
 
           {errors.productImage?.type === "required" ||
@@ -211,7 +268,7 @@ const AddProduct = () => {
             className="btn btn-primary text-white"
             disabled={!loading && true}
           >
-            {!loading ? "Sending Product..." : "Save Product"}
+            {!loading ? "Adding Product..." : "Add Product"}
           </button>
         </div>
       </form>

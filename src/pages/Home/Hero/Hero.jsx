@@ -1,7 +1,9 @@
 import React from "react";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 import "./Hero.css";
 
 const Hero = () => {
+  useScrollToTop();
   return (
     <div className="mt-[-18rem] lg:mt-[-10rem]">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto px-4 lg:px-32">

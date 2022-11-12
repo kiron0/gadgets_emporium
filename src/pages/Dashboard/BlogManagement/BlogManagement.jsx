@@ -9,14 +9,14 @@ const BlogManagement = () => {
 
   return (
     <div>
-      <div className="title text-center py-10">
+      <div className="title text-center py-10 flex flex-col">
         <h3 className="text-3xl font-semibold">Blog Management</h3>
         <span className="text-sm">Here you can manage your own blogs</span>
         <div className="btn-group justify-center mt-5">
           <NavLink
             to="/dashboard/management-blog/add-blog"
             className={`btn btn-outline btn-primary  ${
-              path.includes("add-blog") ? "btn-active" : " "
+              path.includes("add-blog") ? "btn-active text-white" : " "
             }`}
           >
             Add Blog
@@ -24,7 +24,7 @@ const BlogManagement = () => {
           <NavLink
             to="/dashboard/management-blog/manageBlogs"
             className={`btn btn-outline btn-primary ${
-              path.includes("manageBlogs") ? "btn-active" : " "
+              path.includes("manageBlogs") ? "btn-active text-white" : " "
             }`}
           >
             Blog Management

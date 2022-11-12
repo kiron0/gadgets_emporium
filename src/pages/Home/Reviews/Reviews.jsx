@@ -5,7 +5,9 @@ import TItle from "../../../components/Title/Title";
 import CardReview from "./CardReview";
 import Loader from "../../../components/Loader/Loader";
 import { BASE_API } from "../../../config";
+import useScrollToTop from "../../../hooks/useScrollToTop";
 const Reviews = () => {
+  useScrollToTop();
   var settings = {
     dots: true,
     infinite: false,
