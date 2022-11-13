@@ -10,10 +10,10 @@ const OrderStep = () => {
         title="Order Step"
         subTitle=" Here is the order step you have to do for get order."
       />
-      <div className="container px-5 py-24 mx-auto flex flex-wrap">
+      <div className="container px-5 md:py-24 mx-auto flex flex-wrap">
         <Fade bottom distance="30px">
           <div className="flex flex-wrap w-full">
-            <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
+            <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6 order-2 md:order-1">
               <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                   <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
@@ -160,7 +160,7 @@ const OrderStep = () => {
               </div>
             </div>
             <img
-              className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12"
+              className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg order-1 md:order-2"
               src="https://img.freepik.com/free-vector/shop-cart-product-screen-application-search-payment-app_126523-2945.jpg?w=900&t=st=1655329216~exp=1655329816~hmac=7170f742c105b41d5b2dabfdc2e23e092b3e9cfa5d125c998c5868bca57f88b3"
               alt="step"
             />

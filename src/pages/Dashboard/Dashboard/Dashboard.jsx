@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineFire } from "react-icons/ai";
 import { BsGrid } from "react-icons/bs";
@@ -12,6 +12,7 @@ import auth from "../../../auth/Firebase/Firebase.init";
 import useAdmin from "../../../hooks/useAdmin";
 import { InitializeContext } from "../../../App";
 import useUserInfo from "../../../hooks/useUserInfo";
+import { BsBell, BsBellSlash } from "react-icons/bs";
 
 const Dashboard = () => {
   useTitle("Dashboard");
@@ -19,6 +20,12 @@ const Dashboard = () => {
   const [user, isLoading] = useAuthState(auth);
   const [admin, adminLoading] = useAdmin(user);
   const [userInfo] = useUserInfo(user);
+
+  const [notificationCount, setNotificationCount] = useState(0);
+  const [reports, setReports] = useState(0);
+  const [questions, setQuestions] = useState(0);
+  const [reviews, setReviews] = useState(0);
+
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
@@ -60,6 +67,152 @@ const Dashboard = () => {
               {admin ? "Admin" : "Customer"} Panel
             </h1>
           </div>
+
+          {/* sdfhdgh dg */}
+
+          <div className="dropdown dropdown-end">
+            {/* Notification Button */}
+            {admin && (
+              <label tabIndex={0} className="btn btn-ghost btn-circle absolute -right-16 -top-6 lg:left-[25rem]">
+                <div className="indicator">
+                  <span className="text-xl">
+                    <BsBell />
+                  </span>
+                  {notificationCount > 0 && (
+                    <span className="badge badge-sm indicator-item badge-success text-white">
+                      {notificationCount > 9 ? "+9" : notificationCount || 0}
+                    </span>
+                  )}
+                </div>
+              </label>
+            )}
+
+            <div
+              tabIndex={0}
+              className="mt-3 card card-compact dropdown-content sm:w-96 p-5 bg-base-100 shadow rounded ml-72"
+            >
+              <div className="notification-list flex flex-col gap-2">
+                {notificationCount > 0 ? (
+                  <>
+                    {reports?.length > 0 && (
+                      <>
+                        <div>
+                          <span className="my-2 text-sm block">Reports</span>
+                          {reports?.slice(0, 2).map((report) => (
+                            <div
+                              key={report?._id}
+                              className="notification-item flex items-center mb-2 gap-2 bg-gray-100 p-3 rounded"
+                            >
+                              <span className="text-sm">
+                                <BsBell />
+                              </span>
+                              <span className="text-sm text-slate-400 flex  gap-2">
+                                Someone has report your house{" "}
+                                <Link
+                                  to={`/dashboard/houses/reports/${report?.house}`}
+                                  className="text-success underline"
+                                >
+                                  view
+                                </Link>
+                              </span>
+                            </div>
+                          ))}
+                          {reports?.length > 2 && (
+                            <span className="text-xs text-success">
+                              2+ more reports
+                            </span>
+                          )}
+                        </div>
+                      </>
+                    )}
+                    {questions?.length > 0 && (
+                      <>
+                        <div>
+                          <small className="my-2 block">Questions</small>
+                          {questions?.slice(0, 2).map((question) => (
+                            <div
+                              key={question?._id}
+                              className="notification-item flex mb-2 items-center gap-2 bg-gray-100 p-2 rounded"
+                            >
+                              <span className="text-sm">
+                                <BsBell />
+                              </span>
+                              <span className="text-sm text-slate-400 flex  gap-2">
+                                Someone has asked question for house{" "}
+                                <Link
+                                  to={`/dashboard/houses/questions/${question?.house}`}
+                                  className="text-success underline"
+                                >
+                                  view
+                                </Link>
+                              </span>
+                            </div>
+                          ))}{" "}
+                          {questions?.length > 2 && (
+                            <span className="text-xs text-success">
+                              2+ more questions
+                            </span>
+                          )}
+                        </div>
+                      </>
+                    )}
+                    {reviews?.length > 0 && (
+                      <>
+                        <div>
+                          <small className="my-2 text-gray-600 block">
+                            Reviews notifications
+                          </small>
+                          {reviews?.slice(0, 2).map((review) => (
+                            <div
+                              key={review?._id}
+                              className="notification-item flex items-center gap-2 mb-2 bg-gray-100 p-2 rounded"
+                            >
+                              <span className="text-sm">
+                                <BsBell />
+                              </span>
+                              <span className="text-sm text-slate-400 flex  gap-2">
+                                Someone has reviewed for house{" "}
+                                <Link
+                                  to={`/dashboard/houses/reviews/${review?.house}`}
+                                  className="text-success underline"
+                                >
+                                  view
+                                </Link>
+                              </span>
+                            </div>
+                          ))}{" "}
+                          {reviews?.length > 2 && (
+                            <span className="text-xs text-success">
+                              2+ more reviews
+                            </span>
+                          )}
+                        </div>
+                      </>
+                    )}
+
+                    <span
+                      onClick={() => setNotificationCount(0)}
+                      className="text-error mt-3 block font-poppins text-xs underline cursor-pointer"
+                    >
+                      clear notification
+                    </span>
+                  </>
+                ) : (
+                  <div className="py-5 grid place-items-center text-center">
+                    <div className="text-center flex flex-col items-center gap-4">
+                      <BsBellSlash className="text-2xl" />
+                      <h4 className="text-xl font-poppins text-gray-500">
+                        No Notifications
+                      </h4>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* dgdzghjzdf */}
+
           <div className="dropdown dropdown-end">
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
               <div
@@ -191,7 +344,7 @@ const Dashboard = () => {
                   <i className="bx bxs-star-half text-xl"></i> Add a review
                 </NavLink>
               </li>
-              <li className="py-2">
+              {/* <li className="py-2">
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "text-white bg-primary" : ""
@@ -201,7 +354,7 @@ const Dashboard = () => {
                   <i className="bx bx-recycle text-xl"></i> Feature Request &
                   Bugs
                 </NavLink>
-              </li>
+              </li> */}
               <li className="py-2">
                 <NavLink
                   className={({ isActive }) =>

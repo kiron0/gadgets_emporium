@@ -8,7 +8,7 @@ const useCarts = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch(
-        `${BASE_API}/carts?uid=${auth?.currentUser?.uid}`,
+        `${BASE_API}/products/carts?uid=${auth?.currentUser?.uid}`,
         {
           headers: {
             "content-type": "application/json",

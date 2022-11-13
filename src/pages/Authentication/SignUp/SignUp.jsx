@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Fade from "react-reveal/Fade";
 import {
   useCreateUserWithEmailAndPassword,
@@ -18,6 +18,7 @@ import useTitle from "../../../hooks/useTitle";
 const SignUp = () => {
   useScrollToTop();
   useTitle("Sign Up");
+  const [showPassword, setShowPassword] = useState(false);
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const {
     register,
@@ -131,7 +132,7 @@ const SignUp = () => {
                             <span className="label-text">Password</span>
                           </label>
                           <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             placeholder="Password"
                             className="input input-bordered w-full max-w-sm"
                             {...register("password", {
@@ -145,6 +146,16 @@ const SignUp = () => {
                               },
                             })}
                           />
+                          <span
+                            className="absolute right-20 justify-center items-center mt-12 text-xl cursor-pointer z-50"
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? (
+                              <i className="bx bx-show-alt text-black"></i>
+                            ) : (
+                              <i className="bx bx-hide text-black"></i>
+                            )}
+                          </span>
                           <label className="label">
                             {errors.password?.type === "required" && (
                               <span className="label-text-alt text-red-500">

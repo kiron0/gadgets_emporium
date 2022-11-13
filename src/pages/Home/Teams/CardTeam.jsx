@@ -6,7 +6,7 @@ const CardTeam = ({ image, name, designation }) => {
   return (
     <div className="card bg-base-100 shadow-lg">
       <figure className="px-10 pt-10 relative">
-        <img src={image} alt={name} className="rounded-xl" />
+        <img src={image} alt="profile" className="rounded-xl" />
       </figure>
       <div className="card-body items-center text-center">
         <h2 className="card-title mb-0 pb-0">{name}</h2>

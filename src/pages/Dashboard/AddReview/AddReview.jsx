@@ -5,11 +5,15 @@ import { BASE_API } from "../../../config";
 import useTitle from "../../../hooks/useTitle";
 import auth from "../../../auth/Firebase/Firebase.init";
 import useScrollToTop from "../../../hooks/useScrollToTop";
+import { useAuthState } from "react-firebase-hooks/auth";
+import useUserInfo from "../../../hooks/useUserInfo";
+import Loading from "../../../components/Loading/Loading";
 
 const AddReview = () => {
   useTitle("Add Review");
   useScrollToTop();
-
+  const [user, isLoading] = useAuthState(auth);
+  const [userInfo] = useUserInfo(user);
   const [rating, setRating] = useState(0);
 
   const handleAddReview = async (e) => {
@@ -22,7 +26,7 @@ const AddReview = () => {
       author: {
         name: auth?.currentUser?.displayName,
         uid: auth?.currentUser?.uid,
-        photo: auth?.currentUser?.photoURL,
+        photo: userInfo?.image || auth?.currentUser?.photoURL,
       },
     };
     if (rating && reviewText) {
@@ -69,6 +73,10 @@ const AddReview = () => {
     document.getElementById("reviewTextLength").innerText =
       100 - reviewTextLength + " characters left";
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="px-6 py-6 w-full lg:w-[50%] mx-auto lg:mx-0">

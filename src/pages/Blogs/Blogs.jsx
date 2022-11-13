@@ -11,7 +11,7 @@ import { BASE_API } from "../../config";
 import useScrollToTop from "../../hooks/useScrollToTop";
 
 const Blogs = () => {
-  useTitle("BLogs");
+  useTitle("Blogs");
   useScrollToTop();
   const [blogs, loading, setBlogs] = useBlog();
 

@@ -17,10 +17,13 @@ import Loader from "../../../components/Loader/Loader";
 import useScrollToTop from "../../../hooks/useScrollToTop";
 import ImageChangeModal from "./ImageChangeModal";
 import { PulseLoader } from "react-spinners";
+import useUserInfo from "../../../hooks/useUserInfo";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const MyProfile = () => {
-  useTitle("Profile");
   useScrollToTop();
+  useTitle("My Profile");
+  const [user] = useAuthState(auth);
   const [editProfile, setEditProfile] = useState(null);
   // const upload_api_key = `e1a6a4f77bc884f9b46b0d06d86c05e5`;
   const {
@@ -60,7 +63,7 @@ const MyProfile = () => {
   };
 
   const {
-    data: result,
+    data,
     isLoading,
     refetch,
   } = useQuery(["profileData", auth?.currentUser?.uid], () =>
@@ -71,12 +74,7 @@ const MyProfile = () => {
     }).then((res) => res.json())
   );
 
-  if (isLoading)
-    return (
-      <div className="md:p-80">
-        <Loader />
-      </div>
-    );
+  const [userInfo] = useUserInfo();
 
   const {
     image,
@@ -88,7 +86,14 @@ const MyProfile = () => {
     linkedin,
     facebook,
     displayName,
-  } = result[0];
+  } = userInfo;
+
+  if (isLoading)
+    return (
+      <div className="md:p-80">
+        <Loader />
+      </div>
+    );
 
   return (
     <>
@@ -259,7 +264,7 @@ const MyProfile = () => {
                         <h3 className="text-xs font-poppins">Put your email</h3>
                       </div>
                       <div
-                        className="input-group flex items-center my-2 border p-3 rounded-md mt-2 overflow-hidden
+                        className="input-group flex items-center my-2 border p-3 rounded-md mt-2
                       bg-base-200"
                       >
                         <div className="icon">
@@ -267,11 +272,12 @@ const MyProfile = () => {
                         </div>
                         <input
                           type="text"
-                          placeholder="Phone Number"
+                          placeholder="Email"
                           defaultValue={email}
                           required
                           className="input focus:outline-none w-full bg-base-200"
                           readOnly
+                          style={{ cursor: "not-allowed", userSelect: "none" }}
                         />
                       </div>
                     </div>

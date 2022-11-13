@@ -23,7 +23,7 @@ const AllUsers = () => {
     }).then((res) => res.json())
   );
   if (isLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
   return (
     <div className="lg:px-10 py-0 md:py-8 bg-base-100 rounded-md pb-12">

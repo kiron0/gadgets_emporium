@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Fade from "react-reveal/Fade";
 import {
   useSignInWithEmailAndPassword,
@@ -13,10 +13,13 @@ import auth from "../../../auth/Firebase/Firebase.init";
 import useToken from "../../../hooks/useToken";
 import useScrollToTop from "../../../hooks/useScrollToTop";
 import useTitle from "../../../hooks/useTitle";
+import { InitializeContext } from "../../../App";
 
 const Login = () => {
   useScrollToTop();
   useTitle("Login");
+  const { appName } = useContext(InitializeContext);
+  const [showPassword, setShowPassword] = useState(false);
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const {
     register,
@@ -36,14 +39,17 @@ const Login = () => {
   useEffect(() => {
     if (token) {
       navigate(from, { replace: true });
-      toast.success(`Welcome Back, ${auth?.currentUser?.displayName}`, {
-        autoClose: 4000,
-      });
+      toast.success(
+        `Welcome Back to ${appName}, ${auth?.currentUser?.displayName}`,
+        {
+          autoClose: 4000,
+        }
+      );
     }
-  }, [token, navigate, from]);
+  }, [token, navigate, from, appName]);
 
   if (loading || gLoading) {
-    return <Loading></Loading>;
+    return <Loading />;
   }
 
   if (error || gError) {
@@ -110,7 +116,7 @@ const Login = () => {
                             <span className="label-text">Password</span>
                           </label>
                           <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             placeholder="Password"
                             className="input input-bordered w-full max-w-sm"
                             {...register("password", {
@@ -124,6 +130,16 @@ const Login = () => {
                               },
                             })}
                           />
+                          <span
+                            className="absolute right-12 justify-center items-center mt-12 text-xl cursor-pointer z-50"
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? (
+                              <i className="bx bx-show-alt text-black"></i>
+                            ) : (
+                              <i className="bx bx-hide text-black"></i>
+                            )}
+                          </span>
                           <Link
                             to="/resetPassword"
                             className="text-xs text-secondary py-2 hover:text-primary font-semibold"
