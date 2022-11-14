@@ -8303,6 +8303,11 @@ react-scripts@5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-simple-star-rating@^5.1.6:
+  version "5.1.6"
+  resolved "https://registry.yarnpkg.com/react-simple-star-rating/-/react-simple-star-rating-5.1.6.tgz#e395d087f52b4e26ee7d7adb8b4c9dafa12c3b6e"
+  integrity sha512-kRLLqkXRI8qk/9hXlsXviEE9E5gwiIdGyeNToVspbPvm1Asmv6YFNFMG6nr1VtqMajWMWS5PEruy15m+W5W2Iw==
+
 react-slick@^0.29.0:
   version "0.29.0"
   resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.29.0.tgz#0bed5ea42bf75a23d40c0259b828ed27627b51bb"

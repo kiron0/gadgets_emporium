@@ -12,7 +12,7 @@ import { InitializeContext } from "../../App";
 import useUserInfo from "../../hooks/useUserInfo";
 
 const Navbar = () => {
-  const { image, appName } = useContext(InitializeContext);
+  const { appName } = useContext(InitializeContext);
   const [user] = useAuthState(auth);
   const [userInfo] = useUserInfo(user);
   const { pathname } = useLocation();
@@ -86,7 +86,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) =>
-            isActive ? "text-white uppercase rounded-md bg-primary" : ""
+            isActive ? "text-white uppercase bg-primary" : ""
           }
           to="/contact"
         >
@@ -140,7 +140,7 @@ const Navbar = () => {
             {!user && (
               <NavLink
                 to="/login"
-                className="btn flex gap-2 items-center btn-primary"
+                className="btn flex gap-2 items-center btn-primary text-white"
               >
                 <BiLogInCircle /> Login
               </NavLink>
@@ -152,15 +152,14 @@ const Navbar = () => {
                     style={{ display: "grid" }}
                     className="w-8 h-8 lg:w-10 lg:h-10 rounded-full border bg-base-300 grid place-items-center ring ring-primary ring-offset-base-100 ring-offset-2"
                   >
-                    {auth?.currentUser?.photoURL ? (
-                      <img
-                        src={auth?.currentUser?.photoURL}
-                        alt={auth?.currentUser?.displayName.slice(0, 1)}
-                      />
+                    {auth?.currentUser?.photoURL && !userInfo?.image ? (
+                      <img src={auth?.currentUser?.photoURL} alt="profile" />
+                    ) : !auth?.currentUser?.photoURL && userInfo?.image ? (
+                      <img src={userInfo?.image} alt="profile" />
                     ) : (
                       <img
-                        src={image}
-                        alt={auth?.currentUser?.displayName.slice(0, 2)}
+                        src="https://i.ibb.co/xY0rfV4/avatar.jpg"
+                        alt="profile"
                       />
                     )}
                   </div>
@@ -170,17 +169,23 @@ const Navbar = () => {
                   className="mt-3 p-2 shadow-xl menu menu-compact dropdown-content bg-base-100 rounded-box w-60"
                 >
                   <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto my-4 border ring ring-primary ring-offset-base-100 ring-offset-2">
-                    {auth?.currentUser?.photoURL ? (
+                    {auth?.currentUser?.photoURL && !userInfo?.image ? (
                       <img
                         src={auth?.currentUser?.photoURL}
                         alt="profile"
-                        className="w-full h-full rounded-full"
+                        className="w-16 h-16 rounded-full"
+                      />
+                    ) : !auth?.currentUser?.photoURL && userInfo?.image ? (
+                      <img
+                        src={userInfo?.image}
+                        alt="profile"
+                        className="w-16 h-16 rounded-full"
                       />
                     ) : (
                       <img
-                        src={image}
+                        src="https://i.ibb.co/xY0rfV4/avatar.jpg"
                         alt="profile"
-                        className="w-full h-full rounded-full"
+                        className="w-16 h-16 rounded-full"
                       />
                     )}
                   </div>

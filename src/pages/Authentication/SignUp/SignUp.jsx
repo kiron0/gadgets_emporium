@@ -151,9 +151,9 @@ const SignUp = () => {
                             onClick={() => setShowPassword(!showPassword)}
                           >
                             {showPassword ? (
-                              <i className="bx bx-show-alt text-black"></i>
+                              <i className="bx bx-show-alt"></i>
                             ) : (
-                              <i className="bx bx-hide text-black"></i>
+                              <i className="bx bx-hide"></i>
                             )}
                           </span>
                           <label className="label">

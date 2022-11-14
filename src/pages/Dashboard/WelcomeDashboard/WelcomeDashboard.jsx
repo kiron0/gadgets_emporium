@@ -5,7 +5,7 @@ import auth from "../../../auth/Firebase/Firebase.init";
 import welcome from "../../../assets/welcome.png";
 
 const WelcomeDashboard = () => {
-  useTitle("Welcome Dashboard");
+  useTitle("Welcome to");
   const [user] = useAuthState(auth);
   return (
     <div className="p-5 grid place-items-center min-h-[80vh]">

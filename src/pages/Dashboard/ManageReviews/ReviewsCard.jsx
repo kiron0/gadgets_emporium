@@ -6,6 +6,7 @@ import { BASE_API } from "../../../config";
 
 const ReviewsCard = ({ _id, reviewText, author, rating, refetch }) => {
   const [showMore, setShowMore] = useState(false);
+
   const handleReviewsDelete = async (_id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -39,9 +40,9 @@ const ReviewsCard = ({ _id, reviewText, author, rating, refetch }) => {
       <div className="card shadow-xl w-full max-w-lg bg-base-100 p-8  rounded-xl relative">
         <label
           onClick={() => handleReviewsDelete(_id)}
-          className="btn btn-sm btn-circle text-white absolute right-2 top-2"
+          className="btn btn-sm btn-circle btn-error text-white absolute right-2 top-2"
         >
-          ✕
+          <i className="bx bxs-trash-alt"></i>
         </label>
         <svg
           xmlns="http://www.w3.org/2000/svg"

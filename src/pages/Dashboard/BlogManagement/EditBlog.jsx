@@ -12,6 +12,7 @@ const EditBlog = () => {
   const [blogs, loading] = useBlog();
   if (!loading) return <Loader />;
   const findBlog = blogs?.find((blog) => blog._id === editId);
+
   const handleUpdateBLog = async (event) => {
     event.preventDefault();
     const title = event.target.title.value.trim();
@@ -45,48 +46,72 @@ const EditBlog = () => {
   };
   return (
     <div className="py-4 my-4">
-      <h3 className="text-2xl font-semibold my-2 ml-4">Update Blogs</h3>
+      <h3 className="text-2xl font-semibold my-2 ml-4">Update Blog</h3>
       <form
         onSubmit={handleUpdateBLog}
-        action=""
         className="shadow px-5 py-10 rounded flex flex-col gap-4"
       >
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            className="input input-bordered w-full"
-            type="text"
-            placeholder="Title"
-            id="title"
-            required
-            name="title"
-            defaultValue={findBlog?.title}
-          />
+        <div className="name border rounded p-3 relative">
+          <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+            <h3 className="text-xs font-poppins select-none">Blog Title</h3>
+          </div>
+          <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+            <div className="icon">
+              <i className="bx bxs-hot"></i>
+            </div>
+            <input
+              className="input focus:outline-none w-full"
+              type="text"
+              placeholder="Title"
+              id="title"
+              required
+              name="title"
+              defaultValue={findBlog?.title}
+            />
+          </div>
         </div>
 
-        <div>
-          <label htmlFor="category">Category</label>
-          <input
-            className="input input-bordered w-full"
-            type="text"
-            placeholder="Category"
-            name="category"
-            id="category"
-            defaultValue={findBlog?.category}
-            required
-          />
+        <div className="name border rounded p-3 relative">
+          <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+            <h3 className="text-xs font-poppins select-none">Blog Category</h3>
+          </div>
+          <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+            <div className="icon">
+              <i className="bx bxs-hot"></i>
+            </div>
+            <input
+              className="input focus:outline-none w-full"
+              type="text"
+              placeholder="Category"
+              name="category"
+              id="category"
+              defaultValue={findBlog?.category}
+              required
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            name="description"
-            id="description"
-            cols="30"
-            className="textarea textarea-bordered w-full"
-            rows="5"
-            required
-            defaultValue={findBlog?.description}
-          ></textarea>
+
+        <div className="name border rounded p-3 relative">
+          <div className="name-title absolute -top-4 bg-base-100 border rounded p-1">
+            <h3 className="text-xs font-poppins select-none">
+              Blog Description
+            </h3>
+          </div>
+          <div className="input-group flex items-center my-2 border p-3 rounded-md mt-2 w-full overflow-hidden">
+            <div className="icon">
+              <i className="bx bxs-hot"></i>
+            </div>
+            <textarea
+              name="description"
+              id="description"
+              placeholder="Description"
+              cols="30"
+              className="textarea focus:outline-none w-full"
+              rows="5"
+              required
+              defaultValue={findBlog?.description}
+            ></textarea>
+          </div>
         </div>
         <div>
           <button className="btn btn-primary my-2">Update</button>

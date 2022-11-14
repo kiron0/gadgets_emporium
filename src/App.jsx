@@ -42,6 +42,8 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { BASE_API } from "./config";
 import FeatureRequest from "./pages/Dashboard/FeatureRequest/FeatureRequest";
+import MyReviews from "./pages/Dashboard/MyReviews/MyReviews";
+import UserReviews from "./pages/Dashboard/MyReviews/UserReviews";
 
 export const InitializeContext = createContext(null);
 
@@ -163,7 +165,11 @@ function App() {
                 </RequireAdmin>
               }
             ></Route>
-            <Route path="addReview" element={<AddReview />}></Route>
+            <Route path="reviews" element={<MyReviews />}>
+              <Route index element={<UserReviews />} />
+              <Route path="my-reviews" element={<UserReviews />} />
+              <Route path="add-review" element={<AddReview />} />
+            </Route>
             <Route
               path="manageOrder"
               element={

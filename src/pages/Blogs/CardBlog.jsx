@@ -5,8 +5,8 @@ const CardBlog = ({ blog }) => {
   const { _id, category, title, description } = blog;
   return (
     <div className="p-4 lg:w-1/3">
-      <div className="h-full bg-base-200 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
-        <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+      <div className="h-full shadow-md bg-base-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
+        <h2 className="tracking-widest text-xs title-font font-medium mb-1">
           {category}
         </h2>
         <h1 className="title-font sm:text-2xl text-xl font-medium mb-3">
