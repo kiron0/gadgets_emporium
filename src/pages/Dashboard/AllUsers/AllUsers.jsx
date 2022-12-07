@@ -40,8 +40,7 @@ const AllUsers = () => {
                 <th>Image</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Make Admin</th>
-                <th>Remove Admin</th>
+                <th>Change User Role</th>
                 <th>Role</th>
                 <th>isLogin</th>
                 <th>Actions</th>

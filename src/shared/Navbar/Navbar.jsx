@@ -166,7 +166,7 @@ const Navbar = () => {
                 </label>
                 <ul
                   tabIndex="0"
-                  className="mt-3 p-2 shadow-xl menu menu-compact dropdown-content bg-base-100 rounded-box w-60"
+                  className="mt-3 p-2 shadow-xl menu menu-compact dropdown-content bg-base-100 rounded-box w-72"
                 >
                   <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto my-4 border ring ring-primary ring-offset-base-100 ring-offset-2">
                     {auth?.currentUser?.photoURL && !userInfo?.image ? (

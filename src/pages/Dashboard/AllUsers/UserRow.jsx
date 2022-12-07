@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { BASE_API } from "../../../config";
 import { InitializeContext } from "../../../App";
 import auth from "../../../auth/Firebase/Firebase.init";
+import avatar from "../../../assets/avatar.jpg";
 
 const UserRow = ({ user, index, refetch }) => {
   const { theme } = useContext(InitializeContext);
@@ -42,76 +43,56 @@ const UserRow = ({ user, index, refetch }) => {
   };
 
   const makeAdmin = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      background: theme === "night" ? "#333" : "#fff",
-      color: theme === "night" ? "#fff" : "#333",
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, make it!",
-    }).then((willAdmin) => {
-      if (willAdmin.isConfirmed) {
-        fetch(`${BASE_API}/user/admin`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => {
-            if (res.status === 403) {
-              toast.error("Failed to Make an admin");
-            }
-            return res.json();
-          })
-          .then((data) => {
-            if (data.modifiedCount > 0) {
-              refetch();
-              toast.success(`${email} is an admin now.`);
-            }
+    fetch(`${BASE_API}/user/admin`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => {
+        if (res.status === 403) {
+          toast.error("Failed to Make an admin");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Success!",
+            text: `${email} is now an admin.`,
+            icon: "success",
           });
-      }
-    });
+        }
+      });
   };
   const removeAdmin = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      background: theme === "night" ? "#333" : "#fff",
-      color: theme === "night" ? "#fff" : "#333",
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, remove it!",
-    }).then((willAdmin) => {
-      if (willAdmin.isConfirmed) {
-        fetch(`${BASE_API}/user/removeAdmin`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => {
-            if (res.status === 403) {
-              toast.error("Failed to Remove an admin");
-            }
-            return res.json();
-          })
-          .then((data) => {
-            if (data.modifiedCount > 0) {
-              refetch();
-              toast.success(`${email} is an user now.`);
-            }
+    fetch(`${BASE_API}/user/removeAdmin`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => {
+        if (res.status === 403) {
+          toast.error("Failed to Remove an admin");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Success!",
+            text: `${email} is user now.`,
+            icon: "success",
           });
-      }
-    });
+        }
+      });
   };
 
   return (
@@ -119,18 +100,18 @@ const UserRow = ({ user, index, refetch }) => {
       <th>{index + 1}</th>
       <td>
         {image ? (
-          <img
-            src={image}
-            alt=""
-            width={60}
-            className="rounded shadow-sm bg-base-300 border p-1"
-          />
+          <a href={image} target="_blank" rel="noreferrer">
+            <img
+              src={image}
+              alt=""
+              className="rounded-full w-[3rem] h-[3rem] shadow-sm bg-base-200 border p-1"
+            />
+          </a>
         ) : (
           <img
-            src="https://placeimg.com/80/80/people"
+            src={avatar}
             alt=""
-            width={60}
-            className="rounded shadow-sm bg-base-300 border p-1"
+            className="rounded-full w-[3rem] h-[3rem] shadow-sm bg-base-200 border p-1"
           />
         )}
       </td>
@@ -141,21 +122,30 @@ const UserRow = ({ user, index, refetch }) => {
       </td>
       <td>{email}</td>
       <td>
-        {role === "admin" ? (
-          ""
+        {auth?.currentUser?.uid === uid ? (
+          <></>
         ) : (
-          <button onClick={makeAdmin} className="btn btn-xs text-white">
-            Make Admin
-          </button>
-        )}
-      </td>
-      <td>
-        {role === "admin" ? (
-          <button onClick={removeAdmin} className="btn btn-xs text-white">
-            Remove Admin
-          </button>
-        ) : (
-          ""
+          <span className="tooltip" data-tip="Change user role">
+            <select
+              className={`select select-bordered w-full max-w-xs ${
+                role === "admin" ? "select-secondary" : "select-info"
+              }`}
+              defaultValue={role === "admin" ? "Admin" : "User"}
+              onChange={(e) => {
+                if (e.target.value === "Admin") {
+                  makeAdmin();
+                } else {
+                  removeAdmin();
+                }
+              }}
+            >
+              <option disabled selected>
+                Select Role
+              </option>
+              <option>User</option>
+              <option>Admin</option>
+            </select>
+          </span>
         )}
       </td>
       <td>
@@ -177,15 +167,19 @@ const UserRow = ({ user, index, refetch }) => {
         )}
       </td>
       <td>
-        <span className="tooltip tooltip-error" data-tip="Delete user data!">
-          <label
-            onClick={() => handleUserDelete(_id)}
-            htmlFor="user-delete-confirm-modal"
-            className="btn btn-sm btn-error text-white"
-          >
-            <i className="bx bxs-trash"></i>
-          </label>
-        </span>
+        {auth?.currentUser?.uid === uid ? (
+          <></>
+        ) : (
+          <span className="tooltip tooltip-error" data-tip="Delete user data!">
+            <label
+              onClick={() => handleUserDelete(_id)}
+              htmlFor="user-delete-confirm-modal"
+              className="btn btn-sm btn-error text-white"
+            >
+              <i className="bx bxs-trash"></i>
+            </label>
+          </span>
+        )}
       </td>
     </tr>
   );
