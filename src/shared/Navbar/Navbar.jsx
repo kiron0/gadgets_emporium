@@ -14,7 +14,7 @@ import useUserInfo from "../../hooks/useUserInfo";
 const Navbar = () => {
   const { appName } = useContext(InitializeContext);
   const [user] = useAuthState(auth);
-  const [userInfo] = useUserInfo(user);
+  const [userInfo] = useUserInfo();
   const { pathname } = useLocation();
   const [scrollY, setScrollY] = useState();
 

@@ -61,7 +61,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setTheme(window.localStorage.getItem("theme"));
+    setTheme(window.localStorage.getItem("theme") || "light");
   }, []);
 
   const { data, refetch } = useQuery("appName", async () => {
@@ -73,141 +73,145 @@ function App() {
 
   return (
     <InitializeContext.Provider value={{ theme, setTheme, image, appName }}>
-      <div data-theme={theme ? theme : "light"} className="bg-base-100">
-        {isLoading ? <LoadingScreen /> : <Navbar />}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/resetPassword" element={<ResetPassword />} />
-          <Route path="/shop" element={<Products />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/blogDetails/:id" element={<BlogDetails />} />
-          <Route
-            path="/dashboard"
-            element={
-              <RequireAuth>
-                <Dashboard />
-              </RequireAuth>
-            }
-          >
-            <Route index element={<WelcomeDashboard />} />
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <div data-theme={theme ? theme : "light"} className="bg-base-100">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signUp" element={<SignUp />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
+            <Route path="/shop" element={<Products />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogDetails/:id" element={<BlogDetails />} />
             <Route
-              path="profile"
+              path="/dashboard"
               element={
                 <RequireAuth>
-                  <MyProfile />
+                  <Dashboard />
                 </RequireAuth>
               }
-            ></Route>
-            <Route
-              path="myOrders"
-              element={
-                <RequireAuth>
-                  <MyOrders />
-                </RequireAuth>
-              }
-            ></Route>
-            <Route
-              path="paymentHistory"
-              element={
-                <RequireAuth>
-                  <PaymentHistory />
-                </RequireAuth>
-              }
-            ></Route>
-            <Route
-              path="featureRequest"
-              element={
-                <RequireAuth>
-                  <FeatureRequest />
-                </RequireAuth>
-              }
-            ></Route>
-            <Route
-              path="manageReviews"
-              element={
-                <RequireAdmin>
-                  <ManageReviews />
-                </RequireAdmin>
-              }
-            ></Route>
-            <Route
-              path="allUsers"
-              element={
-                <RequireAdmin>
-                  <AllUsers />
-                </RequireAdmin>
-              }
-            ></Route>
-            <Route
-              path="setting"
-              element={
-                <RequireAdmin>
-                  <Setting appChangeRefetch={refetch} />
-                </RequireAdmin>
-              }
-            ></Route>
-            <Route
-              path="addProduct"
-              element={
-                <RequireAdmin>
-                  <AddProduct />
-                </RequireAdmin>
-              }
-            ></Route>
-            <Route
-              path="manageProducts"
-              element={
-                <RequireAdmin>
-                  <ManageProducts />
-                </RequireAdmin>
-              }
-            ></Route>
-            <Route path="reviews" element={<MyReviews />}>
-              <Route index element={<UserReviews />} />
-              <Route path="my-reviews" element={<UserReviews />} />
-              <Route path="add-review" element={<AddReview />} />
+            >
+              <Route index element={<WelcomeDashboard />} />
+              <Route
+                path="profile"
+                element={
+                  <RequireAuth>
+                    <MyProfile />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="myOrders"
+                element={
+                  <RequireAuth>
+                    <MyOrders />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="paymentHistory"
+                element={
+                  <RequireAuth>
+                    <PaymentHistory />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="featureRequest"
+                element={
+                  <RequireAuth>
+                    <FeatureRequest />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="manageReviews"
+                element={
+                  <RequireAdmin>
+                    <ManageReviews />
+                  </RequireAdmin>
+                }
+              ></Route>
+              <Route
+                path="allUsers"
+                element={
+                  <RequireAdmin>
+                    <AllUsers />
+                  </RequireAdmin>
+                }
+              ></Route>
+              <Route
+                path="setting"
+                element={
+                  <RequireAdmin>
+                    <Setting appChangeRefetch={refetch} />
+                  </RequireAdmin>
+                }
+              ></Route>
+              <Route
+                path="addProduct"
+                element={
+                  <RequireAdmin>
+                    <AddProduct />
+                  </RequireAdmin>
+                }
+              ></Route>
+              <Route
+                path="manageProducts"
+                element={
+                  <RequireAdmin>
+                    <ManageProducts />
+                  </RequireAdmin>
+                }
+              ></Route>
+              <Route path="reviews" element={<MyReviews />}>
+                <Route index element={<UserReviews />} />
+                <Route path="my-reviews" element={<UserReviews />} />
+                <Route path="add-review" element={<AddReview />} />
+              </Route>
+              <Route
+                path="manageOrder"
+                element={
+                  <RequireAdmin>
+                    <ManageOrder />
+                  </RequireAdmin>
+                }
+              ></Route>
+              <Route
+                path="payment/:paymentId"
+                element={
+                  <RequireAuth>
+                    <Payment />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route path="management-blog" element={<BlogManagement />}>
+                <Route index element={<AddBlog />} />
+                <Route path="add-blog" element={<AddBlog />} />
+                <Route path="manageBlogs" element={<ManageBlog />} />
+                <Route path="edit/:editId" element={<EditBlog />} />
+              </Route>
             </Route>
             <Route
-              path="manageOrder"
-              element={
-                <RequireAdmin>
-                  <ManageOrder />
-                </RequireAdmin>
-              }
-            ></Route>
-            <Route
-              path="payment/:paymentId"
+              path="/purchase/:id"
               element={
                 <RequireAuth>
-                  <Payment />
+                  <ProductDetails />
                 </RequireAuth>
               }
-            ></Route>
-            <Route path="management-blog" element={<BlogManagement />}>
-              <Route index element={<AddBlog />} />
-              <Route path="add-blog" element={<AddBlog />} />
-              <Route path="manageBlogs" element={<ManageBlog />} />
-              <Route path="edit/:editId" element={<EditBlog />} />
-            </Route>
-          </Route>
-          <Route
-            path="/purchase/:id"
-            element={
-              <RequireAuth>
-                <ProductDetails />
-              </RequireAuth>
-            }
-          />
-          <Route path="/teamMembers" element={<Team />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        {isLoading ? null : <ThemeChanger />}
-        <ScrollButton />
-        <Toaster />
-      </div>
+            />
+            <Route path="/teamMembers" element={<Team />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          {isLoading ? null : <ThemeChanger />}
+          <ScrollButton />
+          <Toaster />
+        </div>
+      )}
     </InitializeContext.Provider>
   );
 }

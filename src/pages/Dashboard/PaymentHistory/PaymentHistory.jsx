@@ -61,7 +61,9 @@ const PaymentHistory = () => {
                       <td>{payment?.productInfo?.orderQty} pcs</td>
                       <td>{payment?.transactionId}</td>
                       <td>
-                        <button className="btn btn-xs btn-success">Paid</button>
+                        <button className="btn btn-xs btn-success text-white">
+                          Paid
+                        </button>
                       </td>
                       <td>{payment?.createdAt}</td>
                     </tr>

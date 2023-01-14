@@ -104,14 +104,14 @@ const UserRow = ({ user, index, refetch }) => {
             <img
               src={image}
               alt=""
-              className="rounded-full w-[3rem] h-[3rem] shadow-sm bg-base-200 border p-1"
+              className="rounded-full w-[2.5rem] h-[2.5rem] shadow-sm bg-base-200 border p-1"
             />
           </a>
         ) : (
           <img
             src={avatar}
             alt=""
-            className="rounded-full w-[3rem] h-[3rem] shadow-sm bg-base-200 border p-1"
+            className="rounded-full w-[2.5rem] h-[2.5rem] shadow-sm bg-base-200 border p-1"
           />
         )}
       </td>

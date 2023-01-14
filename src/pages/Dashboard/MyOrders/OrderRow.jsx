@@ -67,7 +67,7 @@ const OrderRow = ({
           className={`btn btn-xs  ${
             shipped
               ? "btn bg-green-400 text-white border-green-400"
-              : "btn-error"
+              : "btn-error text-white"
           }`}
         >
           {paid ? (shipped ? "Delivered" : "Processing") : "Pending"}
@@ -75,16 +75,16 @@ const OrderRow = ({
       </td>
       <td>
         {paid ? (
-          <button className="btn btn-success btn-sm">PAID</button>
+          <button className="btn btn-success btn-sm text-white">PAID</button>
         ) : (
-          <button className="btn btn-accent btn-sm">UNPAID</button>
+          <button className="btn btn-accent btn-sm text-white">UNPAID</button>
         )}
       </td>
       <td>
         <button
           disabled={paid && true}
           onClick={() => navigate(`/dashboard/payment/${_id}`)}
-          className="btn-sm btn btn-primary"
+          className="btn-sm btn btn-primary text-white"
         >
           {paid ? "Paid" : "Pay"} {Number(price) * Number(orderQty)}$
         </button>

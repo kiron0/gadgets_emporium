@@ -31,38 +31,35 @@ const CardReview = ({ reviewText, author, rating }) => {
           )}
         </p>
 
-        <div className="w-12 h-12 rounded-full border font-semibold grid place-items-center bg-base-300">
-          {auth?.currentUser?.photoURL && !author?.photo ? (
-            <img
-              src={auth?.currentUser?.photoURL}
-              alt="profile"
-              className="rounded-full w-full"
-            />
-          ) : !auth?.currentUser?.photoURL && author?.photo ? (
-            <img
-              src={author?.photo}
-              alt="profile"
-              className="rounded-full w-full"
-            />
-          ) : (
-            <img src={avatar} alt="profile" className="rounded-full w-full" />
-          )}
-        </div>
-        <span className="flex-grow flex flex-col pl-4">
-          <div className="stars flex items-center gap-1 mb-1">
+        <div className="flex items-center gap-2">
+          <div className="w-12 h-12 rounded-full border-1">
+            {auth?.currentUser?.photoURL && !author?.photo ? (
+              <img
+                src={auth?.currentUser?.photoURL}
+                alt="profile"
+                className="rounded-full w-full"
+              />
+            ) : !auth?.currentUser?.photoURL && author?.photo ? (
+              <img
+                src={author?.photo}
+                alt="profile"
+                className="rounded-full w-full"
+              />
+            ) : (
+              <img src={avatar} alt="profile" className="rounded-full w-full" />
+            )}
+          </div>
+          <div className="flex flex-col justify-start items-start">
             <Rating
-              style={{ fontSize: "1rem", marginLeft: "5px" }}
+              style={{ fontSize: "1rem" }}
               initialRating={rating}
               emptySymbol={<ImStarEmpty style={{ color: "#fdde6c" }} />}
               fullSymbol={<ImStarFull style={{ color: "#fdde6c" }} />}
               readonly
             ></Rating>
-            {/* {[...Array(rating).keys()].map((ind) => (
-                <AiTwotoneStar key={ind} className="text-orange-500" />
-              ))} */}
+            <span className="title-font font-medium">{author?.name}</span>
           </div>
-          <span className="title-font font-medium">{author?.name}</span>
-        </span>
+        </div>
       </div>
     </div>
   );

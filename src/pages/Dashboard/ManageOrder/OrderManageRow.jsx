@@ -101,7 +101,7 @@ const OrderManageRow = ({
         <button
           className={`${
             paid ? (shipped ? "btn-primary" : "btn-success") : "btn-error"
-          } btn btn-xs`}
+          } btn btn-xs text-white`}
         >
           {paid ? (shipped ? "Delivered" : "Pending") : "Unpaid"}
         </button>
@@ -110,7 +110,7 @@ const OrderManageRow = ({
         <button
           onClick={() => handleShipped(_id)}
           disabled={!paid || (shipped && true)}
-          className="btn-secondary btn btn-xs"
+          className="btn-secondary btn btn-xs text-white"
         >
           Shipped
         </button>

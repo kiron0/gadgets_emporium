@@ -15,8 +15,8 @@ const BlogManagement = () => {
         <div className="btn-group justify-center mt-5">
           <NavLink
             to="/dashboard/management-blog/add-blog"
-            className={`btn btn-outline btn-primary  ${
-              path.includes("add-blog") ? "btn-active text-white" : " "
+            className={`btn btn-outline btn-primary ${
+              path.includes("add-blog") ? "btn-active text-white" : ""
             }`}
           >
             Add Blog
@@ -24,7 +24,7 @@ const BlogManagement = () => {
           <NavLink
             to="/dashboard/management-blog/manageBlogs"
             className={`btn btn-outline btn-primary ${
-              path.includes("manageBlogs") ? "btn-active text-white" : " "
+              path.includes("manageBlogs") ? "btn-active text-white" : ""
             }`}
           >
             Blog Management

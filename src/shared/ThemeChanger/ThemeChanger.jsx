@@ -36,7 +36,7 @@ export default function ThemeChanger() {
                 <i className="bx bxs-hot"></i>
               </div>
               <select
-                className="select w-full max-w-sm md:ml-2 capitalize"
+                className="select w-full focus:outline-none max-w-sm md:ml-2 capitalize"
                 name="theme"
                 onChange={handleThemeChange}
                 defaultValue={theme}
@@ -61,7 +61,7 @@ export default function ThemeChanger() {
           </div>
 
           <div className="modal-action">
-            <label htmlFor="themeChanger" className="btn btn-warning">
+            <label htmlFor="themeChanger" className="btn btn-error text-white">
               <i className="bx bx-x text-xl"></i> Close
             </label>
           </div>

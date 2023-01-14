@@ -12,14 +12,11 @@ const ManageBlog = () => {
   const navigate = useNavigate();
   /* call to get all the added blogs for particular users */
   const { data, isLoading, refetch } = useQuery("blogs", () =>
-    fetch(
-      `${BASE_API}/blogs?uid=${auth?.currentUser?.uid}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    ).then((res) => res.json())
+    fetch(`${BASE_API}/blogs?uid=${auth?.currentUser?.uid}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
   );
   if (isLoading || data?.length === undefined) return <Loader />;
 
@@ -87,7 +84,7 @@ const ManageBlog = () => {
                       onClick={() =>
                         navigate(`/dashboard/management-blog/edit/${blog._id}`)
                       }
-                      className="btn btn-xs btn-success"
+                      className="btn btn-xs btn-success text-white"
                     >
                       <AiFillEdit />
                     </button>
@@ -95,7 +92,7 @@ const ManageBlog = () => {
                   <td>
                     <button
                       onClick={() => handleDeleteBlog(blog._id)}
-                      className="btn btn-xs btn-error"
+                      className="btn btn-xs btn-error text-white"
                     >
                       <AiFillDelete />
                     </button>
